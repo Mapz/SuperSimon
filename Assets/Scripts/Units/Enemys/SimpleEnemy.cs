@@ -55,7 +55,7 @@ public class SimpleEnemy : MovingUnit {
 
     protected override void OnUpdate () {
         //掉落坑里，消灭
-        if (transform.position.y < GameManager.mainCamera.transform.position.y - InGameVars.ScreenHeight / 2 - 20) {
+        if (CheckDropOutScreen ()) {
             Destroy (gameObject);
         }
     }

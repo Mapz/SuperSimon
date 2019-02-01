@@ -341,6 +341,20 @@
      void FixedUpdate () {
          UpdateStatus ();
          RestrictPosition ();
+         CheckDropDie ();
+     }
+
+     void CheckDropDie () {
+         if (m_isDead) return;
+         if (CheckDropOutScreen ()) {
+             m_isDead = true;
+             new EnumTimer (() => { //无敌时间
+                 if (OnDied != null) {
+                     OnDied (m_diedDamage);
+                 }
+             }, 1.5f).StartTimeout (this);
+
+         }
      }
 
      float GetJumpHeight () {

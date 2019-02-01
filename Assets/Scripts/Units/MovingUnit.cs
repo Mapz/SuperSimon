@@ -46,4 +46,9 @@ public abstract class MovingUnit : Unit {
         }
     }
 
+    public virtual bool CheckDropOutScreen () {
+        return transform.position.y < GameManager.mainCamera.transform.position.y - InGameVars.ScreenHeight / 2 - 20;
+
+    }
+
 }

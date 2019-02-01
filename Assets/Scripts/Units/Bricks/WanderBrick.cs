@@ -34,6 +34,7 @@ public class WanderBrick : BrickBase {
     public void ProduceItem (GameObject ItemPrefab) {
         GameObject go = Instantiate (ItemPrefab);
         go.transform.position = transform.position;
+        go.transform.SetParent (InGameVars.level.transform);
     }
 
     public void ProduceScore (GameObject ShowPrefab) {
