@@ -24,13 +24,15 @@ public class Game : MonoBehaviour {
     //DONE: 稍微调窄Collider，人物可以漏下去 Done 
     //DONE: 一次掉了N格子血的问题 --> 是读取到 IngameVars.hp 的 BUG，修改了 IngameVars.hp 的 setter
     //DONE: Simon的受击移动应该是受击方向，而不是人物方向 -> 重建了伤害系统，增加了伤害类型，伤害方向等
-    
-    //TODO: 蘑菇死亡动画 -> 鞭子死亡 -> 重建了伤害系统 需要判断伤害来源方向
+    //DONE: 蘑菇死亡动画 -> 鞭子死亡 -> 重建了伤害系统，增加了伤害类型，伤害方向等，用DOtween实现了简单的
+    //DONE: 掉坑死
+    //DONE: 时间到死 --> 优化CountDown,然后直接使用一个伤害杀死了 --> 注意后期的伤害计算会死不掉
+
+
+
     //TODO: 重生逻辑 --> 关卡进度逻辑即是
     //TODO: 生怪器
     //TODO: GameOver 逻辑
-    //TODO: 掉坑死
-    //TODO: 时间到死
     //TODO: 副武器系统
     //TODO: 数值配置化  --> 包括升级系统的改版
     //TODO: 顶砖块，到顶了再爆炸

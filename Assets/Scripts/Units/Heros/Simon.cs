@@ -222,6 +222,7 @@
              case SimonStatus.OnHit0:
                  m_anim.Play ("Onhit");
                  ActiveCollider (ColliderType.OnHit);
+                 m_whip.ActiveCollider (false);
                  DisableInput (); //No Input After Attack
                  OnDmgAction ();
                  new EnumTimer (() => {
@@ -316,6 +317,11 @@
          if (transform.position.x > InGameVars.LevelConfigs.m_levelMaxX) {
              transform.position = new Vector2 (InGameVars.LevelConfigs.m_levelMaxX, transform.position.y);
          }
+     }
+
+     public void OnTimeOver () {
+         m_wontBeHurt = false;
+         GetDamage (new Damage (m_HP));
      }
 
      protected override void OnDmg (Damage dmg) {

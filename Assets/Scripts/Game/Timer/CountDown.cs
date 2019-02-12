@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CountDown : MonoBehaviour {
     private int _currCountdownValue;
 
@@ -12,21 +12,42 @@ public class CountDown : MonoBehaviour {
                 _StatusBarAttached.SetTime (value);
             }
             _currCountdownValue = value;
-            
+
         }
     }
 
+    public Action OnTimeOut;
+
+    private bool stopFlag = false;
     private StatusBar _StatusBarAttached;
     private bool m_started = false;
-    private IEnumerator StartCountdown (int countDownValue = 10) {
+    private IEnumerator StartCountdown (int countDownValue) {
         if (m_started) yield break;
         currCountdownValue = countDownValue;
         m_started = true;
         while (currCountdownValue > 0) {
             yield return new WaitForSeconds (1.0f);
             currCountdownValue--;
+            if (stopFlag) {
+                m_started = false;
+                stopFlag = false;
+                yield break;
+            }
+            if (currCountdownValue == 0) {
+                if (OnTimeOut != null) {
+                    m_started = false;
+                    OnTimeOut ();
+                }
+            }
+        }
+    }
+
+    public void Stop () {
+        if (m_started) {
+            stopFlag = true;
         }
         m_started = false;
+        DisAttachToStatusBar ();
     }
 
     public void StartCountDown (int countDownValue) {

@@ -33,6 +33,8 @@ public class GameStateInGame : IGameState {
             GameManager.StatusBar = Utility.CreateUI ("UIGameState").GetComponent<StatusBar> ();
             GameManager.StatusBar.transform.SetParent (GameManager.UICanvas.transform, false);
         }
+
+        InGameVars.time = 10; //TODO 改成从关卡读取
         // Load Level1
         InGameVars.level = Utility.LoadLevel (m_levelPrefabName);;
         // Load Hero
@@ -44,8 +46,11 @@ public class GameStateInGame : IGameState {
         Hero.EnableInput ();
         InGameVars.hero = Hero;
         GameManager.CountDown.AttachToStatusBar (GameManager.StatusBar);
+
         GameManager.CountDown.StartCountDown (InGameVars.time);
         GameManager.StatusBar.Refresh ();
+
+        GameManager.CountDown.OnTimeOut += ((Simon) Hero).OnTimeOver;
         Hero.OnDied += HeroDied;
     }
 
@@ -77,11 +82,17 @@ public class GameStateInGame : IGameState {
     }
 
     void HeroDied (Damage dmg) {
+        GameManager.CountDown.OnTimeOut -= ((Simon) Hero).OnTimeOver;
+        GameManager.CountDown.Stop ();
         InGameVars.life--;
         if (InGameVars.life == 0) {
             //TODO: GameOver Logic
         }
         RestartLevel ();
+    }
+
+    void HeroDied () {
+
     }
 
 }
