@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 public class GameStateInGame : IGameState {
 
@@ -34,7 +31,7 @@ public class GameStateInGame : IGameState {
             GameManager.StatusBar.transform.SetParent (GameManager.UICanvas.transform, false);
         }
 
-        InGameVars.time = 10; //TODO 改成从关卡读取
+        InGameVars.time = 300; //TODO 改成从关卡读取
         // Load Level1
         InGameVars.level = Utility.LoadLevel (m_levelPrefabName);;
         // Load Hero

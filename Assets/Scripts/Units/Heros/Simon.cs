@@ -1,8 +1,6 @@
- using System.Collections.Generic;
- using System.Collections;
- using System;
- using UnityEngine;
- public enum SimonStatus {
+using System.Collections;
+using UnityEngine;
+public enum SimonStatus {
      Walk,
      JumpUp0,
      JumpUp1,
