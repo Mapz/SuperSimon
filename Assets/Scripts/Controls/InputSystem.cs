@@ -12,6 +12,7 @@ public class InputSystem : MonoBehaviour {
     public KeyPressDelegate no_key;
     public KeyPressDelegate m_start;
     public HorizontalMoveDelegate axis_x_add_down;
+    public KeyPressDelegate y_axis_up_and_b;
     void Update () {
 
         //斜下攻击
@@ -51,6 +52,16 @@ public class InputSystem : MonoBehaviour {
                 return;
             } else if (Input.GetKeyDown ("k")) {
                 x_axis_add_a (new Vector2 (0, 0));
+                return;
+            }
+        }
+
+        //上+攻击
+        if (y_axis_up_and_b != null)
+        {
+            if (Input.GetKey("w") && Input.GetKeyDown("j"))
+            {
+                y_axis_up_and_b();
                 return;
             }
         }

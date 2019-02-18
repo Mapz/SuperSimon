@@ -3,7 +3,7 @@ using UnityEngine.U2D;
 using UnityEngine.UI;
 public static class InGameVars {
 
-    public const int MaxLevel = 1;
+    public const int MaxStage = 1;
     public static int ScreenWidth;
     public static int ScreenHeight;
     public static LevelConfigs LevelConfigs;
@@ -87,6 +87,8 @@ public static class InGameVars {
         }
     }
     private static Unit _hero;
+
+    
 
     public static void Init () {
         if (GameManager.ppCamera == null) {

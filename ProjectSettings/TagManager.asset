@@ -57,6 +57,9 @@ TagManager:
   - name: Enemy
     uniqueID: 1917338759
     locked: 0
+  - name: FlyingObject
+    uniqueID: 4161378167
+    locked: 0
   - name: Foreground
     uniqueID: 3691574469
     locked: 0

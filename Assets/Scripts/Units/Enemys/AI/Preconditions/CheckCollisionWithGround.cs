@@ -6,6 +6,7 @@ public class CheckCollisionWithGroundAndContactEnemy : BTPrecondition
 {
 
     private MovingUnit unit;
+    //TODO: 後續添加縱向碰撞的邏輯，現在只有橫向碰撞
     public CheckCollisionWithGroundAndContactEnemy()
     {
 

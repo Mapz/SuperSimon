@@ -25,13 +25,13 @@ public class Game : MonoBehaviour {
     //DONE: 蘑菇死亡动画 -> 鞭子死亡 -> 重建了伤害系统，增加了伤害类型，伤害方向等，用DOtween实现了简单的
     //DONE: 掉坑死
     //DONE: 时间到死 --> 优化CountDown,然后直接使用一个伤害杀死了 --> 注意后期的伤害计算会死不掉
+    //DONE: 重生逻辑 --> 关卡进度逻辑即是,CheckPointObject ，然後直接注意主角重生後要落在地上
+    //DONE: 副武器系统 --> 使用的是MovingUnit+SubWeaponData+Weapon的组合，一个发射器，和枪械发射器类似的
 
-
-
-    //TODO: 重生逻辑 --> 关卡进度逻辑即是
+    //TODO: 顶拳头只能顶一个砖头
     //TODO: 生怪器
     //TODO: GameOver 逻辑
-    //TODO: 副武器系统
+    //TODO: 更多副武器的完成
     //TODO: 数值配置化  --> 包括升级系统的改版
     //TODO: 顶砖块，到顶了再爆炸
     //TODO: 武器升级动画，包括其他东西的暂停系统
