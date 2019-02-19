@@ -27,6 +27,7 @@ public class Game : MonoBehaviour {
     //DONE: 时间到死 --> 优化CountDown,然后直接使用一个伤害杀死了 --> 注意后期的伤害计算会死不掉
     //DONE: 重生逻辑 --> 关卡进度逻辑即是,CheckPointObject ，然後直接注意主角重生後要落在地上
     //DONE: 副武器系统 --> 使用的是MovingUnit+SubWeaponData+Weapon的组合，一个发射器，和枪械发射器类似的
+    //DONE: 武器升级动画，包括其他东西的暂停系统 --> 使用了调色板shader和Time.timescale=0,并用unscaledtime或者Waitforsecondsrealtime来播放一组动画，
 
     //TODO: 顶拳头只能顶一个砖头
     //TODO: 生怪器
@@ -34,7 +35,6 @@ public class Game : MonoBehaviour {
     //TODO: 更多副武器的完成
     //TODO: 数值配置化  --> 包括升级系统的改版
     //TODO: 顶砖块，到顶了再爆炸
-    //TODO: 武器升级动画，包括其他东西的暂停系统
     //TODO: 滑步的问题
     //TODO: 移动中可以穿过格子-->移动中碰撞体加大一点
 

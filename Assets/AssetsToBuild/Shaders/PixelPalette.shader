@@ -7,7 +7,7 @@ Shader "Custom/Sprite/PixelPalette"
 		_Color ("Tint", Color) = (1,1,1,1)
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
         _Speed("Speed", Range(1.0,30)) = 15
-        _ActiveFlikcer("ActiveFlikcer",Int) = 0
+        _ActiveFlicker("ActiveFlicker",Int) = 0
 		_MaxPalette("MaxPalette",Int) = 1  //最大调色板数量，根据调色板纹理来确定
 		_CurrentPalette("CurrentPalette",Int) = 0 //当前调色板
 	}
@@ -52,7 +52,7 @@ Shader "Custom/Sprite/PixelPalette"
 			
 			fixed4 _Color;
             float _Speed;
-            float _ActiveFlikcer;
+            float _ActiveFlicker;
 
 
 			v2f vert(appdata_t IN)
@@ -94,7 +94,9 @@ Shader "Custom/Sprite/PixelPalette"
 				float paletteIndex = 1 - (_CurrentPalette / _MaxPalette);
 				fixed4 swapCol = tex2D(_Pallete,float2(c.g, paletteIndex));
 				fixed4 final = lerp(c, swapCol, swapCol.a) * IN.color;
-				if(_ActiveFlikcer == 1){
+				final.a = c.a;
+
+				if(_ActiveFlicker == 1){
 					half curSin = abs(sin(_Time.a * _Speed));
 					half alpha;
 					if(curSin > 0.5){
@@ -106,7 +108,7 @@ Shader "Custom/Sprite/PixelPalette"
 						final.a = alpha;
 					}
 				}
-				final.a = c.a;
+				
 				final.rgb *= c.a;
 				return final;
              

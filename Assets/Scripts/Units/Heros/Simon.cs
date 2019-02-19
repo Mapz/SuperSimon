@@ -16,6 +16,7 @@ public enum SimonStatus
     OnHit2,
     Dead,
     SubWeaponAttack,
+    Upgrade,
 
 }
 
@@ -69,10 +70,10 @@ public class Simon : MovingUnit
         if (change > 0)
         {
             m_level += change;
-            if (m_level > m_maxLevel)
+            if (m_level >= m_maxLevel)
             {
                 m_level = m_maxLevel;
-                //TODO:show effect anim
+                ChangeState(SimonStatus.Upgrade);
             }
         }
         else if (change < 0)
@@ -81,7 +82,7 @@ public class Simon : MovingUnit
             if (m_level < 0)
             {
                 m_level = 0;
-                //TODO:show effect anim
+                ChangeState(SimonStatus.Upgrade);
             }
         }
         // Upgrade Whip
@@ -119,10 +120,10 @@ public class Simon : MovingUnit
 
     }
 
-    //Must Use Custom Mat /Custom/Sprite/Flicker Shader
+    //Must Use Custom Mat /Custom/Sprite/Pixel
     void ActiveFlicker(bool active)
     {
-        GetComponent<SpriteRenderer>().material.SetInt("_Active", active ? 1 : 0);
+        GetComponent<SpriteRenderer>().material.SetInt("_ActiveFlicker", active ? 1 : 0);
     }
 
     void OnDisable()
@@ -135,7 +136,8 @@ public class Simon : MovingUnit
         m_whip.ActiveCollider(true);
     }
 
-    void ShootSubWeapon() {
+    void ShootSubWeapon()
+    {
         m_subWeaponShooter.ExecShoot();
     }
 
@@ -173,6 +175,27 @@ public class Simon : MovingUnit
     bool OnHit()
     {
         return (m_status == SimonStatus.OnHit0 || m_status == SimonStatus.OnHit1 || m_status == SimonStatus.OnHit2);
+    }
+
+    void UpgradeAnim()
+    {
+        Time.timeScale = 0;
+        DisableInput();
+        StartCoroutine(PlayUpgradeAnim());
+    }
+
+    IEnumerator PlayUpgradeAnim()
+    {
+        for (var i = 0; i < 10; i++)
+        {
+            yield return new WaitForSecondsRealtime(0.1f);
+            GetComponent<SpriteRenderer>().material.SetInt("_CurrentPalette", i % 2 == 0 ? 1 : 5);
+        }
+        GetComponent<SpriteRenderer>().material.SetInt("_CurrentPalette", 1);
+        Time.timeScale = 1;
+        m_status = m_lastStatus;
+        EnableInput();
+
     }
 
     void Awake()
@@ -317,6 +340,9 @@ public class Simon : MovingUnit
             case SimonStatus.SubWeaponAttack:
                 m_anim.Play("ShootSubWeapon");
                 StartCoroutine(SubWeaponAttackOver());
+                break;
+            case SimonStatus.Upgrade:
+                UpgradeAnim();
                 break;
 
 
@@ -466,7 +492,7 @@ public class Simon : MovingUnit
     public void SubWeaponAttack()
     {
         Debug.Log("SubWeaponShoot");
-        if (m_status != SimonStatus.Idle) return;
+        //if (m_status != SimonStatus.Idle) return;
         if (!m_subWeaponShooter.CanShoot) return;
         if (!CheckNotAttacking()) return;
         ChangeState(SimonStatus.SubWeaponAttack);

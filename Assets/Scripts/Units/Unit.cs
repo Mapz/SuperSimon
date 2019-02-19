@@ -159,11 +159,11 @@ public abstract class Unit : MonoBehaviour {
     }
 
     void OnTriggerEnter2D (Collider2D other) {
-        Debug.Log (name + " . OnTriggerEnter2D (" + other.name + ")");
+        //Debug.Log (name + " . OnTriggerEnter2D (" + other.name + ")");
         _OnTriggerEnter2D (other);
     }
 
     void OnTriggerExit2D (Collider2D other) {
-        Debug.Log (name + " . OnTriggerExit2D (" + other.name + ")");
+        //Debug.Log (name + " . OnTriggerExit2D (" + other.name + ")");
     }
 }

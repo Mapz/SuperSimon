@@ -26,9 +26,9 @@ public class ItemTrigger : MonoBehaviour
                     break;
                 case ItemType.score:
                     InGameVars.score += m_value;
-
                     break;
                 case ItemType.upgrade:
+
                     InGameVars.hero.Upgrade(m_value);
                     break;
                 case ItemType.hp:

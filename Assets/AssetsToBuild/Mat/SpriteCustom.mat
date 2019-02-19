@@ -62,6 +62,7 @@ Material:
     m_Floats:
     - PixelSnap: 0
     - _Active: 0
+    - _ActiveFlicker: 0
     - _ActiveFlikcer: 0
     - _BumpScale: 1
     - _CurrentPalette: 1
