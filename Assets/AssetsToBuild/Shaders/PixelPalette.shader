@@ -1,12 +1,15 @@
-Shader "Custom/Sprite/Flicker"
+Shader "Custom/Sprite/PixelPalette"
 {
    Properties
 	{
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+		_Pallete("Pallete",2D) = "transparent"{} //调色板纹理
 		_Color ("Tint", Color) = (1,1,1,1)
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
         _Speed("Speed", Range(1.0,30)) = 15
-        _Active("Active",Int) = 0
+        _ActiveFlikcer("ActiveFlikcer",Int) = 0
+		_MaxPalette("MaxPalette",Int) = 1  //最大调色板数量，根据调色板纹理来确定
+		_CurrentPalette("CurrentPalette",Int) = 0 //当前调色板
 	}
 
 	SubShader
@@ -49,7 +52,8 @@ Shader "Custom/Sprite/Flicker"
 			
 			fixed4 _Color;
             float _Speed;
-            float _Active;
+            float _ActiveFlikcer;
+
 
 			v2f vert(appdata_t IN)
 			{
@@ -66,7 +70,10 @@ Shader "Custom/Sprite/Flicker"
 
 			sampler2D _MainTex;
 			sampler2D _AlphaTex;
+			sampler2D _Pallete;
 			float _AlphaSplitEnabled;
+			half _MaxPalette;
+			half _CurrentPalette;
 
 			fixed4 SampleSpriteTexture (float2 uv)
 			{
@@ -82,21 +89,26 @@ Shader "Custom/Sprite/Flicker"
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
-				fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
-                if(_Active == 1){
-                    half curSin = abs(sin(_Time.a * _Speed));
-                    half alpha;
-                    if(curSin > 0.5){
-                        alpha =  1 ;
-                    }else{
-                        alpha =  0 ;
-                    }
-                    if(c.a == 1){
-                        c.a = alpha;
-                    }
-                }
-                c.rgb *= c.a;
-                return c;
+				fixed4 c = SampleSpriteTexture(IN.texcoord);
+				//切换调色板，这里用G通道的Index来制作的调色板
+				float paletteIndex = 1 - (_CurrentPalette / _MaxPalette);
+				fixed4 swapCol = tex2D(_Pallete,float2(c.g, paletteIndex));
+				fixed4 final = lerp(c, swapCol, swapCol.a) * IN.color;
+				if(_ActiveFlikcer == 1){
+					half curSin = abs(sin(_Time.a * _Speed));
+					half alpha;
+					if(curSin > 0.5){
+						alpha =  1 ;
+					}else{
+						alpha =  0 ;
+					}
+					if(final.a == 1){
+						final.a = alpha;
+					}
+				}
+				final.a = c.a;
+				final.rgb *= c.a;
+				return final;
              
 			}
 		ENDCG

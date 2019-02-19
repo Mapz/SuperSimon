@@ -15,6 +15,15 @@ public class SubWeaponShooter : MonoBehaviour
     private float m_ComboCoolDown;
     private int m_comboCount = 0;
     private int m_heartCost = 0;
+    private bool m_ShowOnStatusBar = false;
+
+    private void Awake()
+    {
+        if(m_Holder.m_team == Team.Hero)
+        {
+            m_ShowOnStatusBar = true;
+        }
+    }
 
 
     public bool CanShoot
@@ -40,11 +49,14 @@ public class SubWeaponShooter : MonoBehaviour
     }
 
 
-    public void SetShotObject(GameObject go)
+    public void SetShotObject(GameObject go,Sprite icon)
     {
         toShootPrefab = go;//Must be a prefab
         GameObject temp = Instantiate(go);
         m_heartCost = temp.GetComponent<SubWeaponData>().heartCost;
+        if (m_ShowOnStatusBar) {
+            GameManager.StatusBar.SetSubWeapon(icon);
+        }
         Destroy(temp);
     }
 

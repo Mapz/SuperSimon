@@ -38,7 +38,7 @@ public class ItemTrigger : MonoBehaviour
                     }));
                     break;
                 case ItemType.subWeapon:
-                    ((Simon)InGameVars.hero).m_subWeaponShooter.SetShotObject(m_SubWeaponPrefab);
+                    ((Simon)InGameVars.hero).m_subWeaponShooter.SetShotObject(m_SubWeaponPrefab, m_baseObject.GetComponent<SpriteRenderer>().sprite);
                     break;
                 default:
                     break;
