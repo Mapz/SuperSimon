@@ -9,4 +9,9 @@ public class Weapon : MonoBehaviour {
     public Collider2D m_collider;
     public DmgType m_dmgType;
 
+    public virtual void OnDealDmg()
+    {
+
+    }
+
 }

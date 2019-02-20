@@ -458,7 +458,7 @@ public class Simon : MovingUnit
         }, m_wontBeHurtTime).StartTimeout(this);
     }
 
-    void FixedUpdate()
+    protected override void OnUpdate()
     {
         UpdateStatus();
         RestrictPosition();

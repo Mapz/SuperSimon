@@ -108,6 +108,14 @@ public abstract class Unit : MonoBehaviour {
 
     }
 
+    protected virtual void OnEnabled() {
+    }
+
+    void OnEnable()
+    {
+        OnEnabled();
+    }
+
     void Update () {
         OnUpdate ();
     }
@@ -127,31 +135,32 @@ public abstract class Unit : MonoBehaviour {
 
     protected virtual void _OnTriggerEnter2D (Collider2D other) {
         if (m_isDead) return;
-        var meleeWeapon = other.GetComponent<Weapon> ();
-        if (meleeWeapon) {
+        var weapon = other.GetComponent<Weapon> ();
+        if (weapon) {
             if (!m_onHitCheck.OnHit (other)) return;
             switch (m_team) {
                 case Team.Hero:
                 case Team.Assistance:
-                    switch (meleeWeapon.m_team) {
+                    switch (weapon.m_team) {
                         case Team.Enemy:
-                            OnAttack (new Damage (meleeWeapon.m_dmg, meleeWeapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
+                            OnAttack (new Damage (weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
+                            weapon.OnDealDmg();
                             break;
                     }
                     break;
                 case Team.Enemy:
-                    switch (meleeWeapon.m_team) {
+                    switch (weapon.m_team) {
                         case Team.Hero:
                         case Team.Assistance:
-                            OnAttack (new Damage (meleeWeapon.m_dmg, meleeWeapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
-
+                            OnAttack (new Damage (weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
+                            weapon.OnDealDmg();
                             break;
                     }
                     break;
                 case Team.Enviroment:
-                    if (meleeWeapon.m_destroyEnviroment) {
-                        OnAttack (new Damage (meleeWeapon.m_dmg, meleeWeapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
-
+                    if (weapon.m_destroyEnviroment) {
+                        OnAttack (new Damage (weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
+                        weapon.OnDealDmg();
                     }
                     break;
             }

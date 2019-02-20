@@ -12,7 +12,7 @@ public class PhysicsObject : MonoBehaviour
 
     public Vector2 targetVelocity = Vector2.zero;
     public bool grounded { get; private set; }
-    protected Vector2 groundNormal;
+    protected Vector2 groundNormal = Vector2.up;
     protected Rigidbody2D rb2d;
     public Vector2 velocity;
     protected ContactFilter2D contactFilter;
@@ -82,6 +82,7 @@ public class PhysicsObject : MonoBehaviour
                 if (currentNormal.y > minGroundNormalY)
                 {
                     grounded = true;
+
                     if (yMovement)
                     {
                         groundNormal = currentNormal;
@@ -94,6 +95,7 @@ public class PhysicsObject : MonoBehaviour
                 {
                     velocity = velocity - projection * currentNormal;
                 }
+               
 
                 float modifiedDistance = hitBufferList[i].distance - shellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;

@@ -12,9 +12,8 @@ public abstract class MovingUnit : Unit
 
     public bool m_interactEnviroment;
 
-    public LayerMask m_groundLayer;
+    //public LayerMask m_groundLayer;
 
-    /***检查是否在地上 end */
     public bool m_TrigerBrick = false; //可以顶砖块
 
     [System.NonSerialized]
@@ -24,7 +23,7 @@ public abstract class MovingUnit : Unit
 
     int m_moving;
 
-    private void OnEnable()
+    protected override void OnEnabled()
     {
         physicsObject.ComputeVelocity = UpdateSpeedX;
     }
@@ -35,7 +34,7 @@ public abstract class MovingUnit : Unit
             physicsObject.targetVelocity.x = m_moving * m_moveSpeed * (facingRight ? 1 : -1);
     }
 
-    public virtual void MoveX(int direction = 1 )
+    public virtual void MoveX(int direction = 1)
     {
         m_moving = direction;
     }

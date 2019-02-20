@@ -3,13 +3,12 @@
 public abstract class FlyingObject : MovingUnit
 {
 
-    private void FixedUpdate()
+    
+
+    protected override void OnUpdate()
     {
-        SetPosition();
         DestroyWhenOutOfScreen();
     }
-
-    protected abstract Vector2 SetPosition();
 
     protected virtual void DestroyWhenOutOfScreen()
     {

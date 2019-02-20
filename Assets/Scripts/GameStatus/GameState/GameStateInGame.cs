@@ -39,9 +39,11 @@ public class GameStateInGame : IGameState
             GameManager.StatusBar.transform.SetParent(GameManager.UICanvas.transform, false);
         }
 
+        InGameVars.heart = 300;//DEBUG
+
         InGameVars.time = 300; //TODO 改成从关卡读取
         // Load Level1
-        InGameVars.level = Utility.LoadLevel(m_levelPrefabName); ;
+        InGameVars.level = Utility.LoadLevel(m_levelPrefabName);
         // Load Hero
         Hero = Utility.CreateUnit("Simon");
         
