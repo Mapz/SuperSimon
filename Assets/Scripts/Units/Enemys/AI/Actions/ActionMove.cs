@@ -12,6 +12,6 @@ public class ActionMove : BTAction {
 
     void Move () {
         MovingUnit unit = database.GetComponent<MovingUnit> ();
-        unit.Move ();
+        unit.MoveX ();
     }
 }

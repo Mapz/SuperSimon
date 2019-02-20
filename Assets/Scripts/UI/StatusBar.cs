@@ -57,6 +57,8 @@ public class StatusBar : MonoBehaviour
         InGameVars.score = InGameVars.score;
         InGameVars.stage = InGameVars.stage;
         InGameVars.time = InGameVars.time;
-        
+        SetSubWeapon(null); //假定死了一定丢副武器
+
+
     }
 }

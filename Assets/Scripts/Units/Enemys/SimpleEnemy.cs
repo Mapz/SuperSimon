@@ -41,6 +41,7 @@ public class SimpleEnemy : MovingUnit {
         if (dmg.dmgType == DmgType.MeleeWhipPhysics) {
             // 简陋的旋转死亡效果
             Rigidbody2D rigid = GetComponent<Rigidbody2D> ();
+            rigid.bodyType = RigidbodyType2D.Dynamic;
             rigid.freezeRotation = false;
             rigid.AddTorque (1000);
             rigid.gravityScale = 100;

@@ -31,7 +31,7 @@ public enum ColliderType
 public class Simon : MovingUnit
 {
 
-    public int m_jumpForece = 1000;
+    public int m_jumpVelocityY = 1000;
     private Animator m_anim;
     public SimonStatus m_status;
     private SimonStatus m_lastStatus;
@@ -59,7 +59,7 @@ public class Simon : MovingUnit
 
     public float m_onHit1Time;
 
-    public float m_hurtJumpForce;
+    public float m_hurtJumpVelocityY;
 
     private Damage m_diedDamage;
 
@@ -115,10 +115,7 @@ public class Simon : MovingUnit
         GameManager.input.y_axis_up_and_b -= SubWeaponAttack;
     }
 
-    void OnEnable()
-    {
 
-    }
 
     //Must Use Custom Mat /Custom/Sprite/Pixel
     void ActiveFlicker(bool active)
@@ -149,6 +146,8 @@ public class Simon : MovingUnit
         if (!OnHit())
             ChangeState(SimonStatus.Idle);
     }
+
+
 
     protected override bool CanBeDamaged()
     {
@@ -200,7 +199,7 @@ public class Simon : MovingUnit
 
     void Awake()
     {
-        m_rigidbody = GetComponent<Rigidbody2D>();
+        //m_rigidbody = GetComponent<Rigidbody2D>();
         m_anim = GetComponent<Animator>();
         ChangeState(SimonStatus.Idle);
         Flip();
@@ -212,12 +211,24 @@ public class Simon : MovingUnit
         m_diedDamage = dmg;
     }
 
+    bool IsColliderActive(ColliderType type)
+    {
+        if (type == ColliderType.None) return false;
+        return colliders[(int)type] == m_currentCollider;
+    }
+
     void ActiveCollider(ColliderType type)
     {
         for (var i = 0; i < colliders.Length; i++)
         {
             if (i == (int)type)
             {
+                {
+                    if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.Default))
+                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 7);
+                    if (IsColliderActive(ColliderType.Default) && (type == ColliderType.Squat))
+                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 7);
+                }
                 colliders[i].enabled = true;
                 m_currentCollider = colliders[i];
             }
@@ -239,7 +250,7 @@ public class Simon : MovingUnit
         {
             return;
         }
-        //  Debug.Log ("SwitchStatus:" + state);
+        Debug.Log("SwitchStatus:" + state);
         switch (state)
         {
             case SimonStatus.JumpUp0:
@@ -252,10 +263,6 @@ public class Simon : MovingUnit
                 break;
             case SimonStatus.Squat:
                 ActiveCollider(ColliderType.Squat);
-                if (m_lastStatus != SimonStatus.SquatMeleeAttack)
-                {
-                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 7);
-                }
                 m_anim.Play("Squat");
                 break;
             case SimonStatus.JumpFall0:
@@ -267,22 +274,18 @@ public class Simon : MovingUnit
                 break;
             case SimonStatus.Walk:
                 m_anim.Play("Walk");
-                if (m_lastStatus == SimonStatus.Squat)
-                {
-                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 7);
-                }
                 ActiveCollider(ColliderType.Default);
                 break;
             case SimonStatus.Idle:
                 m_anim.Play("Idle");
-                if (m_lastStatus == SimonStatus.Squat)
+                if (CheckGrounded())
                 {
-                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 7);
+                    StopX();
                 }
                 ActiveCollider(ColliderType.Default);
                 break;
             case SimonStatus.MeleeAttack:
-                Debug.Log("m_whip.m_animString:" + m_whip.m_animString);
+                //Debug.Log("m_whip.m_animString:" + m_whip.m_animString);
                 m_anim.Play(m_whip.m_animString);
                 ActiveCollider(ColliderType.Default);
                 StartCoroutine(AttackOver());
@@ -309,9 +312,8 @@ public class Simon : MovingUnit
 
             case SimonStatus.OnHit2:
                 m_anim.Play("Squat");
-                transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 7);
                 ActiveCollider(ColliderType.Squat);
-                m_rigidbody.velocity = new Vector2(0, 0);
+                StopX();
                 new EnumTimer(() =>
                 {
                     if (m_isDead)
@@ -351,37 +353,42 @@ public class Simon : MovingUnit
 
     void UpdateStatus()
     {
+        if (m_status != SimonStatus.Walk && m_status != SimonStatus.JumpUp0 && m_status != SimonStatus.OnHit0)
+        {
+            if (CheckGrounded())
+            {
+                StopX();
+            }
+        }
         switch (m_status)
         {
             case SimonStatus.Walk:
                 //Begin To Fall
-                if (m_rigidbody.velocity.y < 0)
+                if (physicsObject.velocity.y < 0)
                 {
-                    m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y);
+
+                    StopX();
                     ChangeState(SimonStatus.JumpFall1);
                 }
                 break;
             case SimonStatus.JumpUp0:
                 var JumpHigh = GetJumpHeight();
-                //  Debug.Log ("JumpHigh:" + JumpHigh);
+
                 if (JumpHigh > 5)
                 {
                     ChangeState(SimonStatus.JumpUp1);
                 }
                 break;
             case SimonStatus.JumpUp1:
-                if (m_rigidbody.velocity.y < 0)
-                {
-                    ChangeState(SimonStatus.JumpFall0);
-                }
+
                 if (CheckGrounded())
                 {
                     ChangeState(SimonStatus.Idle);
                 }
                 break;
             case SimonStatus.JumpFall0:
+
                 JumpHigh = GetJumpHeight();
-                //  Debug.Log ("JumpHigh:" + JumpHigh);
                 if (JumpHigh < 8)
                 {
                     ChangeState(SimonStatus.JumpFall1);
@@ -392,6 +399,7 @@ public class Simon : MovingUnit
                 }
                 break;
             case SimonStatus.JumpFall1:
+
                 if (CheckGrounded())
                 {
                     ChangeState(SimonStatus.Idle);
@@ -438,9 +446,9 @@ public class Simon : MovingUnit
 
     void OnDmgAction()
     {
-        m_lastJumpY = m_rigidbody.position.y;
-        m_rigidbody.AddForce(new Vector2(0, m_hurtJumpForce));
-        m_rigidbody.velocity = new Vector2((facingRight ? -1 : 1) * m_moveSpeed, m_rigidbody.velocity.y);
+        //m_lastJumpY = m_rigidbody.position.y;
+        physicsObject.velocity.y = m_hurtJumpVelocityY;
+        MoveX(-1);
         m_wontBeHurt = true;
         ActiveFlicker(true);
         new EnumTimer(() =>
@@ -476,7 +484,7 @@ public class Simon : MovingUnit
 
     float GetJumpHeight()
     {
-        return m_rigidbody.position.y - m_lastJumpY;
+        return transform.position.y - m_lastJumpY;
     }
 
     bool CheckIsOnGroundActions()
@@ -505,7 +513,7 @@ public class Simon : MovingUnit
         if (CheckIsOnGroundActions())
         {
             ChangeState(SimonStatus.Idle);
-            m_rigidbody.velocity = new Vector2(0, 0);
+            StopX();
         }
     }
 
@@ -528,7 +536,7 @@ public class Simon : MovingUnit
             ChangeState(SimonStatus.MeleeAttack);
             if (CheckGrounded())
             {
-                m_rigidbody.velocity = new Vector2(0, 0);
+                StopX();
             }
         }
     }
@@ -540,7 +548,7 @@ public class Simon : MovingUnit
         if (CheckNotAttacking())
         {
             ChangeState(SimonStatus.SquatMeleeAttack);
-            m_rigidbody.velocity = new Vector2(0, 0);
+            StopX();
         }
     }
 
@@ -554,19 +562,12 @@ public class Simon : MovingUnit
         if (CheckNotAttacking())
             if (CheckIsOnGroundActions())
             {
-                m_rigidbody.velocity = new Vector2(direction.x * m_moveSpeed, m_rigidbody.velocity.y);
-                if (m_rigidbody.velocity.x != 0)
-                {
-                    ChangeState(SimonStatus.Walk);
-                }
-                else
-                {
-                    ChangeState(SimonStatus.Idle);
-                }
+                ChangeState(SimonStatus.Walk);
                 if ((direction.x < 0 && facingRight) || (direction.x > 0 && !facingRight))
                 {
                     Flip();
                 }
+                MoveX();
             }
     }
 
@@ -577,7 +578,7 @@ public class Simon : MovingUnit
             if (CheckIsOnGroundActions())
             {
                 ChangeState(SimonStatus.Squat);
-                m_rigidbody.velocity = new Vector2(0, 0);
+                StopX();
             }
     }
 
@@ -592,14 +593,17 @@ public class Simon : MovingUnit
         if (CheckNotAttacking())
             if (CheckIsOnGroundActions())
             {
-                m_lastJumpY = m_rigidbody.position.y;
-                m_rigidbody.AddForce(new Vector2(0, m_jumpForece));
-                m_rigidbody.velocity = new Vector2(direction.x * m_moveSpeed, m_rigidbody.velocity.y);
+                m_lastJumpY = transform.position.y;
                 ChangeState(SimonStatus.JumpUp0);
                 if ((direction.x < 0 && facingRight) || (direction.x > 0 && !facingRight))
                 {
                     Flip();
                 }
+                if (direction.x != 0)
+                {
+                    MoveX();
+                }
+                physicsObject.velocity.y = m_jumpVelocityY;
             }
     }
 

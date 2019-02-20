@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6331058658509863628}
   - component: {fileID: 6331058658509863626}
   - component: {fileID: 6331058658509863625}
+  - component: {fileID: 1056970067118690532}
   m_Layer: 13
   m_Name: EnemyMushroom
   m_TagString: Untagged
@@ -111,9 +112,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6331058658509863616}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -168,10 +169,9 @@ MonoBehaviour:
   m_defence: 0
   _HP: 1
   m_isDead: 0
+  physicsObject: {fileID: 1056970067118690532}
   facingRight: 1
   m_interactEnviroment: 0
-  m_groundCheck:
-  - {fileID: 0}
   m_groundLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -192,3 +192,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   database: {fileID: 0}
   isRunning: 1
+--- !u!114 &1056970067118690532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6331058658509863616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120c821a53fa4ab40b284248c4ed20be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minGroundNormalY: 0.65
+  gravityModifier: 1
+  targetVelocity: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}

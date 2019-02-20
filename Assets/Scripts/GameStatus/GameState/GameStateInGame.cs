@@ -44,6 +44,7 @@ public class GameStateInGame : IGameState
         InGameVars.level = Utility.LoadLevel(m_levelPrefabName); ;
         // Load Hero
         Hero = Utility.CreateUnit("Simon");
+        
         Hero.SetFollowByCamera(GameManager.mainCamera);
         Hero.AttachToHPBar(GameManager.StatusBar.m_heroHp);
         StartCoroutine(SetHeroPosition());
@@ -56,6 +57,7 @@ public class GameStateInGame : IGameState
         GameManager.StatusBar.Refresh();
 
         GameManager.CountDown.OnTimeOut += ((Simon)Hero).OnTimeOver;
+
         Hero.OnDied += HeroDied;
     }
 

@@ -28,6 +28,7 @@ public class Game : MonoBehaviour {
     //DONE: 重生逻辑 --> 关卡进度逻辑即是,CheckPointObject ，然後直接注意主角重生後要落在地上
     //DONE: 副武器系统 --> 使用的是MovingUnit+SubWeaponData+Weapon的组合，一个发射器，和枪械发射器类似的
     //DONE: 武器升级动画，包括其他东西的暂停系统 --> 使用了调色板shader和Time.timescale=0,并用unscaledtime或者Waitforsecondsrealtime来播放一组动画，
+    //DONE: 优化移动逻辑 --> 不再使用Unity物理，改用个自定义物理,改用Kinematic方式来处理 Use Full Kinematic Contact 自定义物理逻辑
 
     //TODO: 顶拳头只能顶一个砖头
     //TODO: 生怪器

@@ -1,17 +1,17 @@
 using UnityEngine;
 
+
+
+[RequireComponent(typeof(PhysicsObject))]
 public abstract class MovingUnit : Unit
 {
+    [SerializeField]
+    protected PhysicsObject physicsObject;
 
     public bool facingRight = false;
 
     public bool m_interactEnviroment;
 
-    /***检查是否在地上 */
-    protected bool m_grounded = false;
-
-    [SerializeField]
-    public Transform[] m_groundCheck; // 几个位置应当和纵向锚点在一个高度上
     public LayerMask m_groundLayer;
 
     /***检查是否在地上 end */
@@ -22,9 +22,27 @@ public abstract class MovingUnit : Unit
 
     public float m_moveSpeed;
 
-    public virtual void Move()
+    int m_moving;
+
+    private void OnEnable()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(m_moveSpeed * (facingRight ? 1 : -1), GetComponent<Rigidbody2D>().velocity.y);
+        physicsObject.ComputeVelocity = UpdateSpeedX;
+    }
+
+    void UpdateSpeedX()
+    {
+        if (m_moving != 0)
+            physicsObject.targetVelocity.x = m_moving * m_moveSpeed * (facingRight ? 1 : -1);
+    }
+
+    public virtual void MoveX(int direction = 1 )
+    {
+        m_moving = direction;
+    }
+
+    public virtual void StopX()
+    {
+        m_moving = 0;
     }
 
     public virtual void Flip()
@@ -37,19 +55,7 @@ public abstract class MovingUnit : Unit
 
     public virtual bool CheckGrounded()
     {
-        if (m_groundCheck != null)
-        {
-            foreach (var item in m_groundCheck)
-            {
-                if (Utility.Collision.IsGrounded(this, item, m_groundLayer, 0))
-                    return true;
-            }
-            return false;
-        }
-        else
-        {
-            throw new NoGroundCheckObjectException(this.ToString());
-        }
+        return physicsObject.grounded;
     }
 
     public virtual bool CheckDropOutScreen()
