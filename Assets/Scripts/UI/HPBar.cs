@@ -10,12 +10,12 @@ public class HPBar : MonoBehaviour {
     }
 
     public void SetHPBar () {
-        GetComponent<RectTransform> ().SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, m_HP * c_blockWidth);
+        GetComponent<RectTransform> ().SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, m_HP * c_blockWidth - 1);
     }
 
     public void SetHPBar (int hp) {
         m_HP = hp;
-        GetComponent<RectTransform> ().SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, m_HP * c_blockWidth);
+        GetComponent<RectTransform> ().SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, m_HP * c_blockWidth - 1);
     }
 
 }

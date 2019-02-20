@@ -35,7 +35,6 @@ public static class InGameVars {
             } else {
                 return 0;
             }
-
         }
         set {
             if (GameManager.StatusBar) {

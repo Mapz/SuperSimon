@@ -226,8 +226,13 @@ public class Simon : MovingUnit
                 {
                     if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.Default))
                         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 7);
-                    if (IsColliderActive(ColliderType.Default) && (type == ColliderType.Squat))
+                    else if (IsColliderActive(ColliderType.Default) && (type == ColliderType.Squat))
                         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 7);
+                    else if (IsColliderActive(ColliderType.OnHit) && (type == ColliderType.Squat))
+                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 6);
+                    else if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.OnHit))
+                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 6);
+
                 }
                 colliders[i].enabled = true;
                 m_currentCollider = colliders[i];
@@ -446,7 +451,6 @@ public class Simon : MovingUnit
 
     void OnDmgAction()
     {
-        //m_lastJumpY = m_rigidbody.position.y;
         physicsObject.velocity.y = m_hurtJumpVelocityY;
         MoveX(-1);
         m_wontBeHurt = true;

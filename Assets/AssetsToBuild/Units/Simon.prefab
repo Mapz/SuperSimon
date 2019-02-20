@@ -374,7 +374,7 @@ MonoBehaviour:
   m_team: 0
   m_dmg: 1
   m_defence: 0
-  _HP: 16
+  _HP: 15
   m_isDead: 0
   physicsObject: {fileID: 9079881034362278251}
   facingRight: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
   - {fileID: 2992764774603170021}
   m_wontBeHurtTime: 2
   m_onHit1Time: 0.8
-  m_hurtJumpVelocityY: 35
+  m_hurtJumpVelocityY: 110
   m_subWeaponShooter: {fileID: 1258593002055864189}
 --- !u!114 &9079881034362278251
 MonoBehaviour:
