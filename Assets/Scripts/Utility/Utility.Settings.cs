@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public partial class Utility {
     
     public const string UnitPrefabPath = "Assets/AssetsToBuild/Units/";

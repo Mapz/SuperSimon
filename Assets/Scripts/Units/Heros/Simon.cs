@@ -65,6 +65,30 @@ public class Simon : MovingUnit
 
     public SubWeaponShooter m_subWeaponShooter;
 
+    /** Unity Called Mehtods**/
+    void OnDisable()
+    {
+        DisableInput();
+    }
+
+    protected override void OnUpdate()
+    {
+        UpdateStatus();
+        RestrictPosition();
+        CheckDropDie();
+    }
+
+    void Awake()
+    {
+        m_anim = GetComponent<Animator>();
+        ChangeState(SimonStatus.Idle);
+        Flip(); //动画是向左的，默认向右
+    }
+
+    /** End Of Unity Called Mehtods**/
+
+    /** Override Methods **/
+    // 人物升级
     public override void Upgrade(int change)
     {
         if (change > 0)
@@ -90,10 +114,17 @@ public class Simon : MovingUnit
         m_dmg = m_whip.m_dmg;
     }
 
+    //是否可以受伤
+    protected override bool CanBeDamaged()
+    {
+        return !m_wontBeHurt && !m_isDead;
+    }
+
+    //开启输入
     public override void EnableInput()
     {
         GameManager.input.x_axis += Walk;
-        GameManager.input.x_axis_add_a += JumpHorizontal;
+        GameManager.input.x_axis_add_a += Jump;
         GameManager.input.y_axis_down += Squat;
         GameManager.input.no_key += Idle;
         GameManager.input.b += MeleeAttack;
@@ -103,10 +134,11 @@ public class Simon : MovingUnit
 
     }
 
+    //关闭输入
     public override void DisableInput()
     {
         GameManager.input.x_axis -= Walk;
-        GameManager.input.x_axis_add_a -= JumpHorizontal;
+        GameManager.input.x_axis_add_a -= Jump;
         GameManager.input.y_axis_down -= Squat;
         GameManager.input.no_key -= Idle;
         GameManager.input.b -= MeleeAttack;
@@ -115,67 +147,110 @@ public class Simon : MovingUnit
         GameManager.input.y_axis_up_and_b -= SubWeaponAttack;
     }
 
-
-
-    //Must Use Custom Mat /Custom/Sprite/Pixel
-    void ActiveFlicker(bool active)
+    protected override void Die(Damage dmg)
     {
-        GetComponent<SpriteRenderer>().material.SetInt("_ActiveFlicker", active ? 1 : 0);
+        m_isDead = true;
+        m_diedDamage = dmg;
     }
 
-    void OnDisable()
+    protected override void OnDmg(Damage dmg)
     {
-        DisableInput();
+        var dmgXDirection = dmg.xDirection;
+        if ((dmgXDirection.x < 0 && !facingRight) || (dmgXDirection.x > 0 && facingRight))
+        {
+            Flip();
+        }
+        ChangeState(SimonStatus.OnHit0);
     }
 
-    void MeleeAttackHitBoxEnable()
-    {
-        m_whip.ActiveCollider(true);
-    }
+    /** End of Override Methods **/
 
+    /** Anim Key Frame Functions Do Not Delete **/
+    //发射副武器
     void ShootSubWeapon()
     {
         m_subWeaponShooter.ExecShoot();
     }
 
-    IEnumerator AttackOver()
+    // hitbox 开启，动画关键帧调用
+    void MeleeAttackHitBoxEnable()
     {
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(m_anim.GetCurrentAnimatorStateInfo(0).length);
+        m_whip.ActiveCollider(true);
+        StartCoroutine(DisableMeleeAttackHitBoxByEndOfFrame());
+    }
+    /** End Of Anim Key Frame Functions Do Not Delete **/
+
+    //开始闪烁
+    void ActiveFlicker(bool active)
+    {
+        GetComponent<SpriteRenderer>().material.SetInt("_ActiveFlicker", active ? 1 : 0);
+    }
+
+    // hitbox 关闭，动画关键帧一帧后关闭（鞭子动画持续一帧）
+    IEnumerator DisableMeleeAttackHitBoxByEndOfFrame()
+    {
+        string animName = "Idle";
+        switch (m_status)
+        {
+            case SimonStatus.MeleeAttack:
+                animName = m_whip.m_animString;
+                break;
+            case SimonStatus.SquatMeleeAttack:
+                animName = m_whip.m_animStringSquat;
+                break;
+        }
+        //动画的一帧后关闭hitbox
+        AnimationClip ac = Utility.GetAnimationClip(m_anim, animName);
+        float time = 1 / ac.frameRate;
+        yield return new WaitForSeconds(time);
         m_whip.ActiveCollider(false);
-        if (!OnHit())
-            ChangeState(SimonStatus.Idle);
     }
 
-
-
-    protected override bool CanBeDamaged()
+    //攻击动画不能只用关键帧来结束 ，因为可能在攻击动画未结束的时候切换状态，所以在攻击开始的时候，调用这个协程来关闭攻击动画
+    IEnumerator AttackOver(SimonStatus simonStatus)
     {
-        return !m_wontBeHurt && !m_isDead;
-    }
-
-    IEnumerator SquatAttackOver()
-    {
+        string animName = "Idle";
+        switch (simonStatus)
+        {
+            case SimonStatus.MeleeAttack:
+                animName = m_whip.m_animString;
+                break;
+            case SimonStatus.SquatMeleeAttack:
+                animName = m_whip.m_animStringSquat;
+                break;
+            case SimonStatus.SubWeaponAttack:
+                animName = "ShootSubWeapon";
+                break;
+        }
         yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(m_anim.GetCurrentAnimatorStateInfo(0).length);
-        m_whip.ActiveCollider(false);
-        if (!OnHit())
-            ChangeState(SimonStatus.Squat);
+        //获取动画长度
+        float time = Utility.GetAnimationClip(m_anim, animName).length;
+        yield return new WaitForSeconds(time);
+        if (!IsOnHit())
+        {
+            switch (simonStatus)
+            {
+                case SimonStatus.MeleeAttack:
+                    ChangeState(SimonStatus.Idle);
+                    break;
+                case SimonStatus.SquatMeleeAttack:
+                    ChangeState(SimonStatus.Squat);
+                    break;
+                case SimonStatus.SubWeaponAttack:
+                    ChangeState(SimonStatus.Idle);
+                    break;
+            }
+        }
+
     }
 
-    IEnumerator SubWeaponAttackOver()
-    {
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(m_anim.GetCurrentAnimatorStateInfo(0).length);
-        if (!OnHit())
-            ChangeState(SimonStatus.Idle);
-    }
-
-    bool OnHit()
+    // 是否正在被打
+    bool IsOnHit()
     {
         return (m_status == SimonStatus.OnHit0 || m_status == SimonStatus.OnHit1 || m_status == SimonStatus.OnHit2);
     }
 
+    //升级动画，其他的暂停
     void UpgradeAnim()
     {
         Time.timeScale = 0;
@@ -183,40 +258,30 @@ public class Simon : MovingUnit
         StartCoroutine(PlayUpgradeAnim());
     }
 
+    //升级动画
     IEnumerator PlayUpgradeAnim()
     {
         for (var i = 0; i < 10; i++)
         {
+            //TimeScalse == 0 的时候，使用realtime来做协程
             yield return new WaitForSecondsRealtime(0.1f);
+            //使用调色板来做动画
             GetComponent<SpriteRenderer>().material.SetInt("_CurrentPalette", i % 2 == 0 ? 1 : 5);
         }
         GetComponent<SpriteRenderer>().material.SetInt("_CurrentPalette", 1);
         Time.timeScale = 1;
         m_status = m_lastStatus;
         EnableInput();
-
     }
 
-    void Awake()
-    {
-        //m_rigidbody = GetComponent<Rigidbody2D>();
-        m_anim = GetComponent<Animator>();
-        ChangeState(SimonStatus.Idle);
-        Flip();
-    }
-
-    protected override void Die(Damage dmg)
-    {
-        m_isDead = true;
-        m_diedDamage = dmg;
-    }
-
+    //判断是否当前Collider
     bool IsColliderActive(ColliderType type)
     {
         if (type == ColliderType.None) return false;
         return colliders[(int)type] == m_currentCollider;
     }
 
+    //激活Collider
     void ActiveCollider(ColliderType type)
     {
         for (var i = 0; i < colliders.Length; i++)
@@ -224,6 +289,7 @@ public class Simon : MovingUnit
             if (i == (int)type)
             {
                 {
+                    //不同的Collider需要改变人物的位置
                     if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.Default))
                         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 7);
                     else if (IsColliderActive(ColliderType.Default) && (type == ColliderType.Squat))
@@ -244,6 +310,7 @@ public class Simon : MovingUnit
         }
     }
 
+    //切换状态
     void ChangeState(SimonStatus state)
     {
         if (m_status != state)
@@ -290,21 +357,20 @@ public class Simon : MovingUnit
                 ActiveCollider(ColliderType.Default);
                 break;
             case SimonStatus.MeleeAttack:
-                //Debug.Log("m_whip.m_animString:" + m_whip.m_animString);
                 m_anim.Play(m_whip.m_animString);
                 ActiveCollider(ColliderType.Default);
-                StartCoroutine(AttackOver());
+                StartCoroutine(AttackOver(state));
                 break;
             case SimonStatus.SquatMeleeAttack:
                 m_anim.Play(m_whip.m_animStringSquat);
                 ActiveCollider(ColliderType.Squat);
-                StartCoroutine(SquatAttackOver());
+                StartCoroutine(AttackOver(state));
                 break;
             case SimonStatus.OnHit0:
                 m_anim.Play("Onhit");
                 ActiveCollider(ColliderType.OnHit);
                 m_whip.ActiveCollider(false);
-                DisableInput(); //No Input After Attack
+                DisableInput(); //No Input After OnHit
                 OnDmgAction();
                 new EnumTimer(() =>
                 {
@@ -338,24 +404,20 @@ public class Simon : MovingUnit
                 Destroy(m_rigidbody);
                 new EnumTimer(() =>
                 {
-                    if (OnDied != null)
-                    {
-                        OnDied(m_diedDamage);
-                    }
+                    OnDied?.Invoke(m_diedDamage);
                 }, 2f).StartTimeout(this);
                 break;
             case SimonStatus.SubWeaponAttack:
                 m_anim.Play("ShootSubWeapon");
-                StartCoroutine(SubWeaponAttackOver());
+                StartCoroutine(AttackOver(state));
                 break;
             case SimonStatus.Upgrade:
                 UpgradeAnim();
                 break;
-
-
         }
     }
 
+    //状态机Update
     void UpdateStatus()
     {
         if (m_status != SimonStatus.Walk && m_status != SimonStatus.JumpUp0 && m_status != SimonStatus.OnHit0)
@@ -368,10 +430,9 @@ public class Simon : MovingUnit
         switch (m_status)
         {
             case SimonStatus.Walk:
-                //Begin To Fall
+                //开始掉落
                 if (physicsObject.velocity.y < 0)
                 {
-
                     StopX();
                     ChangeState(SimonStatus.JumpFall1);
                 }
@@ -417,10 +478,10 @@ public class Simon : MovingUnit
                     ChangeState(SimonStatus.OnHit2); // 跪在地上
                 }
                 break;
-
         }
     }
 
+    // 限制移动区域 TODO：要和物理引擎结合一下
     void RestrictPosition()
     {
         if (transform.position.x < InGameVars.LevelConfigs.m_levelMinX)
@@ -433,28 +494,20 @@ public class Simon : MovingUnit
         }
     }
 
+    // 时间到了回调
     public void OnTimeOver()
     {
         m_wontBeHurt = false;
-        GetDamage(new Damage(m_HP));
+        GetDamage(new Damage(m_HP)); //直接死掉
     }
 
-    protected override void OnDmg(Damage dmg)
-    {
-        var dmgXDirection = dmg.xDirection;
-        if ((dmgXDirection.x < 0 && !facingRight) || (dmgXDirection.x > 0 && facingRight))
-        {
-            Flip();
-        }
-        ChangeState(SimonStatus.OnHit0);
-    }
-
+    //受击后的行动
     void OnDmgAction()
     {
-        physicsObject.velocity.y = m_hurtJumpVelocityY;
-        MoveX(-1);
-        m_wontBeHurt = true;
-        ActiveFlicker(true);
+        physicsObject.velocity.y = m_hurtJumpVelocityY; //给个Y速度
+        MoveX(-1); //后跳
+        m_wontBeHurt = true; //无敌
+        ActiveFlicker(true); //闪烁
         new EnumTimer(() =>
         { //无敌时间
             m_wontBeHurt = false;
@@ -462,13 +515,7 @@ public class Simon : MovingUnit
         }, m_wontBeHurtTime).StartTimeout(this);
     }
 
-    protected override void OnUpdate()
-    {
-        UpdateStatus();
-        RestrictPosition();
-        CheckDropDie();
-    }
-
+    // 掉坑死
     void CheckDropDie()
     {
         if (m_isDead) return;
@@ -477,39 +524,41 @@ public class Simon : MovingUnit
             m_isDead = true;
             new EnumTimer(() =>
             { //无敌时间
-                if (OnDied != null)
-                {
-                    OnDied(m_diedDamage);
-                }
+                OnDied?.Invoke(m_diedDamage);
             }, 1.5f).StartTimeout(this);
 
         }
     }
 
+    // 跳的高度
     float GetJumpHeight()
     {
         return transform.position.y - m_lastJumpY;
     }
 
+    // 是否在地上的行动
     bool CheckIsOnGroundActions()
     {
         return CheckGrounded() && m_status == SimonStatus.Idle || (m_status == SimonStatus.Walk) || (m_status == SimonStatus.Squat);
     }
 
+    // 没有攻击中
     bool CheckNotAttacking()
     {
-        return m_status != SimonStatus.MeleeAttack && m_status != SimonStatus.SquatMeleeAttack;
+        return m_status != SimonStatus.MeleeAttack && m_status != SimonStatus.SquatMeleeAttack && m_status != SimonStatus.SubWeaponAttack;
     }
 
+    /*** 下面是 Action 区域 ****/
+
+    //发射副武器
     public void SubWeaponAttack()
     {
-        Debug.Log("SubWeaponShoot");
-        //if (m_status != SimonStatus.Idle) return;
         if (!m_subWeaponShooter.CanShoot) return;
         if (!CheckNotAttacking()) return;
         ChangeState(SimonStatus.SubWeaponAttack);
     }
 
+    //等待
     public void Idle()
     {
         if (m_status == SimonStatus.Idle) return;
@@ -521,6 +570,7 @@ public class Simon : MovingUnit
         }
     }
 
+    //蹲着转向
     public void SquatFlip(Vector2 direction)
     {
         if (m_status != SimonStatus.Squat) return;
@@ -533,6 +583,7 @@ public class Simon : MovingUnit
         }
     }
 
+    //攻击
     public void MeleeAttack()
     {
         if (CheckNotAttacking())
@@ -545,6 +596,7 @@ public class Simon : MovingUnit
         }
     }
 
+    //蹲攻击
     public void SquatMeleeAttack()
     {
 
@@ -556,6 +608,7 @@ public class Simon : MovingUnit
         }
     }
 
+    //走路
     public void Walk(Vector2 direction)
     {
         if (m_status == SimonStatus.Squat)
@@ -575,6 +628,7 @@ public class Simon : MovingUnit
             }
     }
 
+    //蹲着
     public void Squat()
     {
         if (m_status == SimonStatus.Squat) return;
@@ -586,12 +640,8 @@ public class Simon : MovingUnit
             }
     }
 
-    public void JumpHorizontal(int direction)
-    {
-        Walk(new Vector2(direction, 0));
-    }
-
-    public void JumpHorizontal(Vector2 direction)
+    //跳跃
+    public void Jump(Vector2 direction)
     {
         if (m_status == SimonStatus.Squat) return;
         if (CheckNotAttacking())
@@ -611,4 +661,6 @@ public class Simon : MovingUnit
             }
     }
 
+
+    /*** 上面是 Action 区域 ****/
 }

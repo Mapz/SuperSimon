@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AttackLevel1
+  m_Name: MeleeAttackLevel2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300030, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
+      value: {fileID: 21300042, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300032, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
+      value: {fileID: 21300044, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300034, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
+      value: {fileID: 21300046, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
     - time: 0.5
       value: {fileID: 21300000, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
     attribute: m_Sprite
@@ -46,9 +46,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300030, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
-    - {fileID: 21300032, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
-    - {fileID: 21300034, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
+    - {fileID: 21300042, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
+    - {fileID: 21300044, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
+    - {fileID: 21300046, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
     - {fileID: 21300000, guid: cee9a60ff68224d7f9938c9b915cf3b7, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2

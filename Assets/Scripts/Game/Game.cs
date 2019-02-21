@@ -31,12 +31,14 @@ public class Game : MonoBehaviour {
     //DONE: 滑步的问题，修改Stop横向移动逻辑
     //DONE: 优化移动逻辑 --> 不再使用Unity物理，改用个自定义物理,改用Kinematic方式来处理 Use Full Kinematic Contact 自定义物理逻辑
     //DONE: 跳矮墙的时候VelocityY为负的BUG --> 因为在不同Sprite修改Collider的时候，大小不一致，导致和墙面重叠了，自定义物理失效，修改为同样宽度的Collider即可
-    
+    //DONE: 攻击武器一帧化 --> 新增找到动画clip的函数，取得framerate
+
     //TODO: 生怪器
-    //TODO: GameOver 逻辑
+    //TODO: 多人在线探索
     //TODO: 更多副武器的完成
+    //TODO: GameOver 逻辑
+    //TODO: 设计一个Boss
     //TODO: 数值配置化  --> 包括升级系统的改版
-    //TODO: 顶砖块，到顶了再爆炸
     //TODO: 移动中可以穿过格子-->移动中碰撞体加大一点
 
     void Awake () {
