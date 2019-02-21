@@ -17,6 +17,14 @@ public class Item : MonoBehaviour
 
     void Awake()
     {
+        _Awake();
+    }
+
+    protected virtual void _Awake() {
+        CreateTriggerItem();
+    }
+
+    protected void CreateTriggerItem() {
         GameObject m_trigger = new GameObject("ItemTrigger");
         BoxCollider2D m_triggerCollider = m_trigger.AddComponent<BoxCollider2D>();
         ItemTrigger m_triggerItem = m_trigger.AddComponent<ItemTrigger>();
