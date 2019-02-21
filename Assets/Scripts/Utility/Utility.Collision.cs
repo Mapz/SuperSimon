@@ -54,19 +54,20 @@ public partial class Utility {
 
         }
 
-        public static bool IsGrounded (MovingUnit unit, Transform m_groundCheck, LayerMask groundLayer, float verticalAnchor) {
-            RaycastHit2D hit;
-            var length = unit.GetComponent<SpriteRenderer> ().sprite.bounds.size.y * (1 - verticalAnchor) + 0.1f;
-            Vector3 endPoint = Vector2.down * length;
-            hit = Physics2D.Raycast (m_groundCheck.position, Vector2.down, length, 1 << LayerMask.NameToLayer ("Ground"));
-            if (hit.collider != null) {
-                Debug.DrawLine (m_groundCheck.position, hit.point, Color.red, 0.1f, false);
-                return true;
-            } else {
-                Debug.DrawLine (m_groundCheck.position, m_groundCheck.position + endPoint, Color.green, 0.1f, false);
-                return false;
-            }
-        }
+        // 暂时没有用
+        //public static bool IsGrounded (MovingUnit unit, Transform m_groundCheck, LayerMask groundLayer, float verticalAnchor) {
+        //    RaycastHit2D hit;
+        //    var length = unit.GetComponent<SpriteRenderer> ().sprite.bounds.size.y * (1 - verticalAnchor) + 0.1f;
+        //    Vector3 endPoint = Vector2.down * length;
+        //    hit = Physics2D.Raycast (m_groundCheck.position, Vector2.down, length, 1 << LayerMask.NameToLayer ("Ground"));
+        //    if (hit.collider != null) {
+        //        Debug.DrawLine (m_groundCheck.position, hit.point, Color.red, 0.1f, false);
+        //        return true;
+        //    } else {
+        //        Debug.DrawLine (m_groundCheck.position, m_groundCheck.position + endPoint, Color.green, 0.1f, false);
+        //        return false;
+        //    }
+        //}
     }
 
 }

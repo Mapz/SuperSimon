@@ -33,9 +33,11 @@ public class Game : MonoBehaviour {
     //DONE: 跳矮墙的时候VelocityY为负的BUG --> 因为在不同Sprite修改Collider的时候，大小不一致，导致和墙面重叠了，自定义物理失效，修改为同样宽度的Collider即可
     //DONE: 攻击武器一帧化 --> 新增找到动画clip的函数，取得framerate
 
+    //TODO: 更多副武器的完成
+    //TODO: 物理重合挤开逻辑
+    //TODO: 边沿探测和物理逻辑的契合
     //TODO: 生怪器
     //TODO: 多人在线探索
-    //TODO: 更多副武器的完成
     //TODO: GameOver 逻辑
     //TODO: 设计一个Boss
     //TODO: 数值配置化  --> 包括升级系统的改版

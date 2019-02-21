@@ -12,6 +12,7 @@ public class PhysicsObject : MonoBehaviour
 
     public Vector2 targetVelocity = Vector2.zero;
     public bool grounded { get; private set; }
+    public bool collided { get; private set; }
     protected Vector2 groundNormal = Vector2.up;
     protected Rigidbody2D rb2d;
     public Vector2 velocity;
@@ -49,6 +50,7 @@ public class PhysicsObject : MonoBehaviour
         velocity.x = targetVelocity.x;
 
         grounded = false;
+        collided = false;
 
         Vector2 deltaPosition = velocity * Time.deltaTime;
 
@@ -89,13 +91,17 @@ public class PhysicsObject : MonoBehaviour
                         currentNormal.x = 0;
                     }
                 }
+                else
+                {
+                    collided = true;
+                }
 
                 float projection = Vector2.Dot(velocity, currentNormal);
                 if (projection < 0)
                 {
                     velocity = velocity - projection * currentNormal;
                 }
-               
+
 
                 float modifiedDistance = hitBufferList[i].distance - shellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;
