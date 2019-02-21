@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
-
-public abstract class FlyingObject : MovingUnit
+public class FlyingObject : MovingUnit
 {
 
-    
+    public float m_startSpeedY;
+    public float m_gravityScale;
+
+    protected override void OnEnabled()
+    {
+        base.OnEnabled();
+        var phyo = GetComponent<PhysicsObject>();
+        phyo.gravityModifier = m_gravityScale;
+        phyo.velocity.y = m_startSpeedY;
+        MoveX();
+    }
 
     protected override void OnUpdate()
     {
