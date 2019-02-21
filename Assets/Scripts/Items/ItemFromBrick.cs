@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemFromBrick : Item {
 
     void Start () {
-        transform.DOMoveY (8, 0.5f).SetRelative ().OnComplete (() => {
+        transform.DOMoveY (10, 0.5f).SetRelative ().OnComplete (() => {
             GetComponent<Collider2D> ().enabled = true;
         });
     }

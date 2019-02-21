@@ -19,6 +19,7 @@ public class PhysicsObject : MonoBehaviour
     protected ContactFilter2D contactFilter;
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
+    protected List<Unit> hitUnitBufferList = new List<Unit>(16);
     public Action ComputeVelocity;
 
 
@@ -65,6 +66,7 @@ public class PhysicsObject : MonoBehaviour
         Movement(move, true);
     }
 
+
     void Movement(Vector2 move, bool yMovement)
     {
         float distance = move.magnitude;
@@ -73,6 +75,7 @@ public class PhysicsObject : MonoBehaviour
         {
             int count = rb2d.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
             hitBufferList.Clear();
+            hitUnitBufferList.Clear();
             for (int i = 0; i < count; i++)
             {
                 hitBufferList.Add(hitBuffer[i]);
@@ -80,7 +83,25 @@ public class PhysicsObject : MonoBehaviour
 
             for (int i = 0; i < hitBufferList.Count; i++)
             {
+
+                // 手动为Unit添加Collide事件
+                var unit = hitBufferList[i].collider.GetComponent<Unit>();
+                if (unit)
+                {
+                    if (!hitUnitBufferList.Contains(unit))
+                    {
+                        unit.OnCollideWithPhysicalObject(hitBufferList[i], rb2d.GetComponent<Collider2D>());
+                        hitUnitBufferList.Add(unit);
+                    }
+
+                }
+                // 手动为Unit添加Collide事件 Over
+
                 Vector2 currentNormal = hitBufferList[i].normal;
+
+                Debug.DrawLine(hitBufferList[i].point, hitBufferList[i].point + Vector2.one, Color.red, 0.1f, false);
+
+
                 if (currentNormal.y > minGroundNormalY)
                 {
                     grounded = true;
@@ -105,6 +126,9 @@ public class PhysicsObject : MonoBehaviour
 
                 float modifiedDistance = hitBufferList[i].distance - shellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;
+
+
+
             }
 
 

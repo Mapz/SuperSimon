@@ -290,10 +290,11 @@ public class Simon : MovingUnit
             {
                 {
                     //不同的Collider需要改变人物的位置
+                    int isGrounded = CheckGrounded() ? 1 : 0;
                     if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.Default))
-                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 7);
+                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + isGrounded*7);
                     else if (IsColliderActive(ColliderType.Default) && (type == ColliderType.Squat))
-                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 7);
+                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - isGrounded*7);
                     else if (IsColliderActive(ColliderType.OnHit) && (type == ColliderType.Squat))
                         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 6);
                     else if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.OnHit))

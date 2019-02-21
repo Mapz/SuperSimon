@@ -46,7 +46,7 @@ public class GameStateInGame : IGameState
         InGameVars.level = Utility.LoadLevel(m_levelPrefabName);
         // Load Hero
         Hero = Utility.CreateUnit("Simon");
-        
+
         Hero.SetFollowByCamera(GameManager.mainCamera);
         Hero.AttachToHPBar(GameManager.StatusBar.m_heroHp);
         StartCoroutine(SetHeroPosition());
@@ -73,14 +73,14 @@ public class GameStateInGame : IGameState
         if (groundPointHit.collider)
         {
             var groundPoint = groundPointHit.point;
-            Hero.transform.position = new Vector2(groundPoint.x, groundPoint.y - (Hero.GetComponent<SpriteRenderer>().size.y - Hero.GetComponent<SpriteRenderer>().size.y - Hero.GetComponent<SpriteRenderer>().sprite.pivot.y));
+            Hero.transform.position = Vector2.up + new Vector2(groundPoint.x, groundPoint.y - (Hero.GetComponent<SpriteRenderer>().size.y - Hero.GetComponent<SpriteRenderer>().size.y - Hero.GetComponent<SpriteRenderer>().sprite.pivot.y));
         }
         if (groundPointHit.collider != null)
         {
             Debug.DrawLine(Hero.transform.position, groundPointHit.point, Color.red, 100.1f, false);
-         
+
         }
-      
+
     }
 
     void Clear()

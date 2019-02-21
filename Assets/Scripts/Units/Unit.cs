@@ -167,6 +167,11 @@ public abstract class Unit : MonoBehaviour {
         }
     }
 
+    //ÔÚ PhysicalObject ÖÐ´¥·¢
+    public virtual void OnCollideWithPhysicalObject(RaycastHit2D hit,Collider2D collider) {
+
+    }
+
     void OnTriggerEnter2D (Collider2D other) {
         //Debug.Log (name + " . OnTriggerEnter2D (" + other.name + ")");
         _OnTriggerEnter2D (other);
