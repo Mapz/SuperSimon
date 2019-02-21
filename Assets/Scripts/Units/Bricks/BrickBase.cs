@@ -38,8 +38,4 @@ public abstract class BrickBase : Unit
         }
     }
 
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-        //TODO: PlayCollisionSound
-    //}
 }

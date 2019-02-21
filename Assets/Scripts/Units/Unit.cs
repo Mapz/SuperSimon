@@ -122,9 +122,7 @@ public abstract class Unit : MonoBehaviour {
 
     protected virtual void Die (Damage dmg) {
         m_isDead = true;
-        if (OnDied != null) {
-            OnDied (dmg);
-        }
+        OnDied?.Invoke(dmg);
         Destroy (gameObject);
 
     }
@@ -167,12 +165,12 @@ public abstract class Unit : MonoBehaviour {
         }
     }
 
-    //在 PhysicalObject 中触发
+    //在 PhysicalObject 中触发碰撞
     public virtual void OnCollideWithPhysicalObject(RaycastHit2D hit,Collider2D collider) {
 
     }
 
-    void OnTriggerEnter2D (Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other) {
         //Debug.Log (name + " . OnTriggerEnter2D (" + other.name + ")");
         _OnTriggerEnter2D (other);
     }
