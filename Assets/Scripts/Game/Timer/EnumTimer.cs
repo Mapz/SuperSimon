@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnumTimer {
@@ -31,7 +30,7 @@ public class EnumTimer {
             if (null != m_pauseWhile) {
                 yield return new WaitWhile (m_pauseWhile);
             }
-            yield return new WaitForSecondsRealtime (timeToWait);
+            yield return new WaitForSeconds (timeToWait);
             action ();
         }
     }

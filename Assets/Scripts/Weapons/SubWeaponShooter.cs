@@ -19,7 +19,7 @@ public class SubWeaponShooter : MonoBehaviour
 
     private void Awake()
     {
-        if(m_Holder.m_team == Team.Hero)
+        if (m_Holder.m_team == Team.Hero)
         {
             m_ShowOnStatusBar = true;
         }
@@ -49,12 +49,13 @@ public class SubWeaponShooter : MonoBehaviour
     }
 
 
-    public void SetShotObject(GameObject go,Sprite icon)
+    public void SetShotObject(GameObject go, Sprite icon)
     {
         toShootPrefab = go;//Must be a prefab
         GameObject temp = Instantiate(go);
         m_heartCost = temp.GetComponent<SubWeaponData>().heartCost;
-        if (m_ShowOnStatusBar) {
+        if (m_ShowOnStatusBar)
+        {
             GameManager.StatusBar.SetSubWeapon(icon);
         }
         Destroy(temp);
@@ -81,10 +82,13 @@ public class SubWeaponShooter : MonoBehaviour
             flyingObject.Flip();
         }
         flyingObject.m_team = m_Holder.m_team;
-        var weapon = GetComponent<Weapon>();
+        flyingObject.m_shooter = m_Holder;
+        var weapon = flyingObject.GetComponentInChildren<FlyObjectWeapon>();
         if (null != weapon)
         {
             weapon.m_team = m_Holder.m_team;
+            weapon.m_Shooter = m_Holder;
+            weapon.m_WeaponCarrier = flyingObject;
         }
         InGameVars.heart -= m_heartCost;
         return true;

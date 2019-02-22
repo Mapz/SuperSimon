@@ -33,6 +33,7 @@ public class Game : MonoBehaviour {
     //DONE: 跳矮墙的时候VelocityY为负的BUG --> 因为在不同Sprite修改Collider的时候，大小不一致，导致和墙面重叠了，自定义物理失效，修改为同样宽度的Collider即可
     //思考：此问题如何永久解决
     //DONE: 攻击武器一帧化 --> 新增找到动画clip的函数，取得framerate
+    //DONE: 迴旋鏢完成
 
     //TODO: 通过Collider变化来判断是否重叠解决物理重合挤开逻辑----> 发射副武器的位置Bug
     //TODO: 更多副武器的完成
