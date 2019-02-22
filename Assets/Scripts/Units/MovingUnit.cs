@@ -19,19 +19,19 @@ public abstract class MovingUnit : Unit
     [System.NonSerialized]
     public Collider2D m_currentCollider;
 
-    public float m_moveSpeed;
+    public float m_xMoveSpeed;
 
-    int m_moving;
+    protected int m_moving;
 
     protected override void OnEnabled()
     {
         physicsObject.ComputeVelocity = UpdateSpeedX;
     }
 
-    void UpdateSpeedX()
+    protected virtual void UpdateSpeedX()
     {
         if (m_moving != 0)
-            physicsObject.targetVelocity.x = m_moving * m_moveSpeed * (facingRight ? 1 : -1);
+            physicsObject.targetVelocity.x = m_moving * m_xMoveSpeed * (facingRight ? 1 : -1);
     }
 
     public virtual void MoveX(int direction = 1)

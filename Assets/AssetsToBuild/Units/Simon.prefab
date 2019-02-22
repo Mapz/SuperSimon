@@ -380,7 +380,7 @@ MonoBehaviour:
   facingRight: 0
   m_interactEnviroment: 1
   m_TrigerBrick: 1
-  m_moveSpeed: 60
+  m_xMoveSpeed: 60
   m_jumpVelocityY: 240
   m_status: 0
   m_whip: {fileID: 3273008750411816863}

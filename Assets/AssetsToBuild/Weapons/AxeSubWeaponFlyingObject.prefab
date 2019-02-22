@@ -89,7 +89,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5566602192485806696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 109ab673182acdd4cb0ed271bb512560, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ab7b967f590cbf49bee814fa862b080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_team: 0
@@ -97,7 +97,9 @@ MonoBehaviour:
   m_dmg: 1
   m_collider: {fileID: 6876531849436679787}
   m_dmgType: 0
-  m_Holder: {fileID: 4267736824745760639}
+  m_WeaponCarrier: {fileID: 4267736824745760639}
+  m_DealDmgToCarrierWhenCollide: 0
+  m_Shooter: {fileID: 0}
 --- !u!1 &6786407331440971920
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +276,7 @@ MonoBehaviour:
   facingRight: 1
   m_interactEnviroment: 0
   m_TrigerBrick: 0
-  m_moveSpeed: 60
+  m_xMoveSpeed: 40
   m_startSpeedY: 430
   m_gravityScale: 100
+  m_shooter: {fileID: 0}

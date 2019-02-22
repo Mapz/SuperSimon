@@ -172,11 +172,8 @@ MonoBehaviour:
   physicsObject: {fileID: 1056970067118690532}
   facingRight: 1
   m_interactEnviroment: 0
-  m_groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
   m_TrigerBrick: 0
-  m_moveSpeed: 20
+  m_xMoveSpeed: 30
   m_bodyIsWeapon: 1
 --- !u!114 &6331058658509863625
 MonoBehaviour:

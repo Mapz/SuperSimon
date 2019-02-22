@@ -34,7 +34,7 @@ public class Game : MonoBehaviour {
     //思考：此问题如何永久解决
     //DONE: 攻击武器一帧化 --> 新增找到动画clip的函数，取得framerate
 
-    //TODO: 通过Collider变化来判断是否重叠解决物理重合挤开逻辑
+    //TODO: 通过Collider变化来判断是否重叠解决物理重合挤开逻辑----> 发射副武器的位置Bug
     //TODO: 更多副武器的完成
     //TODO: 物理重合挤开逻辑
     //TODO: 边沿探测和物理逻辑的契合
