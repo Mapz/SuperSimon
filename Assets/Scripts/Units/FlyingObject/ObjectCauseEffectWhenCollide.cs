@@ -7,7 +7,7 @@ public class ObjectCauseEffectWhenCollide : FlyingObject
     public GameObject m_effectPrefab;
     protected override void OnFixedUpdate()
     {
-        if (phyo.collided || phyo.grounded)
+        if (physicsObject.collided || physicsObject.grounded)
         {
             ShowEffect();
         }

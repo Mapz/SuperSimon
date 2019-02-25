@@ -6,14 +6,12 @@ public class FlyingObject : MovingUnit
     public float m_gravityScale;
     [System.NonSerialized]
     public Unit m_shooter;
-    protected PhysicsObject phyo;
 
     protected override void OnEnabled()
     {
         base.OnEnabled();
-        phyo = GetComponent<PhysicsObject>();
-        phyo.gravityModifier = m_gravityScale;
-        phyo.velocity.y = m_startSpeedY;
+        physicsObject.gravityModifier = m_gravityScale;
+        physicsObject.velocity.y = m_startSpeedY;
         MoveX();
     }
 

@@ -20,6 +20,7 @@ public class PhysicsObject : MonoBehaviour
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
     protected List<Unit> hitUnitBufferList = new List<Unit>(16);
     public Action ComputeVelocity;
+    public float distanceToGound { get; private set; }
 
 
     protected const float minMoveDistance = 0.001f;
@@ -41,7 +42,6 @@ public class PhysicsObject : MonoBehaviour
     {
         targetVelocity = Vector2.zero;
         ComputeVelocity?.Invoke();
-
     }
 
     void FixedUpdate()
@@ -63,7 +63,26 @@ public class PhysicsObject : MonoBehaviour
         move = Vector2.up * deltaPosition.y;
 
         Movement(move, true);
+
+        distanceToGound = GetGroundYDistance();
     }
+
+    private float GetGroundYDistance()
+    {
+        float distance = 10000;
+        if (rb2d)
+        {
+            int count = rb2d.Cast(Vector2.down, contactFilter, hitBuffer);
+
+            for (int i = 0; i < count; i++)
+            {
+                distance = hitBuffer[i].distance < distance ? hitBuffer[i].distance : distance;
+            }
+            Debug.Log("distance:" + distance);
+        }
+        return distance;
+    }
+
 
 
     void Movement(Vector2 move, bool yMovement)

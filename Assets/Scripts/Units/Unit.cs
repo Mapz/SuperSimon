@@ -42,6 +42,7 @@ public abstract class Unit : MonoBehaviour
 
     public OnDied OnDied;
 
+    //打击CD计数器，一个武器只能对一个东西周期性造成伤害而不是总是造成伤害
     private OnHitCountDown m_onHitCheck = new OnHitCountDown();
 
     protected virtual bool CanBeDamaged()

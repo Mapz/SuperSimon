@@ -71,8 +71,8 @@ namespace XAsset {
             }
 
 #else
-            if (Utility.ActiveDownloadMode)
-                url = Utility.AssetBunldesDownloadPath + "/";
+            if (Settings.ActiveDownloadMode)
+                url = Settings.AssetBunldesDownloadPath + "/";
             else {
                 url = Path.Combine (Application.streamingAssetsPath, relativePath) + "/";
             }
@@ -120,13 +120,13 @@ namespace XAsset {
             }
 
 #else
-            if (Utility.ActiveDownloadMode)
-                url = Utility.AssetBunldesDownloadPath + "/";
+            if (Settings.ActiveDownloadMode)
+                url = Settings.AssetBunldesDownloadPath + "/";
             else {
                 url = Path.Combine (Application.streamingAssetsPath, relativePath) + "/";
             }
 #endif
-            StartCoroutine (Bundles.InitializeAsync (url, bundle => {
+            StartCoroutine(Bundles.InitializeAsync (url, bundle => {
                 if (bundle != null) {
                     var asset = bundle.LoadAsset<TextAsset> ("Manifest.txt");
                     if (asset != null) {

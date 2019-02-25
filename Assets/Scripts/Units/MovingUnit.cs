@@ -12,8 +12,6 @@ public abstract class MovingUnit : Unit
 
     public bool m_interactEnviroment;
 
-    //public LayerMask m_groundLayer;
-
     public bool m_TrigerBrick = false; //可以顶砖块
 
     [System.NonSerialized]
@@ -59,15 +57,12 @@ public abstract class MovingUnit : Unit
 
     public virtual bool CheckDropOutScreen()
     {
-        return transform.position.y < GameManager.mainCamera.transform.position.y - InGameVars.ScreenHeight / 2 - 20;
+        return Utility.CheckOutOfScreen(transform.position, 20) == Vector2.down;
     }
 
     public virtual bool CheckOutOfScreen()
     {
-        return transform.position.y < GameManager.mainCamera.transform.position.y - InGameVars.ScreenHeight / 2 - 20 ||
-            transform.position.y > GameManager.mainCamera.transform.position.y + InGameVars.ScreenHeight / 2 + 20 ||
-            transform.position.x < GameManager.mainCamera.transform.position.x - InGameVars.ScreenWidth / 2 - 20 ||
-            transform.position.x > GameManager.mainCamera.transform.position.x + InGameVars.ScreenWidth / 2 + 20;
+        return Utility.CheckOutOfScreen(transform.position, 20) != Vector2.zero;
     }
 
 }

@@ -30,14 +30,14 @@ public enum ColliderType
 
 public class Simon : MovingUnit
 {
-
+    private int m_SpriteYOffset1 = 7; // 蹲下和站起
+    private int m_SpriteYOffset2 = 6; // 受伤和蹲下
     public int m_jumpVelocityY = 1000;
     private Animator m_anim;
     public SimonStatus m_status;
     private SimonStatus m_lastStatus;
     private Rigidbody2D m_rigidbody;
     public NonAlwaysActiveWeapons m_whip;
-    private float m_lastJumpY;
 
     public int m_level = 0;
 
@@ -73,9 +73,13 @@ public class Simon : MovingUnit
 
     protected override void OnUpdate()
     {
+        CheckDropDie();
+    }
+
+    protected override void OnFixedUpdate()
+    {
         UpdateStatus();
         RestrictPosition();
-        CheckDropDie();
     }
 
     void Awake()
@@ -284,31 +288,30 @@ public class Simon : MovingUnit
     //激活Collider
     void ActiveCollider(ColliderType type)
     {
+        //先关闭所有Collider
         for (var i = 0; i < colliders.Length; i++)
         {
-            if (i == (int)type)
-            {
-                {
-                    //不同的Collider需要改变人物的位置
-                    int isGrounded = CheckGrounded() ? 1 : 0;
-                    if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.Default))
-                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + isGrounded*7);
-                    else if (IsColliderActive(ColliderType.Default) && (type == ColliderType.Squat))
-                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - isGrounded*7);
-                    else if (IsColliderActive(ColliderType.OnHit) && (type == ColliderType.Squat))
-                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 6);
-                    else if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.OnHit))
-                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 6);
-
-                }
-                colliders[i].enabled = true;
-                m_currentCollider = colliders[i];
-            }
-            else
-            {
-                colliders[i].enabled = false;
-            }
+            colliders[i].enabled = false;
         }
+
+        Collider2D co = colliders[(int)type];
+
+        //不同的Collider需要改变人物的位置
+        int isGrounded = CheckGrounded() ? 1 : 0;
+        if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.Default))
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + isGrounded * m_SpriteYOffset1);
+        else if (IsColliderActive(ColliderType.Default) && (type == ColliderType.Squat))
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - isGrounded * m_SpriteYOffset1);
+        else if (IsColliderActive(ColliderType.OnHit) && (type == ColliderType.Squat))
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - m_SpriteYOffset2);
+        else if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.OnHit))
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + m_SpriteYOffset2);
+
+
+        co.enabled = true;
+        m_currentCollider = co;
+
+
     }
 
     //切换状态
@@ -410,6 +413,7 @@ public class Simon : MovingUnit
                 break;
             case SimonStatus.SubWeaponAttack:
                 m_anim.Play("ShootSubWeapon");
+                ActiveCollider(ColliderType.Default);
                 StartCoroutine(AttackOver(state));
                 break;
             case SimonStatus.Upgrade:
@@ -417,6 +421,7 @@ public class Simon : MovingUnit
                 break;
         }
     }
+
 
     //状态机Update
     void UpdateStatus()
@@ -447,7 +452,7 @@ public class Simon : MovingUnit
                 }
                 break;
             case SimonStatus.JumpUp1:
-
+                JumpHigh = GetJumpHeight();
                 if (CheckGrounded())
                 {
                     ChangeState(SimonStatus.Idle);
@@ -456,7 +461,7 @@ public class Simon : MovingUnit
             case SimonStatus.JumpFall0:
 
                 JumpHigh = GetJumpHeight();
-                if (JumpHigh < 8)
+                if (JumpHigh < m_SpriteYOffset1 + 1)
                 {
                     ChangeState(SimonStatus.JumpFall1);
                 }
@@ -531,10 +536,10 @@ public class Simon : MovingUnit
         }
     }
 
-    // 跳的高度
+    // 当前Y高度
     float GetJumpHeight()
     {
-        return transform.position.y - m_lastJumpY;
+        return physicsObject.distanceToGound;
     }
 
     // 是否在地上的行动
@@ -549,13 +554,19 @@ public class Simon : MovingUnit
         return m_status != SimonStatus.MeleeAttack && m_status != SimonStatus.SquatMeleeAttack && m_status != SimonStatus.SubWeaponAttack;
     }
 
+    // 可以攻击（不包括蹲着）
+    bool CheckCanAttack()
+    {
+        return CheckNotAttacking() && (GetJumpHeight() > m_SpriteYOffset1 || GetJumpHeight() < 0.1);//太低了不能攻击//避免碰撞box卡进去
+    }
+
     /*** 下面是 Action 区域 ****/
 
     //发射副武器
     public void SubWeaponAttack()
     {
         if (!m_subWeaponShooter.CanShoot) return;
-        if (!CheckNotAttacking()) return;
+        if (!CheckCanAttack()) return;
         ChangeState(SimonStatus.SubWeaponAttack);
     }
 
@@ -587,7 +598,7 @@ public class Simon : MovingUnit
     //攻击
     public void MeleeAttack()
     {
-        if (CheckNotAttacking())
+        if (CheckCanAttack())
         {
             ChangeState(SimonStatus.MeleeAttack);
             if (CheckGrounded())
@@ -648,7 +659,6 @@ public class Simon : MovingUnit
         if (CheckNotAttacking())
             if (CheckIsOnGroundActions())
             {
-                m_lastJumpY = transform.position.y;
                 ChangeState(SimonStatus.JumpUp0);
                 if ((direction.x < 0 && facingRight) || (direction.x > 0 && !facingRight))
                 {

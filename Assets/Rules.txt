@@ -1,6 +1,6 @@
 [BuildAssetsWithFilename]
-searchPath=Assets/SampleAssets
-searchPattern=*.prefab
+searchPath=Assets/AssetsToBuild
+searchPattern=*
 searchOption=AllDirectories
 bundleName=
 
