@@ -10,7 +10,7 @@ public enum Team
     Enemy,
 }
 
-public abstract class Unit : MonoBehaviour
+public abstract class Unit : MonoBehaviour, PauseAble
 {
     public int m_HP
     {
@@ -142,6 +142,16 @@ public abstract class Unit : MonoBehaviour
     {
     }
 
+    protected virtual void DoPause(bool pause)
+    {
+    }
+
+    void Pause(bool pause)
+    {
+        Debug.Log("ÔÝÍ£");
+        DoPause(pause);
+    }
+
     void OnEnable()
     {
         OnEnabled();
@@ -156,6 +166,7 @@ public abstract class Unit : MonoBehaviour
     {
         OnFixedUpdate();
     }
+
 
     protected virtual void Die(Damage dmg)
     {
@@ -234,5 +245,10 @@ public abstract class Unit : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         //Debug.Log (name + " . OnTriggerExit2D (" + other.name + ")");
+    }
+
+    void PauseAble.Pause(bool pause)
+    {
+        throw new System.NotImplementedException();
     }
 }

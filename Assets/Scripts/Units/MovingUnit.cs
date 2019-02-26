@@ -8,7 +8,7 @@ public abstract class MovingUnit : Unit
     [SerializeField]
     protected PhysicsObject physicsObject;
 
-    public bool facingRight = false;
+    public bool facingRight = false; // This Must set as Sprite facing direction does
 
     public bool m_interactEnviroment;
 

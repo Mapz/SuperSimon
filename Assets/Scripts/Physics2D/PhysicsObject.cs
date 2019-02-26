@@ -78,7 +78,7 @@ public class PhysicsObject : MonoBehaviour
             {
                 distance = hitBuffer[i].distance < distance ? hitBuffer[i].distance : distance;
             }
-            Debug.Log("distance:" + distance);
+            //Debug.Log("distance:" + distance);
         }
         return distance;
     }

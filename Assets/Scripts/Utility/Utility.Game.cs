@@ -30,6 +30,11 @@ public partial class Utility
         }
 
         return direction;
+    }
 
+    public static bool CheckInSpawnArea(Vector2 position, int outOffset = 30)
+    {
+        Bounds outter = new Bounds(new Vector2(GameManager.mainCamera.transform.position.x, GameManager.mainCamera.transform.position.y), new Vector2(InGameVars.ScreenWidth + outOffset, InGameVars.ScreenHeight + +outOffset));
+        return outter.Contains(position);  //inner.Contains(position);
     }
 }
