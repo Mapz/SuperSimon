@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 5005339150224170590}
   - component: {fileID: 104639524199774660}
   - component: {fileID: 7350987384671445016}
-  - component: {fileID: 8197020687125434543}
   m_Layer: 13
   m_Name: EnemyTurtle
   m_TagString: Untagged
@@ -139,10 +138,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 6.0553465}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 16, y: 24}
     newSize: {x: 16, y: 16}
     adaptiveTilingThreshold: 0.5
@@ -150,7 +149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16, y: 24}
+  m_Size: {x: 16, y: 23.903097}
   m_EdgeRadius: 0
 --- !u!61 &5005339150224170590
 BoxCollider2D:
@@ -165,10 +164,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -4.3973866}
+  m_Offset: {x: 0, y: 2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 16, y: 24}
     newSize: {x: 16, y: 16}
     adaptiveTilingThreshold: 0.5
@@ -176,7 +175,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16, y: 15.205227}
+  m_Size: {x: 16, y: 16}
   m_EdgeRadius: 0
 --- !u!114 &104639524199774660
 MonoBehaviour:
@@ -218,22 +217,10 @@ MonoBehaviour:
   m_TrigerBrick: 0
   m_xMoveSpeed: 30
   m_bodyIsWeapon: 1
-  m_wakeUpTime: 5
   m_guardUpDefence: 0
   colliders:
   - {fileID: 4378332469571612793}
   - {fileID: 5005339150224170590}
---- !u!114 &8197020687125434543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3500537951951617419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6304d91089f6f45974bce45eb5fa8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  database: {fileID: 0}
-  isRunning: 1
+  m_wakeUpTime: 7
+  m_wakeUpTime1: 2
+  m_slidingSpeed: 80

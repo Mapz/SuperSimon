@@ -23,6 +23,7 @@ public abstract class MovingUnit : Unit
 
     protected override void OnEnabled()
     {
+        base.OnEnabled();
         physicsObject.ComputeVelocity = UpdateSpeedX;
     }
 

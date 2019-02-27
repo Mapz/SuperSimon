@@ -22,7 +22,7 @@ TagManager:
   - EnemyCanContact
   - ItemTrigger
   - NoCollide
-  - 
+  - OnlyHitGround
   - 
   - 
   - 

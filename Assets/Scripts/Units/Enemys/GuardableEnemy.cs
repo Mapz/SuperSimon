@@ -8,11 +8,12 @@ using UnityEngine;
 public class GuardableEnemy : SimpleEnemy, IGuard
 {
 
-    private Animator m_anim;
-    [SerializeField]
-    private float m_wakeUpTime;
+   
+
     [SerializeField]
     private int m_guardUpDefence;
+
+    protected bool m_isGuarding;
 
     void Awake()
     {
@@ -23,13 +24,14 @@ public class GuardableEnemy : SimpleEnemy, IGuard
     {
         m_anim.Play("Walk");
         m_defence -= m_guardUpDefence;
+        m_isGuarding = false;
     }
 
     public virtual void Guard()
     {
         m_anim.Play("Guard");
         m_defence += m_guardUpDefence;
-        StopX();
+        m_isGuarding = true;
     }
 
 

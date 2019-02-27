@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6331058658509863627}
   - component: {fileID: 6331058658509863628}
   - component: {fileID: 6331058658509863626}
-  - component: {fileID: 6331058658509863625}
   - component: {fileID: 1056970067118690532}
   m_Layer: 13
   m_Name: EnemyMushroom
@@ -175,20 +174,6 @@ MonoBehaviour:
   m_TrigerBrick: 0
   m_xMoveSpeed: 30
   m_bodyIsWeapon: 1
---- !u!114 &6331058658509863625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6331058658509863616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a518d7397b3cf42c0967872f3ad2f1af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  database: {fileID: 0}
-  isRunning: 1
 --- !u!114 &1056970067118690532
 MonoBehaviour:
   m_ObjectHideFlags: 0

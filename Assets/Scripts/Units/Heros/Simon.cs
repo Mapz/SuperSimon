@@ -33,7 +33,6 @@ public class Simon : MovingUnit
     private int m_SpriteYOffset1 = 7; // 蹲下和站起
     private int m_SpriteYOffset2 = 6; // 受伤和蹲下
     public int m_jumpVelocityY = 1000;
-    private Animator m_anim;
     public SimonStatus m_status;
     private SimonStatus m_lastStatus;
     private Rigidbody2D m_rigidbody;

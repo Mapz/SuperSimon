@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using BT;
 using UnityEngine;
 [System.Serializable]
 public class SpawnData

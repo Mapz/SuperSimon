@@ -1,3 +1,4 @@
+using BTAI;
 using UnityEngine;
 
 public delegate void OnDied(Damage dmg);
@@ -8,6 +9,7 @@ public enum Team
     Assistance,
     Enviroment,
     Enemy,
+    Chaos,
 }
 
 public abstract class Unit : MonoBehaviour, IPause
@@ -24,6 +26,10 @@ public abstract class Unit : MonoBehaviour, IPause
             }
         }
     }
+
+    protected Animator m_anim;
+
+    protected Root ai;
 
     public int m_maxHp;
 
@@ -45,6 +51,8 @@ public abstract class Unit : MonoBehaviour, IPause
     private bool m_isPaused = false;
 
     public bool m_isAttacked { get; private set; }
+
+    public Damage m_lastDamageGot { get; private set; }
 
     //打击CD计数器，一个武器只能对一个东西周期性造成伤害而不是总是造成伤害
     private OnHitCountDown m_onHitCheck = new OnHitCountDown();
@@ -71,15 +79,7 @@ public abstract class Unit : MonoBehaviour, IPause
         hpBarAttached = null;
     }
 
-    public virtual void EnableInput()
-    {
 
-    }
-
-    public virtual void DisableInput()
-    {
-
-    }
 
     public void SetFollowByCamera(Camera _camera)
     {
@@ -89,6 +89,8 @@ public abstract class Unit : MonoBehaviour, IPause
 
     public virtual void GetDamage(Damage dmg)
     {
+        m_lastDamageGot = dmg;
+
         if (CanBeDamaged())
         {
             if (dmg.rawDamage > 0)
@@ -134,7 +136,7 @@ public abstract class Unit : MonoBehaviour, IPause
 
     protected virtual void OnUpdate()
     {
-
+        ai?.Tick();
     }
 
     protected virtual void OnFixedUpdate()
@@ -143,6 +145,21 @@ public abstract class Unit : MonoBehaviour, IPause
     }
 
     protected virtual void OnEnabled()
+    {
+        AddAI();
+    }
+
+    public virtual void EnableInput()
+    {
+
+    }
+
+    public virtual void DisableInput()
+    {
+
+    }
+
+    public virtual void AddAI()
     {
 
     }
@@ -200,9 +217,11 @@ public abstract class Unit : MonoBehaviour, IPause
                     switch (weapon.m_team)
                     {
                         case Team.Enemy:
+                        case Team.Enviroment:
+                        case Team.Chaos:
                             OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
                             weapon.OnDealDmg();
-                           
+
                             break;
                     }
                     break;
@@ -211,6 +230,7 @@ public abstract class Unit : MonoBehaviour, IPause
                     {
                         case Team.Hero:
                         case Team.Assistance:
+                        case Team.Chaos:
                             OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
                             weapon.OnDealDmg();
                             break;
