@@ -50,6 +50,12 @@ public abstract class MovingUnit : Unit
         transform.localScale = theScale;
     }
 
+    public override void Pause(bool pause)
+    {
+        base.Pause(pause);
+        physicsObject.Pause(pause);
+    }
+
     public virtual bool CheckGrounded()
     {
         return physicsObject.grounded;

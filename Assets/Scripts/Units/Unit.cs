@@ -10,7 +10,7 @@ public enum Team
     Enemy,
 }
 
-public abstract class Unit : MonoBehaviour, PauseAble
+public abstract class Unit : MonoBehaviour, IPause
 {
     public int m_HP
     {
@@ -41,6 +41,10 @@ public abstract class Unit : MonoBehaviour, PauseAble
     public bool m_isDead = false;
 
     public OnDied OnDied;
+
+    private bool m_isPaused = false;
+
+    public bool m_isAttacked { get; private set; }
 
     //打击CD计数器，一个武器只能对一个东西周期性造成伤害而不是总是造成伤害
     private OnHitCountDown m_onHitCheck = new OnHitCountDown();
@@ -140,16 +144,13 @@ public abstract class Unit : MonoBehaviour, PauseAble
 
     protected virtual void OnEnabled()
     {
+
     }
 
-    protected virtual void DoPause(bool pause)
-    {
-    }
-
-    void Pause(bool pause)
+    public virtual void Pause(bool pause)
     {
         Debug.Log("暂停");
-        DoPause(pause);
+        m_isPaused = pause;
     }
 
     void OnEnable()
@@ -159,11 +160,14 @@ public abstract class Unit : MonoBehaviour, PauseAble
 
     void Update()
     {
+        if (m_isPaused) return;
         OnUpdate();
     }
 
     void FixedUpdate()
     {
+        if (m_isPaused) return;
+        m_isAttacked = false;
         OnFixedUpdate();
     }
 
@@ -172,12 +176,13 @@ public abstract class Unit : MonoBehaviour, PauseAble
     {
         m_isDead = true;
         OnDied?.Invoke(dmg);
-        Destroy(gameObject);
+        Destroy(this);
 
     }
 
     protected virtual void OnAttack(Damage dmg)
     {
+        m_isAttacked = true;
         GetDamage(dmg);
     }
 
@@ -197,6 +202,7 @@ public abstract class Unit : MonoBehaviour, PauseAble
                         case Team.Enemy:
                             OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
                             weapon.OnDealDmg();
+                           
                             break;
                     }
                     break;
@@ -230,6 +236,24 @@ public abstract class Unit : MonoBehaviour, PauseAble
         }
     }
 
+    public static void Destroy(Unit unit)
+    {
+        ObjectMgr<Unit>.Instance.Destroy(unit);
+    }
+
+    public static void Destroy(GameObject go)
+    {
+        var unit = go.GetComponent<Unit>();
+        if (unit)
+        {
+            ObjectMgr<Unit>.Instance.Destroy(unit);
+        }
+        else
+        {
+            Object.Destroy(go);
+        }
+    }
+
     //在 PhysicalObject 中触发碰撞
     public virtual void OnCollideWithPhysicalObject(RaycastHit2D hit, Collider2D collider)
     {
@@ -247,8 +271,5 @@ public abstract class Unit : MonoBehaviour, PauseAble
         //Debug.Log (name + " . OnTriggerExit2D (" + other.name + ")");
     }
 
-    void PauseAble.Pause(bool pause)
-    {
-        throw new System.NotImplementedException();
-    }
+
 }

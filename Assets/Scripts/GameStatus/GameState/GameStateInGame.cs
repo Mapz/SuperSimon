@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-public class GameStateInGame : IGameState
+public class GameStateInGame : IGameState, IPause
 {
 
     private Unit Hero;
@@ -45,7 +45,10 @@ public class GameStateInGame : IGameState
         // Load Level1
         InGameVars.level = Utility.LoadLevel(m_levelPrefabName);
         // Load Hero
-        Hero = Utility.CreateUnit("Simon");
+        Hero = ObjectMgr<Unit>.Instance.Create(() =>
+        {
+            return Utility.CreateUnit("Simon");
+        });
 
         Hero.SetFollowByCamera(GameManager.mainCamera);
         Hero.AttachToHPBar(GameManager.StatusBar.m_heroHp);
@@ -85,7 +88,8 @@ public class GameStateInGame : IGameState
 
     void Clear()
     {
-        GameObject.Destroy(InGameVars.level);
+        ObjectMgr<Unit>.Instance.Clear();
+        Object.Destroy(InGameVars.level);
     }
 
     void RestartLevel()
@@ -97,10 +101,9 @@ public class GameStateInGame : IGameState
         }, 1f).StartTimeout();
     }
 
-    public void PauseGame()
+    public void Pause(bool pause)
     {
-        m_isPaused = !m_isPaused;
-        if (m_isPaused)
+        if (pause)
         {
             Time.timeScale = 0;
             Hero.DisableInput();
@@ -110,6 +113,12 @@ public class GameStateInGame : IGameState
             Time.timeScale = 1;
             Hero.EnableInput();
         }
+    }
+
+    public void PauseGame()
+    {
+        m_isPaused = !m_isPaused;
+        Pause(m_isPaused);
     }
 
     public override void OnLeave()
@@ -134,5 +143,6 @@ public class GameStateInGame : IGameState
     {
 
     }
+
 
 }

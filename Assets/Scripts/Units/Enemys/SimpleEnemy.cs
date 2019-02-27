@@ -32,12 +32,10 @@ public class SimpleEnemy : MovingUnit {
         m_isDead = true;
         Destroy (m_weaponCollider);
         Destroy (GetComponent<Collider2D> ());
-        if (OnDied != null) {
-            OnDied (dmg);
-        }
+        OnDied?.Invoke(dmg);
     }
 
-    void DieFrom (Damage dmg) {
+    protected virtual void DieFrom (Damage dmg) {
         if (dmg.dmgType == DmgType.MeleeWhipPhysics) {
             // 简陋的旋转死亡效果
             Rigidbody2D rigid = GetComponent<Rigidbody2D> ();

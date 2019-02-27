@@ -35,8 +35,10 @@ public class Game : MonoBehaviour {
     //DONE: 攻击武器一帧化 --> 新增找到动画clip的函数，取得framerate
     //DONE: 迴旋鏢完成
     //DONE: 更多副武器的完成 --> 圣水完成
+    //DONE: 通过Collider变化来判断是否重叠解决物理重合挤开逻辑----> 发射副武器的位置Bug --> 位置太低的時候不准開火
+    //DONE: 生怪器
+    //DONE: Unit通过ObjectMgr来产生
 
-    //TODO: 通过Collider变化来判断是否重叠解决物理重合挤开逻辑----> 发射副武器的位置Bug
     //TODO: 资源模式调通
     //TODO: 进入管子的逻辑
     //TODO: 跟随探索 Cinemachine 
@@ -44,7 +46,6 @@ public class Game : MonoBehaviour {
     //TODO: 时停副武器的制作
     //TODO: 分数系统的制作
     //TODO: 边沿探测和物理逻辑的契合
-    //TODO: 生怪器
     //TODO: 多人在线探索
     //TODO: GameOver 逻辑
     //TODO: 设计一个Boss

@@ -73,7 +73,12 @@ public class SubWeaponShooter : MonoBehaviour
     private bool Shoot()
     {
         if (null == toShootPrefab) return false;
-        GameObject shotObject = Instantiate(toShootPrefab);
+
+        GameObject shotObject = ObjectMgr<Unit>.Instance.Create(() =>
+        {
+            return Instantiate(toShootPrefab).GetComponent<Unit>();
+        }).gameObject;
+  
         shotObject.transform.SetParent(InGameVars.level.transform);
         shotObject.transform.position = transform.position;
         var flyingObject = shotObject.GetComponent<FlyingObject>();

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectMgr<T> where T : MonoBehaviour, PauseAble
+public class ObjectMgr<T> where T : MonoBehaviour, IPause
 {
     public delegate T GetObj();
     public static ObjectMgr<T> _Instance;
@@ -28,7 +28,7 @@ public class ObjectMgr<T> where T : MonoBehaviour, PauseAble
     public void Destroy(T obj)
     {
         _Instance.m_pool.Remove(obj);
-        GameObject.Destroy(obj.gameObject);
+        UnityEngine.Object.Destroy(obj.gameObject);
     }
 
     public void PauseAll(bool _pause)
@@ -45,7 +45,7 @@ public class ObjectMgr<T> where T : MonoBehaviour, PauseAble
         foreach (T obj in _Instance.m_pool)
         {
             if (null != obj)
-                GameObject.Destroy(obj.gameObject);
+                UnityEngine.Object.Destroy(obj.gameObject);
         }
         _Instance.m_pool.Clear();
     }

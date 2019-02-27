@@ -1,4 +1,4 @@
-﻿public interface PauseAble
+﻿public interface IPause
 {
     void Pause(bool pause);
 }

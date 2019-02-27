@@ -20,7 +20,7 @@ public enum SimonStatus
 
 }
 
-public enum ColliderType
+public enum SimonColliderType
 {
     Default = 0,
     Squat = 1,
@@ -279,14 +279,14 @@ public class Simon : MovingUnit
     }
 
     //判断是否当前Collider
-    bool IsColliderActive(ColliderType type)
+    bool IsColliderActive(SimonColliderType type)
     {
-        if (type == ColliderType.None) return false;
+        if (type == SimonColliderType.None) return false;
         return colliders[(int)type] == m_currentCollider;
     }
 
     //激活Collider
-    void ActiveCollider(ColliderType type)
+    void ActiveCollider(SimonColliderType type)
     {
         //先关闭所有Collider
         for (var i = 0; i < colliders.Length; i++)
@@ -298,13 +298,13 @@ public class Simon : MovingUnit
 
         //不同的Collider需要改变人物的位置
         int isGrounded = CheckGrounded() ? 1 : 0;
-        if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.Default))
+        if (IsColliderActive(SimonColliderType.Squat) && (type == SimonColliderType.Default))
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + isGrounded * m_SpriteYOffset1);
-        else if (IsColliderActive(ColliderType.Default) && (type == ColliderType.Squat))
+        else if (IsColliderActive(SimonColliderType.Default) && (type == SimonColliderType.Squat))
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - isGrounded * m_SpriteYOffset1);
-        else if (IsColliderActive(ColliderType.OnHit) && (type == ColliderType.Squat))
+        else if (IsColliderActive(SimonColliderType.OnHit) && (type == SimonColliderType.Squat))
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - m_SpriteYOffset2);
-        else if (IsColliderActive(ColliderType.Squat) && (type == ColliderType.OnHit))
+        else if (IsColliderActive(SimonColliderType.Squat) && (type == SimonColliderType.OnHit))
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + m_SpriteYOffset2);
 
 
@@ -331,26 +331,26 @@ public class Simon : MovingUnit
         {
             case SimonStatus.JumpUp0:
                 m_anim.Play("Idle");
-                ActiveCollider(ColliderType.Default);
+                ActiveCollider(SimonColliderType.Default);
                 break;
             case SimonStatus.JumpUp1:
-                ActiveCollider(ColliderType.Squat);
+                ActiveCollider(SimonColliderType.Squat);
                 m_anim.Play("Squat");
                 break;
             case SimonStatus.Squat:
-                ActiveCollider(ColliderType.Squat);
+                ActiveCollider(SimonColliderType.Squat);
                 m_anim.Play("Squat");
                 break;
             case SimonStatus.JumpFall0:
-                ActiveCollider(ColliderType.Squat);
+                ActiveCollider(SimonColliderType.Squat);
                 break;
             case SimonStatus.JumpFall1:
                 m_anim.Play("Idle");
-                ActiveCollider(ColliderType.Default);
+                ActiveCollider(SimonColliderType.Default);
                 break;
             case SimonStatus.Walk:
                 m_anim.Play("Walk");
-                ActiveCollider(ColliderType.Default);
+                ActiveCollider(SimonColliderType.Default);
                 break;
             case SimonStatus.Idle:
                 m_anim.Play("Idle");
@@ -358,21 +358,21 @@ public class Simon : MovingUnit
                 {
                     StopX();
                 }
-                ActiveCollider(ColliderType.Default);
+                ActiveCollider(SimonColliderType.Default);
                 break;
             case SimonStatus.MeleeAttack:
                 m_anim.Play(m_whip.m_animString);
-                ActiveCollider(ColliderType.Default);
+                ActiveCollider(SimonColliderType.Default);
                 StartCoroutine(AttackOver(state));
                 break;
             case SimonStatus.SquatMeleeAttack:
                 m_anim.Play(m_whip.m_animStringSquat);
-                ActiveCollider(ColliderType.Squat);
+                ActiveCollider(SimonColliderType.Squat);
                 StartCoroutine(AttackOver(state));
                 break;
             case SimonStatus.OnHit0:
                 m_anim.Play("Onhit");
-                ActiveCollider(ColliderType.OnHit);
+                ActiveCollider(SimonColliderType.OnHit);
                 m_whip.ActiveCollider(false);
                 DisableInput(); //No Input After OnHit
                 OnDmgAction();
@@ -387,7 +387,7 @@ public class Simon : MovingUnit
 
             case SimonStatus.OnHit2:
                 m_anim.Play("Squat");
-                ActiveCollider(ColliderType.Squat);
+                ActiveCollider(SimonColliderType.Squat);
                 StopX();
                 new EnumTimer(() =>
                 {
@@ -413,7 +413,7 @@ public class Simon : MovingUnit
                 break;
             case SimonStatus.SubWeaponAttack:
                 m_anim.Play("ShootSubWeapon");
-                ActiveCollider(ColliderType.Default);
+                ActiveCollider(SimonColliderType.Default);
                 StartCoroutine(AttackOver(state));
                 break;
             case SimonStatus.Upgrade:

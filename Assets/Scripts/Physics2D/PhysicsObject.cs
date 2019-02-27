@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PhysicsObject : MonoBehaviour
+public class PhysicsObject : MonoBehaviour, IPause
 {
 
     public float minGroundNormalY = .65f;
@@ -21,7 +21,7 @@ public class PhysicsObject : MonoBehaviour
     protected List<Unit> hitUnitBufferList = new List<Unit>(16);
     public Action ComputeVelocity;
     public float distanceToGound { get; private set; }
-
+    private bool m_pause = false;
 
     protected const float minMoveDistance = 0.001f;
     protected const float shellRadius = 0.01f;
@@ -40,12 +40,14 @@ public class PhysicsObject : MonoBehaviour
 
     void Update()
     {
+        if (m_pause) return;
         targetVelocity = Vector2.zero;
         ComputeVelocity?.Invoke();
     }
 
     void FixedUpdate()
     {
+        if (m_pause) return;
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
         velocity.x = targetVelocity.x;
 
@@ -155,4 +157,8 @@ public class PhysicsObject : MonoBehaviour
         rb2d.position = rb2d.position + move.normalized * distance;
     }
 
+    public void Pause(bool pause)
+    {
+        m_pause = pause;
+    }
 }
