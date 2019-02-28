@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectMgr<T> where T : MonoBehaviour, IPause
+public class ObjectMgr<T> : IEnumerable where T : MonoBehaviour, IPause
 {
     public delegate T GetObj();
     public static ObjectMgr<T> _Instance;
@@ -16,6 +16,11 @@ public class ObjectMgr<T> where T : MonoBehaviour, IPause
             _Instance = new ObjectMgr<T>();
             return _Instance;
         }
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return m_pool.GetEnumerator();
     }
 
     public T Create(GetObj creatAction)

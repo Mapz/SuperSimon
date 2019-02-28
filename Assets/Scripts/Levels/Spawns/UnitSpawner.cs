@@ -61,7 +61,7 @@ public class SpawnData
         if (UnityEngine.Random.Range(0f, 1f) >= rateOfSpawn) return;
         GameObject enemy = ObjectMgr<Unit>.Instance.Create(() =>
         {
-            return GameObject.Instantiate(EnemeyToProduce).GetComponent<Unit>();
+            return UnityEngine.Object.Instantiate(EnemeyToProduce).GetComponent<Unit>();
         }).gameObject;
         enemy.transform.parent = parent;
         enemy.transform.position = grid.CellToLocal(position) + spawnerTransform.position + grid.cellSize / 2;
@@ -71,9 +71,9 @@ public class SpawnData
 public class UnitSpawner : MonoBehaviour
 {
 
-    //[HideInInspector]
+    [HideInInspector]
     public List<SpawnData> spawns;
-  
+
     void Update()
     {
         if (!GameStatus.IsState<GameStateInGame>()) return;
@@ -81,8 +81,23 @@ public class UnitSpawner : MonoBehaviour
         {
             if (Utility.CheckInSpawnArea(transform.position + InGameVars.LevelConfigs.m_levelGrid.CellToLocal(data.position)))
             {
-                data.SetActive(true);
-                data.UpdateSpawn(Time.deltaTime, InGameVars.LevelConfigs.m_levelGrid, InGameVars.LevelConfigs.m_EnemyObjectParentTransform, transform);
+                Bounds spawnerBound = new Bounds(transform.position + InGameVars.LevelConfigs.m_levelGrid.CellToLocal(data.position), Vector3.one * 32);
+                bool boundsIntersect = false;
+                foreach (Unit u in ObjectMgr<Unit>.Instance)
+                {
+                    var collider = u.GetComponent<Collider2D>();
+                    if (collider)
+                    {
+                        if (spawnerBound.Intersects(collider.bounds)) {
+                            boundsIntersect = true;
+                            break;
+                        }
+                    }
+                }
+                if (!boundsIntersect) {
+                    data.SetActive(true);
+                    data.UpdateSpawn(Time.deltaTime, InGameVars.LevelConfigs.m_levelGrid, InGameVars.LevelConfigs.m_EnemyObjectParentTransform, transform);
+                }
             }
             else
             {

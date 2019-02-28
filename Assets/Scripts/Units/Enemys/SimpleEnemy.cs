@@ -45,7 +45,7 @@ public class SimpleEnemy : MovingUnit
 
     protected virtual void DieFrom(Damage dmg)
     {
-        if (dmg.dmgType == DmgType.MeleeWhipPhysics)
+        if (dmg.dmgType == DmgType.MeleeWhipPhysics|| dmg.dmgType == DmgType.RealDmg)
         {
             // 简陋的旋转死亡效果
             Rigidbody2D rigid = GetComponent<Rigidbody2D>();
@@ -80,7 +80,7 @@ public class SimpleEnemy : MovingUnit
         ai = BT.Root();
         ai.OpenBranch(
            BT.If(() => { return m_initDirection == false; }).
-            OpenBranch(BT.Call(() => { Flip(); m_initDirection = true; })),
+            OpenBranch(BT.Call(() => { Flip(); m_initDirection = true; }),BT.Wait(0.2f)),
            BT.If(() => { return physicsObject.collided; }).
             OpenBranch(
                BT.Call(Flip),

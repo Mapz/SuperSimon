@@ -121,6 +121,7 @@ public abstract class Unit : MonoBehaviour, IPause
 
     protected virtual int GetRealDmg(int dmg, DmgType dmgType)
     {
+        if (dmgType == DmgType.RealDmg) return dmg;
         return dmg - m_defence;
     }
 
@@ -212,6 +213,16 @@ public abstract class Unit : MonoBehaviour, IPause
             if (!m_onHitCheck.OnHit(other)) return;
             switch (m_team)
             {
+                case Team.Chaos:
+                    switch (weapon.m_team)
+                    {
+                        case Team.Hero:
+                        case Team.Assistance:
+                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
+                            weapon.OnDealDmg();
+                            break;
+                    }
+                    break;
                 case Team.Hero:
                 case Team.Assistance:
                     switch (weapon.m_team)

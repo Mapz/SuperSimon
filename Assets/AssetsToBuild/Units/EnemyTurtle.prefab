@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
-  gravityModifier: 1
+  gravityModifier: 10
   targetVelocity: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
 --- !u!114 &7350987384671445016

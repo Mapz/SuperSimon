@@ -3,6 +3,7 @@ public enum DmgType {
     MeleeWhipPhysics,
     Item,
     HeadCollision,
+    RealDmg,
 }
 
 public delegate int GetRealDmg (int rawDamage, DmgType dmgType);

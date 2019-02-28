@@ -38,7 +38,9 @@ public class Game : MonoBehaviour {
     //DONE: 通过Collider变化来判断是否重叠解决物理重合挤开逻辑----> 发射副武器的位置Bug --> 位置太低的時候不准開火
     //DONE: 生怪器
     //DONE: Unit通过ObjectMgr来产生
+    //DONE: 乌龟
 
+    //TODO: 生怪器优化，有怪的时候不能生怪 --> 优化思路，刷怪器改成 GameObject 而不是数据，用Trigger来控制是否刷怪 
     //TODO: 资源模式调通
     //TODO: 进入管子的逻辑
     //TODO: 跟随探索 Cinemachine 

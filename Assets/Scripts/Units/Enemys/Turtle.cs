@@ -47,13 +47,18 @@ public class Turtle : GuardableEnemy
         //先关闭所有Collider
         for (var i = 0; i < colliders.Length; i++)
         {
-            colliders[i].enabled = false;
+            if (colliders[i])
+            {
+                colliders[i].enabled = false;
+            }
+        }
+        Collider2D co = colliders[(int)type];
+        if (co)
+        {
+            co.enabled = true;
+            m_currentCollider = co;
         }
 
-        Collider2D co = colliders[(int)type];
-
-        co.enabled = true;
-        m_currentCollider = co;
     }
 
     //判断是否当前Collider
@@ -106,9 +111,11 @@ public class Turtle : GuardableEnemy
             m_originalTeam = m_selfWeapon.m_team;
             m_originalDamage = m_selfWeapon.m_dmg;
             m_selfWeapon.m_team = Team.Chaos;
+            m_team = Team.Chaos;
             m_selfWeapon.m_destroyEnviroment = true;
             m_selfWeapon.m_dmg = 10;
             m_selfWeapon.gameObject.SetActive(true);
+            m_selfWeapon.m_dmgType = DmgType.RealDmg;
         }
     }
 
@@ -124,8 +131,10 @@ public class Turtle : GuardableEnemy
         {
             m_selfWeapon.m_team = m_originalTeam;
             m_selfWeapon.m_dmg = m_originalDamage;
+            m_team = m_originalTeam;
             m_selfWeapon.m_destroyEnviroment = false;
             m_selfWeapon.gameObject.SetActive(false);
+            m_selfWeapon.m_dmgType = DmgType.MeleeWhipPhysics;
         }
 
     }
@@ -164,7 +173,7 @@ public class Turtle : GuardableEnemy
         ai = BT.Root();
         ai.OpenBranch(
            BT.If(() => { return !m_initDirection; }).
-            OpenBranch(BT.Call(() => { Flip(); m_initDirection = true; })),
+            OpenBranch(BT.Call(() => { Flip(); m_initDirection = true; }), BT.Wait(0.2f)),
            BT.If(() => { return physicsObject.collided; }).
             OpenBranch(
                BT.Call(Flip),
