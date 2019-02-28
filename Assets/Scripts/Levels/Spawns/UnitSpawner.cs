@@ -81,7 +81,7 @@ public class UnitSpawner : MonoBehaviour
         {
             if (Utility.CheckInSpawnArea(transform.position + InGameVars.LevelConfigs.m_levelGrid.CellToLocal(data.position)))
             {
-                Bounds spawnerBound = new Bounds(transform.position + InGameVars.LevelConfigs.m_levelGrid.CellToLocal(data.position), Vector3.one * 32);
+                Bounds spawnerBound = new Bounds(transform.position + InGameVars.LevelConfigs.m_levelGrid.CellToLocal(data.position), Vector3.one * 17);
                 bool boundsIntersect = false;
                 foreach (Unit u in ObjectMgr<Unit>.Instance)
                 {

@@ -40,13 +40,15 @@ public class Game : MonoBehaviour {
     //DONE: Unit通过ObjectMgr来产生
     //DONE: 乌龟
     //DONE: 生怪器有怪的时候不生怪
+    //DONE: 分数系统的制作 --> 简陋
 
+    //TODO: 顶砖块对上面的东西造成一个伤害
     //TODO: 资源模式调通
     //TODO: 进入管子的逻辑
     //TODO: 跟随探索 Cinemachine 
     //TODO: 物理重合挤开逻辑
     //TODO: 时停副武器的制作
-    //TODO: 分数系统的制作
+
     //TODO: 边沿探测和物理逻辑的契合
     //TODO: 多人在线探索
     //TODO: GameOver 逻辑

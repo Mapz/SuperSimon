@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -301,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -455,6 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -709,6 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -861,20 +865,110 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawns:
-  - position: {x: 19, y: -6, z: 0}
+  - position: {x: 15, y: -6, z: 0}
     EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
       type: 3}
     maxCount: 1
     interval: 0.1
     rateOfSpawn: 1
-  - position: {x: 16, y: -6, z: 0}
+  - position: {x: 36, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 44, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 46, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 75, y: 2, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 78, y: 2, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 91, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 93, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 101, y: -6, z: 0}
     EnemeyToProduce: {fileID: 3500537951951617419, guid: fdb383c81430e4e41b619d817f0d2730,
       type: 3}
     maxCount: 1
     interval: 0.1
     rateOfSpawn: 1
-  - position: {x: 14, y: -2, z: 0}
-    EnemeyToProduce: {fileID: 3500537951951617419, guid: fdb383c81430e4e41b619d817f0d2730,
+  - position: {x: 106, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 108, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 118, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 120, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 124, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 126, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 167, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 169, y: -6, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
+      type: 3}
+    maxCount: 1
+    interval: 0.1
+    rateOfSpawn: 1
+  - position: {x: 13, y: -2, z: 0}
+    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
       type: 3}
     maxCount: 1
     interval: 0.1
@@ -887,16 +981,71 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325018912228589193}
   m_Enabled: 1
-  m_Tiles: {}
+  m_Tiles:
+  - first: {x: 15, y: -6, z: 0}
+    second:
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 16, y: -6, z: 0}
+    second:
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 14, y: -2, z: 0}
+    second:
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 2
+    m_Data: {fileID: 11400000, guid: 695003242dd2643f69fd55f9864f71d2, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 710534993c2324c0082947d7c866788d, type: 2}
+  m_TileSpriteArray:
+  - m_RefCount: 2
+    m_Data: {fileID: 21300652, guid: bac9d3cda385741c397ab5e8d801eb57, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300654, guid: bac9d3cda385741c397ab5e8d801eb57, type: 3}
+  m_TileMatrixArray:
+  - m_RefCount: 3
+    m_Data:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  m_TileColorArray:
+  - m_RefCount: 3
+    m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Origin: {x: 0, y: -6, z: 0}
+  m_Size: {x: 17, y: 6, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -1093,6 +1242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -1165,6 +1315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -1419,6 +1570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -1573,6 +1725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -1759,6 +1912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -2013,6 +2167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -2167,6 +2322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -2353,6 +2509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -2539,6 +2696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -2793,6 +2951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -2947,6 +3106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -3133,6 +3293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -3319,6 +3480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -3505,6 +3667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -3759,6 +3922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -3913,6 +4077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -4099,6 +4264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -4285,6 +4451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -4471,6 +4638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -4725,6 +4893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -4879,6 +5048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -5065,6 +5235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -5802,6 +5973,33 @@ Tilemap:
     second:
       m_TileIndex: 4
       m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 15, y: -6, z: 0}
+    second:
+      m_TileIndex: 7
+      m_TileSpriteIndex: 7
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 16, y: -6, z: 0}
+    second:
+      m_TileIndex: 8
+      m_TileSpriteIndex: 8
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 17, y: -6, z: 0}
+    second:
+      m_TileIndex: 9
+      m_TileSpriteIndex: 9
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -7515,11 +7713,11 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: d946c434117fe41de876b490f2cba5b3, type: 2}
   - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: b6f95b825f6d8459388c79c80041f73e, type: 2}
-  - m_RefCount: 6
+  - m_RefCount: 7
     m_Data: {fileID: 11400000, guid: 695003242dd2643f69fd55f9864f71d2, type: 2}
-  - m_RefCount: 16
+  - m_RefCount: 17
     m_Data: {fileID: 11400000, guid: 710534993c2324c0082947d7c866788d, type: 2}
-  - m_RefCount: 9
+  - m_RefCount: 10
     m_Data: {fileID: 11400000, guid: 76d67e86c180e4d0d855ff8faa6f49f7, type: 2}
   - m_RefCount: 15
     m_Data: {fileID: 11400000, guid: 3572114326a23446da230de1b84c834f, type: 2}
@@ -7552,11 +7750,11 @@ Tilemap:
     m_Data: {fileID: 21300548, guid: bac9d3cda385741c397ab5e8d801eb57, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 21300498, guid: bac9d3cda385741c397ab5e8d801eb57, type: 3}
-  - m_RefCount: 6
+  - m_RefCount: 7
     m_Data: {fileID: 21300652, guid: bac9d3cda385741c397ab5e8d801eb57, type: 3}
-  - m_RefCount: 16
+  - m_RefCount: 17
     m_Data: {fileID: 21300654, guid: bac9d3cda385741c397ab5e8d801eb57, type: 3}
-  - m_RefCount: 9
+  - m_RefCount: 10
     m_Data: {fileID: 21300558, guid: bac9d3cda385741c397ab5e8d801eb57, type: 3}
   - m_RefCount: 15
     m_Data: {fileID: 21301090, guid: bac9d3cda385741c397ab5e8d801eb57, type: 3}
@@ -7575,7 +7773,7 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: 21300556, guid: bac9d3cda385741c397ab5e8d801eb57, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 202
+  - m_RefCount: 205
     m_Data:
       e00: 1
       e01: 0
@@ -7594,7 +7792,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 202
+  - m_RefCount: 205
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7828,6 +8026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -13197,6 +13396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 8
   m_team: 2
   m_dmg: 0
@@ -13381,6 +13581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -13635,6 +13836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -13857,6 +14059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -14081,6 +14284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -14267,6 +14471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -14521,6 +14726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -14743,6 +14949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -14754,10 +14961,10 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6243653715679782031}
-        m_MethodName: ProduceHeart
+        m_MethodName: ProduceItem
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 4846756941252162294, guid: 2e9db5dd956ad4d9ebafc8969974cbee,
+          m_ObjectArgument: {fileID: 2504155413594109752, guid: d28f4d4ae4394f84d8ecd1d14b22d74b,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
@@ -14897,6 +15104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -15151,6 +15359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -15305,6 +15514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -15491,6 +15701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -15677,6 +15888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -15863,6 +16075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -16049,6 +16262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
@@ -16267,6 +16481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8f091bd3fc4d2cb0e3eb03274ef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_score: 0
   m_maxHp: 1
   m_team: 2
   m_dmg: 0
