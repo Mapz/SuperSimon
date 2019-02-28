@@ -137,7 +137,8 @@ public abstract class Unit : MonoBehaviour, IPause
 
     protected virtual void OnUpdate()
     {
-        ai?.Tick();
+        if (!m_isDead)
+            ai?.Tick();
     }
 
     protected virtual void OnFixedUpdate()

@@ -38,25 +38,28 @@ public class SimpleEnemy : MovingUnit
     protected override void Die(Damage dmg)
     {
         m_isDead = true;
+        gameObject.layer = LayerMask.NameToLayer("Default");
+        physicsObject.ResetContactLayer();
         Destroy(m_weaponCollider);
-        Destroy(GetComponent<Collider2D>());
+        Destroy(m_currentCollider);
         OnDied?.Invoke(dmg);
     }
 
     protected virtual void DieFrom(Damage dmg)
     {
-        if (dmg.dmgType == DmgType.MeleeWhipPhysics|| dmg.dmgType == DmgType.RealDmg)
+        if (dmg.dmgType == DmgType.MeleeWhipPhysics || dmg.dmgType == DmgType.RealDmg)
         {
             // 简陋的旋转死亡效果
-            Rigidbody2D rigid = GetComponent<Rigidbody2D>();
-            rigid.bodyType = RigidbodyType2D.Dynamic;
-            rigid.freezeRotation = false;
-            rigid.AddTorque(1000);
-            rigid.gravityScale = 100;
-            var DeathJumpPointY = GameManager.mainCamera.transform.position.y - InGameVars.ScreenHeight / 2 - transform.position.y;
-            var JumpHeight = 3;
-            var JumpWidth = 15;
-            transform.DOLocalJump(new Vector2(dmg.xDirection.x * JumpWidth, DeathJumpPointY), JumpHeight - DeathJumpPointY, 1, 0.01f * (JumpHeight - DeathJumpPointY)).SetRelative();
+            var scale = transform.localScale;
+            scale.y = -1;
+            transform.localScale = scale;
+            physicsObject.gravityModifier = 100;
+            m_xMoveSpeed = 100;
+            physicsObject.velocity.y = 120;
+            if (dmg.xDirection.x > 0 != facingRight)
+            {
+                Flip();
+            }
         }
         else
         {
@@ -80,7 +83,7 @@ public class SimpleEnemy : MovingUnit
         ai = BT.Root();
         ai.OpenBranch(
            BT.If(() => { return m_initDirection == false; }).
-            OpenBranch(BT.Call(() => { Flip(); m_initDirection = true; }),BT.Wait(0.2f)),
+            OpenBranch(BT.Call(() => { Flip(); m_initDirection = true; }), BT.Wait(0.2f)),
            BT.If(() => { return physicsObject.collided; }).
             OpenBranch(
                BT.Call(Flip),

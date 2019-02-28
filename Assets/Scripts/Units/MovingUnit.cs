@@ -1,8 +1,5 @@
 using UnityEngine;
 
-
-
-[RequireComponent(typeof(PhysicsObject))]
 public abstract class MovingUnit : Unit
 {
     [SerializeField]

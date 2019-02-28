@@ -1,4 +1,5 @@
 ﻿using BTAI;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,17 +48,14 @@ public class Turtle : GuardableEnemy
         //先关闭所有Collider
         for (var i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i])
-            {
-                colliders[i].enabled = false;
-            }
+
+            colliders[i].enabled = false;
+
         }
         Collider2D co = colliders[(int)type];
-        if (co)
-        {
-            co.enabled = true;
-            m_currentCollider = co;
-        }
+        co.enabled = true;
+        m_currentCollider = co;
+
 
     }
 
@@ -163,7 +161,13 @@ public class Turtle : GuardableEnemy
             DisGuard();
             m_isWakingUp = false;
         }
+    }
 
+
+    protected override void DieFrom(Damage dmg)
+    {
+        m_anim.Play("Guard");
+        base.DieFrom(dmg);
     }
 
 
