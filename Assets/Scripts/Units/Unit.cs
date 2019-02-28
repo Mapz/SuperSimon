@@ -31,6 +31,8 @@ public abstract class Unit : MonoBehaviour, IPause
 
     protected Root ai;
 
+    public int m_score;
+
     public int m_maxHp;
 
     public Team m_team;
@@ -174,6 +176,7 @@ public abstract class Unit : MonoBehaviour, IPause
 
     void OnEnable()
     {
+        OnDied += AddScore;
         OnEnabled();
     }
 
@@ -188,6 +191,14 @@ public abstract class Unit : MonoBehaviour, IPause
         if (m_isPaused) return;
         m_isAttacked = false;
         OnFixedUpdate();
+    }
+
+    void AddScore(Damage dmg)
+    {
+        if (m_team != Team.Hero && m_team != Team.Assistance)
+        {
+            InGameVars.score += m_score;
+        }
     }
 
 
@@ -209,9 +220,11 @@ public abstract class Unit : MonoBehaviour, IPause
     {
         if (m_isDead) return;
         var weapon = other.GetComponent<Weapon>();
+        Unit unit;
         if (weapon)
         {
             if (!m_onHitCheck.OnHit(other)) return;
+            unit = weapon.m_WeaponCarrier;
             switch (m_team)
             {
                 case Team.Chaos:
@@ -219,7 +232,7 @@ public abstract class Unit : MonoBehaviour, IPause
                     {
                         case Team.Hero:
                         case Team.Assistance:
-                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
+                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit));
                             weapon.OnDealDmg();
                             break;
                     }
@@ -231,7 +244,7 @@ public abstract class Unit : MonoBehaviour, IPause
                         case Team.Enemy:
                         case Team.Enviroment:
                         case Team.Chaos:
-                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
+                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit));
                             weapon.OnDealDmg();
 
                             break;
@@ -243,7 +256,7 @@ public abstract class Unit : MonoBehaviour, IPause
                         case Team.Hero:
                         case Team.Assistance:
                         case Team.Chaos:
-                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
+                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit));
                             weapon.OnDealDmg();
                             break;
                     }
@@ -251,7 +264,7 @@ public abstract class Unit : MonoBehaviour, IPause
                 case Team.Enviroment:
                     if (weapon.m_destroyEnviroment)
                     {
-                        OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg));
+                        OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit));
                         weapon.OnDealDmg();
                     }
                     break;

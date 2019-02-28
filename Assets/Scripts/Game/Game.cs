@@ -39,8 +39,8 @@ public class Game : MonoBehaviour {
     //DONE: 生怪器
     //DONE: Unit通过ObjectMgr来产生
     //DONE: 乌龟
+    //DONE: 生怪器有怪的时候不生怪
 
-    //TODO: 生怪器优化，有怪的时候不能生怪 --> 优化思路，刷怪器改成 GameObject 而不是数据，用Trigger来控制是否刷怪 
     //TODO: 资源模式调通
     //TODO: 进入管子的逻辑
     //TODO: 跟随探索 Cinemachine 
@@ -53,6 +53,7 @@ public class Game : MonoBehaviour {
     //TODO: 设计一个Boss
     //TODO: 数值配置化  --> 包括升级系统的改版
     //TODO: 移动中可以穿过格子-->移动中碰撞体加大一点
+    //TODO: 生怪器优化，有怪的时候不能生怪 --> 优化思路，刷怪器改成 GameObject 而不是数据，用Trigger来控制是否刷怪 
     void Awake () {
         Instance = this;
     }
