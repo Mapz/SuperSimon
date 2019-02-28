@@ -967,12 +967,6 @@ MonoBehaviour:
     maxCount: 1
     interval: 0.1
     rateOfSpawn: 1
-  - position: {x: 13, y: -2, z: 0}
-    EnemeyToProduce: {fileID: 6331058658509863616, guid: 7a1638c8f41bf49778965f8a350717a5,
-      type: 3}
-    maxCount: 1
-    interval: 0.1
-    rateOfSpawn: 1
 --- !u!1839735485 &2610835777833757073
 Tilemap:
   m_ObjectHideFlags: 0

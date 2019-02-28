@@ -176,8 +176,6 @@ public class Turtle : GuardableEnemy
         base.AddAI();
         ai = BT.Root();
         ai.OpenBranch(
-           BT.If(() => { return !m_initDirection; }).
-            OpenBranch(BT.Call(() => { Flip(); m_initDirection = true; }), BT.Wait(0.2f)),
            BT.If(() => { return physicsObject.collided; }).
             OpenBranch(
                BT.Call(Flip),

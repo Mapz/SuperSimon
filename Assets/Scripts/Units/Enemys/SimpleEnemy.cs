@@ -83,7 +83,11 @@ public class SimpleEnemy : MovingUnit
         ai = BT.Root();
         ai.OpenBranch(
            BT.If(() => { return m_initDirection == false; }).
-            OpenBranch(BT.Call(() => { Flip(); m_initDirection = true; }), BT.Wait(0.2f)),
+            OpenBranch(BT.Call(() =>
+            {
+                if (facingRight) Flip();
+                m_initDirection = true;
+            }), BT.Wait(0.2f)),
            BT.If(() => { return physicsObject.collided; }).
             OpenBranch(
                BT.Call(Flip),

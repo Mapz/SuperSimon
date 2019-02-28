@@ -170,7 +170,7 @@ MonoBehaviour:
   _HP: 1
   m_isDead: 0
   physicsObject: {fileID: 1056970067118690532}
-  facingRight: 1
+  facingRight: 0
   m_interactEnviroment: 0
   m_TrigerBrick: 0
   m_xMoveSpeed: 30
