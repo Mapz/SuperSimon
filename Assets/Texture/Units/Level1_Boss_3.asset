@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApiVersion: 4
   m_Sprite: {fileID: 21300006, guid: 2f54a83652719ca418d2134ee9dd1db3, type: 3}
-  m_SharedMesh: {fileID: 43584430461886700}
---- !u!43 &43584430461886700
+  m_SharedMesh: {fileID: 43200624204067884}
+--- !u!43 &43200624204067884
 Mesh:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,14 +40,14 @@ Mesh:
     channels: []
     fullWeights: []
   m_BindPose:
-  - e00: 0.05345675
-    e01: -0.99857044
+  - e00: 0.0049388036
+    e01: -0.9999879
     e02: 0
-    e03: 15.505573
-    e10: 0.99857044
-    e11: 0.05345675
+    e03: 16.314932
+    e10: 0.9999879
+    e11: 0.0049388036
     e12: 0
-    e13: 0.5758103
+    e13: 0.42771915
     e20: 0
     e21: 0
     e22: 1
@@ -191,7 +191,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &114073359571418450
+--- !u!114 &114943495455887572
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,37 +243,37 @@ MonoBehaviour:
     boneIndex2: 0
     boneIndex3: 0
   m_Edges:
-  - index1: 0
+  - index1: 2
     index2: 1
   - index1: 1
-    index2: 2
-  - index1: 2
+    index2: 0
+  - index1: 0
     index2: 3
   - index1: 3
-    index2: 0
+    index2: 2
   m_Holes: []
   m_Indices: 020000000100000000000000000000000300000002000000
   m_BindPoses:
   - bindPose:
-      e00: 0.05345675
-      e01: -0.99857044
+      e00: 0.0049388036
+      e01: -0.9999879
       e02: 0
-      e03: 15.505573
-      e10: 0.99857044
-      e11: 0.05345675
+      e03: 16.314932
+      e10: 0.9999879
+      e11: 0.0049388036
       e12: 0
-      e13: 0.5758103
+      e13: 0.42771915
       e20: 0
       e21: 0
       e22: 1
-      e23: 3.6766405
+      e23: 0
       e30: 0
       e31: 0
       e32: 0
       e33: 1
     boneLength: 32
-    path: Right Shoulder/RightArm/RightHand
-    name: RightHand
+    path: Right Shoulder/Right Arm/Right Hand
+    name: Right Hand
     color: {r: 1, g: 0, b: 0, a: 1}
     zOrder: 0
   m_Blendshapes: []

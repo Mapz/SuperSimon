@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApiVersion: 4
   m_Sprite: {fileID: 21300022, guid: 2f54a83652719ca418d2134ee9dd1db3, type: 3}
-  m_SharedMesh: {fileID: 43561853737042798}
---- !u!43 &43561853737042798
+  m_SharedMesh: {fileID: 43454141886213572}
+--- !u!43 &43454141886213572
 Mesh:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,14 +40,14 @@ Mesh:
     channels: []
     fullWeights: []
   m_BindPose:
-  - e00: 0.019481147
-    e01: -0.99981034
+  - e00: -0.025266014
+    e01: -0.9996811
     e02: 0
-    e03: 8.923605
-    e10: 0.99981034
-    e11: 0.019481147
+    e03: 8.542035
+    e10: 0.9996811
+    e11: -0.025266014
     e12: 0
-    e13: 0.15275665
+    e13: 0.3739969
     e20: 0
     e21: 0
     e22: 1
@@ -191,7 +191,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &114677686704247756
+--- !u!114 &114991867535277826
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,35 +243,35 @@ MonoBehaviour:
     boneIndex2: 0
     boneIndex3: 0
   m_Edges:
-  - index1: 0
+  - index1: 2
     index2: 1
   - index1: 1
-    index2: 2
-  - index1: 2
+    index2: 0
+  - index1: 0
     index2: 3
   - index1: 3
-    index2: 0
+    index2: 2
   m_Holes: []
   m_Indices: 020000000100000000000000000000000300000002000000
   m_BindPoses:
   - bindPose:
-      e00: 0.019481147
-      e01: -0.99981034
+      e00: -0.025266014
+      e01: -0.9996811
       e02: 0
-      e03: 8.923605
-      e10: 0.99981034
-      e11: 0.019481147
+      e03: 8.542035
+      e10: 0.9996811
+      e11: -0.025266014
       e12: 0
-      e13: 0.15275665
+      e13: 0.3739969
       e20: 0
       e21: 0
       e22: 1
-      e23: 3.6766405
+      e23: 0
       e30: 0
       e31: 0
       e32: 0
       e33: 1
-    boneLength: 24.845495
+    boneLength: 17.907742
     path: Right Hip/Right Leg
     name: Right Leg
     color: {r: 1, g: 0, b: 0, a: 1}

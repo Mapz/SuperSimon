@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApiVersion: 4
   m_Sprite: {fileID: 21300012, guid: 2f54a83652719ca418d2134ee9dd1db3, type: 3}
-  m_SharedMesh: {fileID: 43081204930111996}
---- !u!43 &43081204930111996
+  m_SharedMesh: {fileID: 43697544704740840}
+--- !u!43 &43697544704740840
 Mesh:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,17 +40,17 @@ Mesh:
     channels: []
     fullWeights: []
   m_BindPose:
-  - e00: -0.9999565
-    e01: -0.009268444
-    e02: 0.0010922585
-    e03: 15.042484
-    e10: 0.009275343
-    e11: -0.999936
-    e12: 0.0064959684
-    e13: 0.24758357
-    e20: 0.0010319808
-    e21: 0.0065058167
-    e22: 0.9999783
+  - e00: -0.99999905
+    e01: 0.0014462653
+    e02: 0
+    e03: 16.00311
+    e10: -0.0014462653
+    e11: -0.99999905
+    e12: 0
+    e13: 0.4750956
+    e20: 0
+    e21: 0
+    e22: 1
     e23: 0
     e30: 0
     e31: 0
@@ -191,7 +191,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &114559590107745656
+--- !u!114 &114532616506437716
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,38 +262,38 @@ MonoBehaviour:
     boneIndex3: 0
   m_Edges:
   - index1: 0
+    index2: 5
+  - index1: 0
     index2: 1
-  - index1: 1
-    index2: 2
   - index1: 2
-    index2: 3
-  - index1: 3
+    index2: 1
+  - index1: 5
     index2: 4
   - index1: 4
-    index2: 5
-  - index1: 5
-    index2: 0
+    index2: 3
+  - index1: 2
+    index2: 3
   m_Holes: []
   m_Indices: 000000000500000001000000020000000100000005000000050000000400000003000000020000000500000003000000
   m_BindPoses:
   - bindPose:
-      e00: -0.9999565
-      e01: -0.009268444
-      e02: 0.0010922585
-      e03: 15.042484
-      e10: 0.009275343
-      e11: -0.999936
-      e12: 0.0064959684
-      e13: 0.24758357
-      e20: 0.0010319808
-      e21: 0.0065058167
-      e22: 0.9999783
-      e23: 3.9
+      e00: -0.99999905
+      e01: 0.0014462653
+      e02: 0
+      e03: 16.00311
+      e10: -0.0014462653
+      e11: -0.99999905
+      e12: 0
+      e13: 0.4750956
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
       e30: 0
       e31: 0
       e32: 0
       e33: 1
-    boneLength: 33.003258
+    boneLength: 35.557777
     path: Left Shoulder/Left Arm
     name: Left Arm
     color: {r: 1, g: 0, b: 0, a: 1}

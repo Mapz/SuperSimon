@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApiVersion: 4
   m_Sprite: {fileID: 21300010, guid: 2f54a83652719ca418d2134ee9dd1db3, type: 3}
-  m_SharedMesh: {fileID: 43723388897556916}
---- !u!43 &43723388897556916
+  m_SharedMesh: {fileID: 43006348492019218}
+--- !u!43 &43006348492019218
 Mesh:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,14 +40,14 @@ Mesh:
     channels: []
     fullWeights: []
   m_BindPose:
-  - e00: -0.9992127
-    e01: -0.0396761
+  - e00: -0.9998564
+    e01: -0.016946789
     e02: 0
-    e03: 6.2376075
-    e10: 0.0396761
-    e11: -0.9992127
+    e03: 7.8831606
+    e10: 0.016946789
+    e11: -0.9998564
     e12: 0
-    e13: -0.5762979
+    e13: 0.36984307
     e20: 0
     e21: 0
     e22: 1
@@ -191,7 +191,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &114252100411454034
+--- !u!114 &114420281433010498
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,38 +279,38 @@ MonoBehaviour:
     boneIndex2: 0
     boneIndex3: 0
   m_Edges:
-  - index1: 0
+  - index1: 6
+    index2: 5
+  - index1: 4
+    index2: 3
+  - index1: 2
     index2: 1
   - index1: 1
-    index2: 2
-  - index1: 2
-    index2: 3
+    index2: 0
   - index1: 3
-    index2: 4
-  - index1: 4
-    index2: 5
+    index2: 2
   - index1: 5
-    index2: 6
-  - index1: 6
+    index2: 4
+  - index1: 0
     index2: 7
   - index1: 7
-    index2: 0
+    index2: 6
   m_Holes: []
   m_Indices: 040000000200000000000000020000000100000000000000040000000300000002000000060000000500000004000000040000000700000006000000000000000700000004000000
   m_BindPoses:
   - bindPose:
-      e00: -0.9992127
-      e01: -0.0396761
+      e00: -0.9998564
+      e01: -0.016946789
       e02: 0
-      e03: 6.2376075
-      e10: 0.0396761
-      e11: -0.9992127
+      e03: 7.8831606
+      e10: 0.016946789
+      e11: -0.9998564
       e12: 0
-      e13: -0.5762979
+      e13: 0.36984307
       e20: 0
       e21: 0
       e22: 1
-      e23: 3.6766405
+      e23: 0
       e30: 0
       e31: 0
       e32: 0

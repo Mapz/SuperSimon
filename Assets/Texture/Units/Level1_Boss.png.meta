@@ -208,7 +208,7 @@ TextureImporter:
         width: 94
         height: 62
       alignment: 9
-      pivot: {x: 0.49999997, y: 0.5}
+      pivot: {x: 0.49999994, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -410,6 +410,6 @@ TextureImporter:
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
-  userData: 636870099102486283
+  userData: 636872653418929441
   assetBundleName: 
   assetBundleVariant: 
