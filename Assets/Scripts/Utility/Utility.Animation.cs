@@ -8,4 +8,10 @@ public partial class Utility
     {
         return animator.runtimeAnimatorController.animationClips.First(x => x.name == name);
     }
+
+    public static float GetAnimationClipLength(Animator animator, string name)
+    {
+        float time = GetAnimationClip(animator, name).length;
+        return time;
+    }
 }

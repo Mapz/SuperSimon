@@ -325,7 +325,7 @@ public class Simon : MovingUnit
         {
             return;
         }
-        Debug.Log("SwitchStatus:" + state);
+        //Debug.Log("SwitchStatus:" + state);
         switch (state)
         {
             case SimonStatus.JumpUp0:

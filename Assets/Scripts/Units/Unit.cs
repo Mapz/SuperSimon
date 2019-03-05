@@ -22,7 +22,7 @@ public abstract class Unit : MonoBehaviour, IPause
             _HP = value;
             if (hpBarAttached)
             {
-                hpBarAttached.SetHPBar(value);
+                hpBarAttached.RefreshHPBar();
             }
         }
     }
@@ -72,12 +72,12 @@ public abstract class Unit : MonoBehaviour, IPause
     public void AttachToHPBar(HPBar _hp)
     {
         hpBarAttached = _hp;
-        hpBarAttached.SetHPBar(_HP);
+        hpBarAttached.Attach(this);
     }
 
     public void DisAttachToHPBar()
     {
-        hpBarAttached.SetHPBar(16);
+        hpBarAttached.DisAttach();
         hpBarAttached = null;
     }
 
@@ -177,6 +177,7 @@ public abstract class Unit : MonoBehaviour, IPause
     void OnEnable()
     {
         OnDied += AddScore;
+        m_anim = GetComponent<Animator>();
         OnEnabled();
     }
 

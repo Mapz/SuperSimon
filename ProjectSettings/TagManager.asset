@@ -51,6 +51,9 @@ TagManager:
   - name: Ground
     uniqueID: 1523116105
     locked: 0
+  - name: BackLayeredEnemy
+    uniqueID: 1143051369
+    locked: 0
   - name: Player
     uniqueID: 3909442463
     locked: 0
