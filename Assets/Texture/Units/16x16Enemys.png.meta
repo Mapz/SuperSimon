@@ -5,6 +5,7 @@ TextureImporter:
     21300000: 16x16Enemys_0
     21300002: 16x16Enemys_1
     21300004: 16x16Enemys_2
+    21300006: 16x16Enemys_3
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -123,7 +124,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4c63088ab3f940b3b340ba721e80435
+      spriteID: a5ca87a0171bb6341b56f8d148e3cc47
       vertices: []
       indices: 
       edges: []
@@ -143,7 +144,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f9836b29200c4e3598074db3255d6f9
+      spriteID: ddb18b745ce101349a3f527b76e6f2bb
       vertices: []
       indices: 
       edges: []
@@ -163,7 +164,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac5aac83602124a86945dda8e1781dee
+      spriteID: 434c9c86141f0a04b8a6a750afb1b5ea
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 16x16Enemys_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65347149fb804ea469d5ddbb94423325
       vertices: []
       indices: 
       edges: []

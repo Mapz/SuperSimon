@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SpawnData
 {
+    protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
 
     public Vector3Int position;
     public GameObject EnemeyToProduce;
@@ -65,6 +66,21 @@ public class SpawnData
         }).gameObject;
         enemy.transform.parent = parent;
         enemy.transform.position = grid.CellToLocal(position) + spawnerTransform.position + grid.cellSize / 2;
+
+        //var rb2d = enemy.GetComponent<Rigidbody2D>();
+        //rb2d.MovePosition(enemy.transform.position);
+        //var contactFilter = new ContactFilter2D();
+        //contactFilter.useTriggers = false;
+        //contactFilter.SetLayerMask(1 << LayerMask.NameToLayer("Ground"));
+        //contactFilter.useLayerMask = true;
+        //int count = rb2d.Cast(Vector2.down, contactFilter, hitBuffer);
+
+        //for (int i = 0; i < count; i++)
+        //{
+        //    enemy.transform.position -= hitBuffer[i].distance * Vector3.down;
+        //}
+      
+
     }
 }
 

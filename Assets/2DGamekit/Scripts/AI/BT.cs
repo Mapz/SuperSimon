@@ -15,6 +15,7 @@ namespace BTAI
     public static class BT
     {
         public static Root Root() { return new Root(); }
+        public static RandomBranch Random() { return new RandomBranch(); }
         public static Sequence Sequence() { return new Sequence(); }
         public static Selector Selector(bool shuffle = false) { return new Selector(shuffle); }
         public static Action RunCoroutine(System.Func<IEnumerator<BTState>> coroutine) { return new Action(coroutine); }
@@ -108,6 +109,36 @@ namespace BTAI
                     return BTState.Continue;
                 case BTState.Abort:
                     activeChild = 0;
+                    return BTState.Abort;
+            }
+            throw new System.Exception("This should never happen, but clearly it has.");
+        }
+    }
+
+    public class RandomBranch : Branch
+    {
+
+        public RandomBranch()
+        {
+            activeChild = -1;
+        }
+        public override BTState Tick()
+        {
+            if (activeChild == -1)
+                activeChild = Random.Range(0, children.Count);
+            var childState = children[activeChild].Tick();
+            switch (childState)
+            {
+                case BTState.Success:
+                    activeChild = -1;
+                    return BTState.Success;
+                case BTState.Failure:
+                    activeChild = -1;
+                    return BTState.Failure;
+                case BTState.Continue:
+                    return BTState.Continue;
+                case BTState.Abort:
+                    activeChild = -1;
                     return BTState.Abort;
             }
             throw new System.Exception("This should never happen, but clearly it has.");

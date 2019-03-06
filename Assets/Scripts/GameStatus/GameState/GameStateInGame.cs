@@ -69,9 +69,9 @@ public class GameStateInGame : IGameState, IPause
     IEnumerator SetHeroPosition()
     {
         if (Hero == null) yield break;
-        yield return new WaitForFixedUpdate();
         Hero.transform.SetParent(InGameVars.level.transform);
         Hero.transform.position = CheckPointStatus.GetCheckPoint().Position;
+        Hero.transform.position = new Vector2(2768, -40);
         RaycastHit2D groundPointHit = Physics2D.Raycast(Hero.transform.position, Vector2.down, 256f, 1 << LayerMask.NameToLayer("Ground"));
         if (groundPointHit.collider)
         {
@@ -83,6 +83,7 @@ public class GameStateInGame : IGameState, IPause
             Debug.DrawLine(Hero.transform.position, groundPointHit.point, Color.red, 100.1f, false);
 
         }
+        yield return new WaitForFixedUpdate();
 
     }
 

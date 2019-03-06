@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
-public class SubWeaponShooter : MonoBehaviour
+public class SubWeaponShooter : WeaponShooter
 {
-    private GameObject toShootPrefab; //射擊出去的物件Prefab
+
     private int m_level = 1; //Equals Max CombCount;
     private float m_CurrentCoolDown;
     [SerializeField]
     private float m_CoolDown;
-    [SerializeField]
-    private MovingUnit m_Holder;
+
     [SerializeField]
     private int m_MaxLevel;
+
     [SerializeField]
     private float m_ComboCoolDown;
     private int m_comboCount = 0;
@@ -31,7 +31,7 @@ public class SubWeaponShooter : MonoBehaviour
         get { return m_CurrentCoolDown <= 0 && (null != toShootPrefab) && (InGameVars.heart >= m_heartCost); }
     }
 
-    public bool ExecShoot()
+    public override bool ExecShoot()
     {
         if (m_CurrentCoolDown > 0) return false;
         if (!Shoot()) return false;
@@ -70,31 +70,9 @@ public class SubWeaponShooter : MonoBehaviour
         }
     }
 
-    private bool Shoot()
+    protected override bool Shoot()
     {
-        if (null == toShootPrefab) return false;
-
-        GameObject shotObject = ObjectMgr<Unit>.Instance.Create(() =>
-        {
-            return Instantiate(toShootPrefab).GetComponent<Unit>();
-        }).gameObject;
-  
-        shotObject.transform.SetParent(InGameVars.level.transform);
-        shotObject.transform.position = transform.position;
-        var flyingObject = shotObject.GetComponent<FlyingObject>();
-        if (flyingObject.facingRight != m_Holder.facingRight)
-        {
-            flyingObject.Flip();
-        }
-        flyingObject.m_team = m_Holder.m_team;
-        flyingObject.m_shooter = m_Holder;
-        var weapon = flyingObject.GetComponentInChildren<FlyObjectWeapon>();
-        if (null != weapon)
-        {
-            weapon.m_team = m_Holder.m_team;
-            weapon.m_Shooter = m_Holder;
-            weapon.m_WeaponCarrier = flyingObject;
-        }
+        if (!base.Shoot()) return false;
         InGameVars.heart -= m_heartCost;
         return true;
     }

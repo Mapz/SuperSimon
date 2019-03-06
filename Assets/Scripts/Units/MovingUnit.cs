@@ -66,7 +66,7 @@ public abstract class MovingUnit : Unit
 
     public virtual bool CheckOutOfScreen()
     {
-        return Utility.CheckOutOfScreen(transform.position, 20) != Vector2.zero;
+        return Utility.CheckOutOfScreen(transform.position, 400) != Vector2.zero;
     }
 
 }

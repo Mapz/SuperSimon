@@ -41,8 +41,9 @@ public class Game : MonoBehaviour {
     //DONE: 乌龟
     //DONE: 生怪器有怪的时候不生怪
     //DONE: 分数系统的制作 --> 简陋
+    //DONE: 顶砖块对上面的东西造成一个伤害 ,形成一个冲击波
 
-    //TODO: 顶砖块对上面的东西造成一个伤害
+    //TODO: 生怪器优化，条件生怪
     //TODO: 资源模式调通
     //TODO: 进入管子的逻辑
     //TODO: 跟随探索 Cinemachine 

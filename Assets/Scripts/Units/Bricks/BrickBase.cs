@@ -54,7 +54,7 @@ public abstract class BrickBase : Unit
 
     public override void OnCollideWithPhysicalObject(RaycastHit2D hit, Collider2D collider)
     {
-
+        if (collider == null) return;
         var colliderMovingUnit = collider.GetComponent<MovingUnit>();
         if (colliderMovingUnit && colliderMovingUnit.m_interactEnviroment)
         {
