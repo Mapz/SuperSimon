@@ -174,8 +174,8 @@ public class Turtle : GuardableEnemy
     public override void AddAI()
     {
         base.AddAI();
-        ai = BT.Root();
-        ai.OpenBranch(
+        m_btAi = BT.Root();
+        m_btAi.OpenBranch(
            BT.If(() => { return physicsObject.collided; }).
             OpenBranch(
                BT.Call(Flip),

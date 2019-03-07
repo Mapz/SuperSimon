@@ -52,8 +52,6 @@ public class Simon : MovingUnit
         1 -> Squat Collider
      */
 
-    private bool m_wontBeHurt = false;
-
     public float m_wontBeHurtTime;
 
     public float m_onHit1Time;
@@ -117,11 +115,6 @@ public class Simon : MovingUnit
         m_dmg = m_whip.m_dmg;
     }
 
-    //是否可以受伤
-    protected override bool CanBeDamaged()
-    {
-        return !m_wontBeHurt && !m_isDead;
-    }
 
     //开启输入
     public override void EnableInput()
@@ -203,7 +196,7 @@ public class Simon : MovingUnit
                 break;
         }
         //动画的一帧后关闭hitbox
-        AnimationClip ac = Utility.GetAnimationClip(m_anim, animName);
+        AnimationClip ac = m_anim.GetAnimationClip(animName);
         float time = 1 / ac.frameRate;
         yield return new WaitForSeconds(time);
         m_whip.ActiveCollider(false);
@@ -227,7 +220,7 @@ public class Simon : MovingUnit
         }
         yield return new WaitForEndOfFrame();
         //获取动画长度
-        float time = Utility.GetAnimationClip(m_anim, animName).length;
+        float time = m_anim.GetAnimationClip(animName).length;
         yield return new WaitForSeconds(time);
         if (!IsOnHit())
         {

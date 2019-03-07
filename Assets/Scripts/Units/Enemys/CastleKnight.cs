@@ -11,108 +11,7 @@ public class CastleKnight : SimpleEnemy
     private float m_jumpVelocityX;
     private float m_backJumpTime = 1.5f;
 
-    protected override void OnEnabled()
-    {
-        base.OnEnabled();
 
-    }
-
-
-    public override void AddAI()
-    {
-        base.AddAI();
-        ai = BT.Root();
-        ai.OpenBranch(
-               BT.If(() => { return m_isAttacked; }).OpenBranch(BT.If(() => { return -1 == m_isAwake; }).OpenBranch(BT.Call(() =>
-                    {
-                        m_isAwake = 0;
-                        AttachToHPBar(GameManager.StatusBar.m_enemyHp);
-                        m_anim.SetTrigger("WakeUp");
-                    }))),
-               BT.If(() => { return 1 == m_isAwake; }).OpenBranch( //已經激活
-                    BT.If(() =>
-                    {
-                        var distanceToHero = this.CheckDistanceX(InGameVars.hero);
-                        //Debug.Log("distanceToHero 1:" + distanceToHero);
-                        return distanceToHero < 70;  // 太近，跳遠一點
-                    }).OpenBranch(BT.If(CheckGrounded).OpenBranch(
-
-                        BT.Random().OpenBranch(
-                            //BT.Sequence().OpenBranch(
-                            //        BT.Call(() =>
-                            //             {
-                            //                 Debug.Log("Too Near");
-                            //                 //StopX();
-                            //                 //JumpToScreenEdge();
-                            //                 m_anim.SetTrigger("WalkTrigger");
-                            //                 MoveX(-1);
-                            //             }),
-                            //        BT.Wait(3f),
-                            //        BT.Call(Idle)
-                            //    ),
-                            BT.Sequence().OpenBranch(
-                                  BT.Call(Idle),
-                                  BT.Wait(0.1f),
-                                  BT.Call(() =>
-                                  {
-                                      //Debug.Log("Too Near");
-                                      StopX();
-                                      JumpToScreenEdge();
-                                      //m_anim.SetTrigger("WalkTrigger");
-                                      //MoveX(-1);
-                                  }),
-                                  BT.Wait(m_backJumpTime),
-                                  BT.Call(Idle),
-                                  BT.Wait(0.1f),
-                                  BT.Call(() =>
-                                  {
-                                      m_anim.SetTrigger("FireTrigger");
-                                      //m_anim.Play("FireCanon");
-                                      m_jumpVelocityX = 0;
-                                      StopX();
-                                  }),
-                                  BT.WaitForAnimatorState(m_anim, "Idle")
-                                //BT.Call(Idle)
-
-                                )
-                            )
-                        )
-
-
-
-
-
-                    ),
-                    BT.If(() =>
-                    {
-                        var distanceToHero = this.CheckDistanceX(InGameVars.hero);
-                        //Debug.Log("distanceToHero 0:" + distanceToHero);
-                        return distanceToHero > 90;
-                    }).OpenBranch(
-                            //BT.Trigger(m_anim, "AxeAttackTrigger", false),
-                            BT.Call(Walk),
-                            BT.Wait(0.1f),
-                            BT.Trigger(m_anim, "WalkTrigger", false)
-                        ),
-                    BT.If(() =>
-                    {
-                        var distanceToHero = this.CheckDistanceX(InGameVars.hero);
-                        //Debug.Log("distanceToHero 2:" + distanceToHero);
-                        return distanceToHero > 70 && distanceToHero < 90;
-                    }).OpenBranch(
-                                BT.Call(Idle),
-                                BT.Wait(0.1f),
-                                BT.Call(() =>
-                                    {
-                                        m_anim.Play("AxeAttack");
-                                    }
-                                ),
-                                BT.WaitForAnimatorState(m_anim, "Idle")
-
-                            )
-                  )
-        );
-    }
 
 
     protected override void UpdateSpeedX()
@@ -152,7 +51,7 @@ public class CastleKnight : SimpleEnemy
         //通过时间来计算X 速度
         m_jumpVelocityX = JumpFar / m_backJumpTime;
         MoveX(-1);
-        m_anim.SetTrigger("JumpTrigger");
+        m_anim.PlayAvoidRePlay("Jump");
 
     }
 
@@ -178,14 +77,256 @@ public class CastleKnight : SimpleEnemy
 
     public void Idle()
     {
-        m_anim.ResetTrigger("WalkTrigger");
-        m_anim.SetTrigger("IdleTrigger");
-        StopX();
+        m_sm.TransState("Idle");
     }
 
-    public void Walk()
+    public void Walk(int direction)
     {
-        m_anim.SetTrigger("WalkTrigger");
-        MoveX();
+        m_anim.PlayAvoidRePlay("Walk");
+        MoveX(direction);
     }
+
+
+
+    public override void AddAI()
+    {
+        m_sm = new StateMachine();
+        string stateNameSleep = "Sleep";
+        string stateNameWakeUp = "WakeUp";
+        string stateNameIdle = "Idle";
+        string stateNameWalking = "Walking";
+        string stateNameAxeAttack = "AxeAttack";
+        string stateNameCannonAttack = "CannonAttack";
+        string stateNameJumpBack = "JumpBack";
+        float axeAttackCoolDown = 6f;
+        float cannonAttackCoolDown = 3f;
+        float WalkCoolDown = 3f;
+
+        onStateAction distanceCheck = _ =>
+        {
+            float distance = this.CheckDistanceX(InGameVars.hero);
+            var transSucceed = false;
+            if ((distance > 80 || distance < 120))
+            {
+                transSucceed = m_sm.TransState(stateNameAxeAttack);
+                if (transSucceed)
+                {
+                    return;
+                }
+                else
+                {
+
+                    m_sm.SetData("WalkingBack", true);
+                    m_sm.SetData("distance", distance);
+                    var walkSucceed = m_sm.TransState(stateNameWalking);
+                    if (!walkSucceed)
+                    {
+                        m_sm.SetData("WalkingBack", false);
+                    }
+                }
+            }
+
+            if (distance < 80 || (distance > 120 && distance < 160))
+            {
+
+                if (distance < 80)
+                {
+                    var random = Random.Range(0f, 1f);
+                    Debug.Log(random);
+                    if (random > 0.5f)
+                    {
+                        var jumpSucceed = m_sm.TransState(stateNameJumpBack);
+                        if (jumpSucceed)
+                            return;
+                    }
+                    else
+                    {
+                        m_sm.SetData("distance", distance);
+                        m_sm.SetData("WalkingBack", true);
+                        var walkSucceed = m_sm.TransState(stateNameWalking);
+                        if (!walkSucceed)
+                        {
+                            m_sm.SetData("WalkingBack", false);
+                        }
+                    }
+                }
+                else
+                {
+                    m_sm.SetData("distance", distance);
+                    m_sm.SetData("WalkingBack", false);
+                    m_sm.TransState(stateNameWalking);
+                }
+            }
+            if (distance > 160)
+            {
+                if (!m_sm.TransState(stateNameCannonAttack))
+                {
+                    m_sm.SetData("distance", distance);
+                    m_sm.SetData("WalkingBack", false);
+                    m_sm.TransState(stateNameWalking);
+                }
+            }
+        };
+
+
+        SMState stateSleep = new SMState(stateNameSleep);
+        m_sm.AddState(stateSleep);
+        stateSleep.OnEnterState = (_) =>
+        {
+            m_wontBeHurt = true;
+        };
+
+        stateSleep.OnExitState = (_) =>
+        {
+            m_wontBeHurt = false;
+        };
+
+        stateSleep.OnUpdate = (_) =>
+        {
+            if (m_isAttacked)
+            {
+                if (m_anim.IsAnimationState(stateNameSleep))
+                {
+                    m_sm.TransState(stateNameWakeUp);
+                    m_anim.PlayAvoidRePlay("Awake");
+                }
+            }
+        };
+
+        // 起身
+        SMState stateWakeUp = new SMState(stateNameWakeUp);
+        m_sm.AddState(stateWakeUp);
+
+        stateWakeUp.OnEnterState = _ =>
+        {
+            AttachToHPBar(GameManager.StatusBar.m_enemyHp);
+        };
+        stateWakeUp.OnUpdate = _ =>
+        {
+            if (m_isAwake == 1)
+            {
+                m_sm.TransState(stateNameIdle);
+            }
+        };
+
+
+
+
+        SMState StateJumpBack = new SMState(stateNameJumpBack);
+        m_sm.AddState(StateJumpBack);
+
+        StateJumpBack.TransPreCheck = () =>
+        {
+            return m_sm.GetData<bool>("WalkCoolDown");
+        };
+        StateJumpBack.OnExitState = _ =>
+        {
+            m_jumpVelocityX = 0;
+        };
+        StateJumpBack.OnEnterState = _ =>
+        {
+            JumpToScreenEdge();
+            new EnumTimer(() =>
+            {
+                m_sm.TransState(stateNameCannonAttack);
+            }, m_backJumpTime).StartTimeout();
+        };
+
+        // 站立状态
+        SMState StateIdle = new SMState(stateNameIdle);
+        m_sm.AddState(StateIdle);
+        StateIdle.OnEnterState = _ =>
+        {
+            m_anim.PlayAvoidRePlay("Idle");
+            StopX();
+        };
+
+
+        StateIdle.OnUpdate = distanceCheck;
+
+        SMState stateWalking = new SMState(stateNameWalking);
+        m_sm.AddState(stateWalking);
+
+        stateWalking.TransPreCheck = () =>
+        {
+            return m_sm.GetData<bool>("WalkCoolDown");
+        };
+
+        stateWalking.canTranlateToSelf = true;
+        stateWalking.OnEnterState = _ =>
+        {
+            var distance = m_sm.GetData<float>("distance");
+            var walkingBack = m_sm.GetData<bool>("WalkingBack");
+            if (distance < 80 || walkingBack)
+            {
+                Walk(-1);
+            }
+            else
+            {
+                Walk(1);
+            }
+
+            m_sm.SetData("WalkCoolDown", false);
+            new EnumTimer(() =>
+            {
+                m_sm.SetData("WalkCoolDown", true);
+                m_sm.SetData("WalkingBack", false);
+            }, WalkCoolDown).StartTimeout();
+
+            return;
+        };
+        stateWalking.OnUpdate = state =>
+        {
+
+            if (!m_sm.GetData<bool>("WalkCoolDown"))
+            {
+                return;
+            }
+            distanceCheck.Invoke(state);
+        };
+
+        SMState stateAxeAttack = new SMState(stateNameAxeAttack);
+        m_sm.AddState(stateAxeAttack);
+        stateAxeAttack.OnEnterState = _ =>
+        {
+            StopX();
+            m_anim.PlayAvoidRePlay("AxeAttack");
+            m_sm.SetData("AxeAttackCoolDown", false);
+            new EnumTimer(() =>
+            {
+                m_sm.SetData("AxeAttackCoolDown", true);
+            }, axeAttackCoolDown).StartTimeout();
+        };
+
+        stateAxeAttack.TransPreCheck = () =>
+        {
+            return m_sm.GetData<bool>("AxeAttackCoolDown");
+        };
+
+        SMState stateCannonAttack = new SMState(stateNameCannonAttack);
+        m_sm.AddState(stateCannonAttack);
+        stateCannonAttack.OnEnterState = _ =>
+        {
+            StopX();
+            m_anim.PlayAvoidRePlay("FireCanon");
+            m_sm.SetData("CannonAttackCoolDown", false);
+            new EnumTimer(() =>
+            {
+                m_sm.SetData("CannonAttackCoolDown", true);
+            }, cannonAttackCoolDown).StartTimeout();
+        };
+
+        stateCannonAttack.TransPreCheck = () =>
+        {
+            return m_sm.GetData<bool>("CannonAttackCoolDown");
+        };
+
+
+        m_sm.TransState(stateNameSleep);
+        m_sm.SetData("AxeAttackCoolDown", true);
+        m_sm.SetData("CannonAttackCoolDown", true);
+        m_sm.SetData("WalkCoolDown", true);
+
+    }
+
 }

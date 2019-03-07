@@ -8,6 +8,7 @@ public class GameStatus : MonoBehaviour
     public static IGameState m_GameState;
     public static IGameState m_LastGameState;
 
+
     private static Dictionary<Type, IGameState> m_statusStore = new Dictionary<Type, IGameState>();
 
     void Awake()

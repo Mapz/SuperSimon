@@ -27,9 +27,13 @@ public abstract class Unit : MonoBehaviour, IPause
         }
     }
 
+    protected bool m_wontBeHurt = false;
+
     protected Animator m_anim;
 
-    protected Root ai;
+    protected Root m_btAi;
+
+    protected StateMachine m_sm;
 
     public int m_score;
 
@@ -59,9 +63,10 @@ public abstract class Unit : MonoBehaviour, IPause
     //打击CD计数器，一个武器只能对一个东西周期性造成伤害而不是总是造成伤害
     private OnHitCountDown m_onHitCheck = new OnHitCountDown();
 
+    //是否可以受伤
     protected virtual bool CanBeDamaged()
     {
-        return !m_isDead;
+        return !m_wontBeHurt && !m_isDead;
     }
 
     public virtual void Upgrade(int change)
@@ -140,7 +145,11 @@ public abstract class Unit : MonoBehaviour, IPause
     protected virtual void OnUpdate()
     {
         if (!m_isDead)
-            ai?.Tick();
+        {
+            m_btAi?.Tick();
+            m_sm?.OnUpdate();
+        }
+
     }
 
     protected virtual void OnFixedUpdate()

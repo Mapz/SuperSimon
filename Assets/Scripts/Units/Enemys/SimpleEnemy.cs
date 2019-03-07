@@ -80,8 +80,8 @@ public class SimpleEnemy : MovingUnit
     public override void AddAI()
     {
         base.AddAI();
-        ai = BT.Root();
-        ai.OpenBranch(
+        m_btAi = BT.Root();
+        m_btAi.OpenBranch(
            BT.If(() => { return m_initDirection == false; }).
             OpenBranch(BT.Call(() =>
             {
