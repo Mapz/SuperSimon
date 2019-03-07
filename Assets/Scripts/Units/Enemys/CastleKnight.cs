@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class CastleKnight : SimpleEnemy
 {
@@ -66,7 +67,8 @@ public class CastleKnight : SimpleEnemy
     {
         if (this.isAtRightOf(InGameVars.hero) == facingRight)
         {
-            Flip();
+            if (Math.Abs(transform.position.x - InGameVars.hero.transform.position.x) > 30)
+                Flip();
         }
     }
 
@@ -86,6 +88,35 @@ public class CastleKnight : SimpleEnemy
         MoveX(direction);
     }
 
+    protected override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+        RestrictPosition();
+    }
+
+
+    // 限制移动区域 TODO：要和物理引擎结合一下
+    void RestrictPosition()
+    {
+        if (transform.position.x < InGameVars.LevelConfigs.m_levelMinX)
+        {
+            transform.position = new Vector2(InGameVars.LevelConfigs.m_levelMinX, transform.position.y);
+        }
+        else
+        if (transform.position.x > InGameVars.LevelConfigs.m_levelMaxX)
+        {
+            transform.position = new Vector2(InGameVars.LevelConfigs.m_levelMaxX, transform.position.y);
+        }
+        if (transform.position.x < GameManager.mainCamera.transform.position.x - InGameVars.ScreenWidth / 2)
+        {
+            transform.position = new Vector2(GameManager.mainCamera.transform.position.x - InGameVars.ScreenWidth / 2, transform.position.y);
+        }
+        else
+        if (transform.position.x > GameManager.mainCamera.transform.position.x + InGameVars.ScreenWidth / 2)
+        {
+            transform.position = new Vector2(GameManager.mainCamera.transform.position.x + InGameVars.ScreenWidth / 2, transform.position.y);
+        }
+    }
 
 
     public override void AddAI()
@@ -131,7 +162,7 @@ public class CastleKnight : SimpleEnemy
 
                 if (distance < 80)
                 {
-                    var random = Random.Range(0f, 1f);
+                    var random = UnityEngine.Random.Range(0f, 1f);
                     Debug.Log(random);
                     if (random > 0.5f)
                     {
@@ -200,6 +231,7 @@ public class CastleKnight : SimpleEnemy
         stateWakeUp.OnEnterState = _ =>
         {
             AttachToHPBar(GameManager.StatusBar.m_enemyHp);
+            GameManager.cameraHandler.DisFollow();
         };
         stateWakeUp.OnUpdate = _ =>
         {

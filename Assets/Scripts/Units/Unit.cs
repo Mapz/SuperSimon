@@ -87,11 +87,9 @@ public abstract class Unit : MonoBehaviour, IPause
     }
 
 
-
-    public void SetFollowByCamera(Camera _camera)
+    public void SetFollowByCamera()
     {
-        CameraFollow cameraFollow = gameObject.AddComponent<CameraFollow>();
-        cameraFollow.m_camera = _camera;
+        GameManager.cameraHandler.SetFollow(gameObject);
     }
 
     public virtual void GetDamage(Damage dmg)

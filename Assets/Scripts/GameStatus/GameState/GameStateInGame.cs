@@ -50,12 +50,14 @@ public class GameStateInGame : IGameState, IPause
             return Utility.CreateUnit("Simon");
         });
 
-        Hero.SetFollowByCamera(GameManager.mainCamera);
         Hero.AttachToHPBar(GameManager.StatusBar.m_heroHp);
         StartCoroutine(SetHeroPosition());
 
         Hero.EnableInput();
         InGameVars.hero = Hero;
+        Hero.SetFollowByCamera();
+        //GameManager.mainCamera.GetComponent<CameraHandler>().SetFollow(Hero.gameObject);
+        GameManager.cameraHandler.Init();
         GameManager.CountDown.AttachToStatusBar(GameManager.StatusBar);
 
         GameManager.CountDown.StartCountDown(InGameVars.time);

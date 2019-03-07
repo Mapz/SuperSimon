@@ -2,47 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraHandler : MonoBehaviour
 {
-    public Camera m_camera;
+    private Camera m_camera;
     private float m_cameraMinX;
     private float m_cameraMaxX;
-    public bool m_follows = true;
+    public GameObject m_followsObject;
+    private bool m_isFollowing = false;
     void Start()
     {
-        Init();
+        m_camera = GetComponent<Camera>();
     }
 
-    void Init()
+    public void Init()
     {
         //Call When LoadLevel
         m_cameraMinX = InGameVars.ScreenWidth / 2 + InGameVars.LevelConfigs.m_levelMinX;
         m_cameraMaxX = InGameVars.LevelConfigs.m_levelMaxX - InGameVars.ScreenWidth / 2;
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    public void SetFollow(GameObject obj)
     {
-        if (!m_follows) return;
-        var playerX = transform.position.x;
-        var newLevelMinX = playerX - InGameVars.ScreenWidth / 2;
+        m_isFollowing = true;
+        m_followsObject = obj;
+    }
+
+    public void DisFollow()
+    {
+        m_isFollowing = false;
+    }
+
+    void Follows()
+    {
+        if (!m_isFollowing) return;
+        if (m_followsObject == null) return;
+        var followsX = m_followsObject.transform.position.x;
+        var newLevelMinX = followsX - InGameVars.ScreenWidth / 2;
         if (newLevelMinX >= InGameVars.LevelConfigs.m_levelMinX)
         {
             InGameVars.LevelConfigs.m_levelMinX = newLevelMinX;
             m_cameraMinX = InGameVars.ScreenWidth / 2 + InGameVars.LevelConfigs.m_levelMinX;
         }
-        if (playerX < m_cameraMinX)
+        if (followsX < m_cameraMinX)
         {
             m_camera.transform.position = new Vector3(m_cameraMinX, m_camera.transform.position.y, m_camera.transform.position.z);
         }
-        else if (playerX > m_cameraMaxX)
+        else if (followsX > m_cameraMaxX)
         {
             m_camera.transform.position = new Vector3(m_cameraMaxX, m_camera.transform.position.y, m_camera.transform.position.z);
         }
         else
         {
-            m_camera.transform.position = new Vector3(playerX, m_camera.transform.position.y, m_camera.transform.position.z);
+            m_camera.transform.position = new Vector3(followsX, m_camera.transform.position.y, m_camera.transform.position.z);
         }
+    }
 
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        Follows();
     }
 }

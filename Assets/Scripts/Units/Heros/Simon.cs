@@ -486,9 +486,19 @@ public class Simon : MovingUnit
         {
             transform.position = new Vector2(InGameVars.LevelConfigs.m_levelMinX, transform.position.y);
         }
+        else
         if (transform.position.x > InGameVars.LevelConfigs.m_levelMaxX)
         {
             transform.position = new Vector2(InGameVars.LevelConfigs.m_levelMaxX, transform.position.y);
+        }
+        if (transform.position.x < GameManager.mainCamera.transform.position.x - InGameVars.ScreenWidth / 2)
+        {
+            transform.position = new Vector2(GameManager.mainCamera.transform.position.x - InGameVars.ScreenWidth / 2, transform.position.y);
+        }
+        else
+        if (transform.position.x > GameManager.mainCamera.transform.position.x + InGameVars.ScreenWidth / 2)
+        {
+            transform.position = new Vector2(GameManager.mainCamera.transform.position.x + InGameVars.ScreenWidth / 2, transform.position.y);
         }
     }
 
