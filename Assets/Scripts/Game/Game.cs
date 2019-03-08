@@ -42,8 +42,11 @@ public class Game : MonoBehaviour {
     //DONE: 生怪器有怪的时候不生怪
     //DONE: 分数系统的制作 --> 简陋
     //DONE: 顶砖块对上面的东西造成一个伤害 ,形成一个冲击波
+    //DONE: 怪物状态机系统优化
+    //DONE: 设计一个Boss --> 第一关，骨骼动画Anima2D
 
-    //TODO: 怪物状态机系统优化
+    //TODO: OnHitBox的设计
+    //TODO: 关卡结束
     //TODO: Animator的学习
     //TODO: boss区域创建
     //TODO: 生怪器优化，条件生怪
@@ -52,11 +55,9 @@ public class Game : MonoBehaviour {
     //TODO: 跟随探索 Cinemachine 
     //TODO: 物理重合挤开逻辑
     //TODO: 时停副武器的制作
-
     //TODO: 边沿探测和物理逻辑的契合
     //TODO: 多人在线探索
     //TODO: GameOver 逻辑
-    //TODO: 设计一个Boss
     //TODO: 数值配置化  --> 包括升级系统的改版
     //TODO: 移动中可以穿过格子-->移动中碰撞体加大一点
     //TODO: 生怪器优化，有怪的时候不能生怪 --> 优化思路，刷怪器改成 GameObject 而不是数据，用Trigger来控制是否刷怪 

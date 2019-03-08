@@ -8,6 +8,7 @@ public enum DmgType
 }
 
 public delegate int GetRealDmg(int rawDamage, DmgType dmgType);
+public delegate void GetDmgDelegate(Damage dmg);
 
 public class Damage
 {
@@ -15,11 +16,12 @@ public class Damage
     {
         get; private set;
     }
-    private int _rawDamage;
+    private readonly int _rawDamage;
     private DmgType _dmgType;
     private int _realDamage;
     private Vector2 _dmgDirection;
     private Vector2 _rawDirection;
+    private Vector2 _dmgPosition;
     public DmgType dmgType
     {
         get { return _dmgType; }
@@ -27,7 +29,7 @@ public class Damage
 
     public int rawDamage
     {
-        get { return _rawDamage; }
+        get { return RawDamage; }
     }
 
     public int realDamage
@@ -62,22 +64,46 @@ public class Damage
         }
     }
 
-    public Damage(int rawDamage, DmgType dmgType, Vector2 direction, GetRealDmg dmgDelegate, Unit dealer)
+    public int RawDamage => _rawDamage;
+
+    public int RawDamage1 => _rawDamage;
+
+    public DmgType DmgType { get => _dmgType; set => _dmgType = value; }
+    public int RealDamage { get => _realDamage; set => _realDamage = value; }
+    public Vector2 DmgDirection { get => _dmgDirection; set => _dmgDirection = value; }
+    public Vector2 RawDirection { get => _rawDirection; set => _rawDirection = value; }
+    public Vector2 DmgPosition { get => _dmgPosition; set => _dmgPosition = value; }
+
+    public Damage(int rawDamage, DmgType dmgType, Vector2 direction, GetRealDmg dmgDelegate, Unit dealer, Vector2 position)
     {
         _rawDamage = rawDamage;
         _dmgType = dmgType;
         _realDamage = dmgDelegate(_rawDamage, _dmgType);
         _rawDirection = direction;
         _dmgDirection = CalcDmgDirection(direction);
+        _dmgPosition = position;
         Dealer = dealer;
     }
 
-    public Damage(int rawDamage, DmgType dmgType, GetRealDmg dmgDelegate, Unit dealer) : this(rawDamage, dmgType, Vector2.zero, dmgDelegate, dealer)
+    public Damage(int rawDamage, DmgType dmgType, GetRealDmg dmgDelegate, Unit dealer, Vector2 position) : this(rawDamage, dmgType, Vector2.zero, dmgDelegate, dealer, position)
     {
 
     }
 
-    public Damage(int rawDamage, DmgType dmgType, GetRealDmg dmgDelegate) : this(rawDamage, dmgType, Vector2.zero, dmgDelegate, null)
+    public Damage(int rawDamage, DmgType dmgType, Vector2 dmgdirection, GetRealDmg dmgDelegate, Unit dealer) : this(rawDamage, dmgType, dmgdirection, dmgDelegate, dealer, Vector2.zero)
+    {
+
+    }
+
+
+
+
+    public Damage(int rawDamage, DmgType dmgType, GetRealDmg dmgDelegate, Unit dealer) : this(rawDamage, dmgType, Vector2.zero, dmgDelegate, dealer, Vector2.zero)
+    {
+
+    }
+
+    public Damage(int rawDamage, DmgType dmgType, GetRealDmg dmgDelegate) : this(rawDamage, dmgType, Vector2.zero, dmgDelegate, null, Vector2.zero)
     {
 
     }

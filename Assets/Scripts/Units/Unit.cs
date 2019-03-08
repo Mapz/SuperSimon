@@ -63,6 +63,7 @@ public abstract class Unit : MonoBehaviour, IPause
     //打击CD计数器，一个武器只能对一个东西周期性造成伤害而不是总是造成伤害
     private OnHitCountDown m_onHitCheck = new OnHitCountDown();
 
+
     //是否可以受伤
     protected virtual bool CanBeDamaged()
     {
@@ -224,6 +225,7 @@ public abstract class Unit : MonoBehaviour, IPause
         GetDamage(dmg);
     }
 
+
     protected virtual void _OnTriggerEnter2D(Collider2D other)
     {
         if (m_isDead) return;
@@ -233,6 +235,15 @@ public abstract class Unit : MonoBehaviour, IPause
         {
             if (!m_onHitCheck.OnHit(other)) return;
             unit = weapon.m_WeaponCarrier;
+            Vector3 hitPos = other.bounds.ClosestPoint(transform.position);
+            System.Action OnAttackDelegate = () =>
+            {
+
+                Debug.Log("HitPos:" + hitPos);
+                OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit, hitPos));
+
+
+            };
             switch (m_team)
             {
                 case Team.Chaos:
@@ -240,7 +251,7 @@ public abstract class Unit : MonoBehaviour, IPause
                     {
                         case Team.Hero:
                         case Team.Assistance:
-                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit));
+                            OnAttackDelegate.Invoke();
                             weapon.OnDealDmg();
                             break;
                     }
@@ -252,7 +263,7 @@ public abstract class Unit : MonoBehaviour, IPause
                         case Team.Enemy:
                         case Team.Enviroment:
                         case Team.Chaos:
-                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit));
+                            OnAttackDelegate.Invoke();
                             weapon.OnDealDmg();
 
                             break;
@@ -264,7 +275,7 @@ public abstract class Unit : MonoBehaviour, IPause
                         case Team.Hero:
                         case Team.Assistance:
                         case Team.Chaos:
-                            OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit));
+                            OnAttackDelegate.Invoke();
                             weapon.OnDealDmg();
                             break;
                     }
@@ -272,7 +283,7 @@ public abstract class Unit : MonoBehaviour, IPause
                 case Team.Enviroment:
                     if (weapon.m_destroyEnviroment)
                     {
-                        OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit));
+                        OnAttackDelegate.Invoke();
                         weapon.OnDealDmg();
                     }
                     break;

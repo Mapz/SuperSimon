@@ -1199,6 +1199,8 @@ MonoBehaviour:
   m_xMoveSpeed: 20
   m_bodyIsWeapon: 0
   m_cannonShooter: {fileID: 3388420059680836115}
+  m_onHitPrefab: {fileID: 6245590121247635125, guid: 063ef139047784decb6f80bf66a7b31e,
+    type: 3}
 --- !u!1 &5783555546219765732
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,9 +11,18 @@ public class CastleKnight : SimpleEnemy
     public WeaponShooter m_cannonShooter;
     private float m_jumpVelocityX;
     private float m_backJumpTime = 1.5f;
+    public GameObject m_onHitPrefab;
 
 
+    protected override void OnDmg(Damage dmg)
+    {
+        base.OnDmg(dmg);
+        GameObject go = Instantiate(m_onHitPrefab);
+        Debug.Log("DmgPos:" + dmg.DmgPosition);
+        go.transform.position = dmg.DmgPosition;
+        go.transform.SetParent(InGameVars.level.transform, true);
 
+    }
 
     protected override void UpdateSpeedX()
     {
@@ -44,7 +53,7 @@ public class CastleKnight : SimpleEnemy
     {
         //板邊位置
         var CameraPositionX = GameManager.mainCamera.transform.position.x;
-        var ToX = CameraPositionX + (InGameVars.ScreenWidth / 2 - 80) * ((facingRight) ? -1 : 1);
+        var ToX = CameraPositionX + (InGameVars.ScreenWidth / 2 - 50) * ((facingRight) ? -1 : 1);
         var JumpFar = ToX - transform.position.x;
 
         //通过时间来计算Y 速度

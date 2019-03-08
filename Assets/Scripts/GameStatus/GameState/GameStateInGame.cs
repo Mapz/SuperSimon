@@ -56,7 +56,6 @@ public class GameStateInGame : IGameState, IPause
         Hero.EnableInput();
         InGameVars.hero = Hero;
         Hero.SetFollowByCamera();
-        //GameManager.mainCamera.GetComponent<CameraHandler>().SetFollow(Hero.gameObject);
         GameManager.cameraHandler.Init();
         GameManager.CountDown.AttachToStatusBar(GameManager.StatusBar);
 
