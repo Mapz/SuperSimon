@@ -43,8 +43,8 @@ public class Game : MonoBehaviour {
     //DONE: 分数系统的制作 --> 简陋
     //DONE: 顶砖块对上面的东西造成一个伤害 ,形成一个冲击波
     //DONE: 怪物状态机系统优化
-    //DONE: 设计一个Boss --> 第一关，骨骼动画Anima2D
-
+    
+    //TODO: 设计一个Boss --> 第一关，骨骼动画Anima2D -> 第一个boss死亡
     //TODO: OnHitBox的设计
     //TODO: 关卡结束
     //TODO: Animator的学习

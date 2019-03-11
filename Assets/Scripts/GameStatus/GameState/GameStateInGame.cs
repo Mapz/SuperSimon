@@ -39,7 +39,7 @@ public class GameStateInGame : IGameState, IPause
             GameManager.StatusBar.transform.SetParent(GameManager.UICanvas.transform, false);
         }
 
-        InGameVars.heart = 300;//DEBUG
+        //InGameVars.heart = 300;//DEBUG
 
         InGameVars.time = 300; //TODO 改成从关卡读取
         // Load Level1
@@ -72,7 +72,7 @@ public class GameStateInGame : IGameState, IPause
         if (Hero == null) yield break;
         Hero.transform.SetParent(InGameVars.level.transform);
         Hero.transform.position = CheckPointStatus.GetCheckPoint().Position;
-        Hero.transform.position = new Vector2(2768, -40);
+        //Hero.transform.position = new Vector2(2768, -40);
         RaycastHit2D groundPointHit = Physics2D.Raycast(Hero.transform.position, Vector2.down, 256f, 1 << LayerMask.NameToLayer("Ground"));
         if (groundPointHit.collider)
         {

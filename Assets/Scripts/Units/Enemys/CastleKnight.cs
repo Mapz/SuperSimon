@@ -40,6 +40,29 @@ public class CastleKnight : SimpleEnemy
 
     }
 
+    protected virtual void DieFrom(Damage dmg)
+    {
+        if (dmg.dmgType == DmgType.MeleeWhipPhysics || dmg.dmgType == DmgType.RealDmg)
+        {
+            // 简陋的旋转死亡效果
+            var scale = transform.localScale;
+            scale.y = -1;
+            transform.localScale = scale;
+            physicsObject.gravityModifier = 100;
+            m_xMoveSpeed = 100;
+            physicsObject.velocity.y = 120;
+            if (dmg.xDirection.x > 0 != facingRight)
+            {
+                Flip();
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
 
     public void ShootCanon()
     {

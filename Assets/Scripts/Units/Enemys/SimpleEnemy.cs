@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using BT = BTAI.BT;
 using DG.Tweening;
@@ -40,8 +41,12 @@ public class SimpleEnemy : MovingUnit
         m_isDead = true;
         gameObject.layer = LayerMask.NameToLayer("Default");
         physicsObject.ResetContactLayer();
-        Destroy(m_weaponCollider);
-        Destroy(m_currentCollider);
+        var colliders = GetComponentsInChildren<Collider2D>();
+        foreach (var collider in colliders) {
+            Destroy(collider);
+        }
+        //Destroy(m_weaponCollider);
+        //Destroy(m_currentCollider);
         OnDied?.Invoke(dmg);
     }
 
