@@ -20,6 +20,36 @@ public class CheatManager : MonoBehaviour
             }
 
         });
+        m_CheatActions.Add("CROSS", () =>
+        {
+            if (InGameVars.hero != null && InGameVars.hero is Simon)
+            {
+                ((Simon)InGameVars.hero).m_subWeaponShooter.SetShotObject(Utility.LoadRawWeapon("CrossSubWeaponFlyingObject"), null);
+            }
+        });
+
+        m_CheatActions.Add("WATER", () =>
+        {
+            if (InGameVars.hero != null && InGameVars.hero is Simon)
+            {
+                ((Simon)InGameVars.hero).m_subWeaponShooter.SetShotObject(Utility.LoadRawWeapon("HolyWaterSubWeaponFlyingObject"), null);
+            }
+        });
+
+        m_CheatActions.Add("DAGGER", () =>
+        {
+            if (InGameVars.hero != null && InGameVars.hero is Simon)
+            {
+                ((Simon)InGameVars.hero).m_subWeaponShooter.SetShotObject(Utility.LoadRawWeapon("DaggerSubWeaponFlyingObject"), null);
+            }
+        });
+        m_CheatActions.Add("AXE", () =>
+        {
+            if (InGameVars.hero != null && InGameVars.hero is Simon)
+            {
+                ((Simon)InGameVars.hero).m_subWeaponShooter.SetShotObject(Utility.LoadRawWeapon("AxeSubWeaponFlyingObject"), null);
+            }
+        });
     }
 
 

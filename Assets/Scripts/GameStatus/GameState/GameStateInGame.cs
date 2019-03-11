@@ -39,7 +39,7 @@ public class GameStateInGame : IGameState, IPause
             GameManager.StatusBar.transform.SetParent(GameManager.UICanvas.transform, false);
         }
 
-        //InGameVars.heart = 300;//DEBUG
+        InGameVars.heart = 300;//DEBUG
 
         InGameVars.time = 300; //TODO 改成从关卡读取
         // Load Level1
