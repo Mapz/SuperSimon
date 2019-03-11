@@ -18,7 +18,7 @@ public class CastleKnight : SimpleEnemy
     {
         base.OnDmg(dmg);
         GameObject go = Instantiate(m_onHitPrefab);
-        Debug.Log("DmgPos:" + dmg.DmgPosition);
+        //Debug.Log("DmgPos:" + dmg.DmgPosition);
         go.transform.position = dmg.DmgPosition;
         go.transform.SetParent(InGameVars.level.transform, true);
 
@@ -40,29 +40,20 @@ public class CastleKnight : SimpleEnemy
 
     }
 
-    protected virtual void DieFrom(Damage dmg)
+    protected override void Die(Damage dmg)
     {
-        if (dmg.dmgType == DmgType.MeleeWhipPhysics || dmg.dmgType == DmgType.RealDmg)
+        m_isDead = true;
+        m_sm.TransState("Died");
+        var weapons = GetComponentsInChildren<Weapon>();
+        foreach (var weapon in weapons)
         {
-            // 简陋的旋转死亡效果
-            var scale = transform.localScale;
-            scale.y = -1;
-            transform.localScale = scale;
-            physicsObject.gravityModifier = 100;
-            m_xMoveSpeed = 100;
-            physicsObject.velocity.y = 120;
-            if (dmg.xDirection.x > 0 != facingRight)
-            {
-                Flip();
-            }
+            Destroy(weapon);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        transform.position += Vector3.up * 40;
+        m_anim.PlayAvoidRePlay("Sleep");
+        StopX();
+
     }
-
-
 
     public void ShootCanon()
     {
@@ -161,6 +152,7 @@ public class CastleKnight : SimpleEnemy
         string stateNameAxeAttack = "AxeAttack";
         string stateNameCannonAttack = "CannonAttack";
         string stateNameJumpBack = "JumpBack";
+        string StateNameDied = "Died";
         float axeAttackCoolDown = 6f;
         float cannonAttackCoolDown = 3f;
         float WalkCoolDown = 3f;
@@ -230,6 +222,9 @@ public class CastleKnight : SimpleEnemy
                 }
             }
         };
+
+        SMState stateDied = new SMState(StateNameDied);
+        m_sm.AddState(stateDied);
 
 
         SMState stateSleep = new SMState(stateNameSleep);

@@ -45,7 +45,6 @@ public class CheatManager : MonoBehaviour
         {
             var update = false;
             string key = FetchKey().ToString();
-            Debug.Log(key);
             m_currentString += key;
             foreach (string cheatKey in m_CheatActions.Keys)
             {
