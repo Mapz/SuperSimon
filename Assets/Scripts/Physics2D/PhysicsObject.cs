@@ -36,7 +36,8 @@ public class PhysicsObject : MonoBehaviour, IPause
         ResetContactLayer();
     }
 
-    public void ResetContactLayer() {
+    public void ResetContactLayer()
+    {
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         contactFilter.useLayerMask = true;
@@ -102,14 +103,65 @@ public class PhysicsObject : MonoBehaviour, IPause
             hitUnitBufferList.Clear();
             for (int i = 0; i < count; i++)
             {
-                hitBufferList.Add(hitBuffer[i]);
+                var collider = hitBuffer[i].collider;
+                CustomEffector ce = collider.GetComponent<CustomEffector>();
+                if (ce != null)
+                {
+                    if (ce is FourSidePlatformEffector)
+                    {
+                        var fe = (FourSidePlatformEffector)ce;
+                        if (fe.m_BlockMoveDirection.normalized == Vector2.up)
+                        {
+                            if (velocity.y > 0 && yMovement)
+                            {
+                                hitBufferList.Add(hitBuffer[i]);
+                            }
+
+                        }
+                        else if (fe.m_BlockMoveDirection.normalized == Vector2.down)
+                        {
+                            if (velocity.y < 0 && yMovement)
+                            {
+                                hitBufferList.Add(hitBuffer[i]);
+                            }
+
+                        }
+                        else if (fe.m_BlockMoveDirection.normalized == Vector2.left)
+                        {
+                            if (velocity.x < 0 && !yMovement)
+                            {
+                                hitBufferList.Add(hitBuffer[i]);
+                            }
+
+                        }
+                        else if (fe.m_BlockMoveDirection.normalized == Vector2.right)
+                        {
+                            if (velocity.x > 0 && !yMovement)
+                            {
+                                hitBufferList.Add(hitBuffer[i]);
+                            }
+
+                        }
+                    }
+
+                }
+                else
+                {
+                    hitBufferList.Add(hitBuffer[i]);
+                }
+
+
+
             }
 
             for (int i = 0; i < hitBufferList.Count; i++)
             {
 
+                var collider = hitBufferList[i].collider;
+
+
                 // 手动为Unit添加Collide事件
-                var unit = hitBufferList[i].collider.GetComponent<Unit>();
+                var unit = collider.GetComponent<Unit>();
                 if (unit)
                 {
                     if (!hitUnitBufferList.Contains(unit))
