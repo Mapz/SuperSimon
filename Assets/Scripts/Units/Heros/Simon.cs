@@ -99,8 +99,8 @@ public class Simon : MovingUnit
             if (m_level >= m_maxLevel)
             {
                 m_level = m_maxLevel;
-                ChangeState(SimonStatus.Upgrade);
             }
+            ChangeState(SimonStatus.Upgrade);
         }
         else if (change < 0)
         {
