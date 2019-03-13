@@ -9,6 +9,7 @@ public partial class Utility {
     public const string LevelPrefabPath = "Assets/AssetsToBuild/Levels/";
     public const string ItemPrefabPath = "Assets/AssetsToBuild/Items/";
     public const string WeaponPrefabPath = "Assets/AssetsToBuild/Weapons/";
+    public const string TimelinePrefabPath = "Assets/AssetsToBuild/Timelines/";
 
     public static string ProtoBufFilePrefix = ".prt";
 

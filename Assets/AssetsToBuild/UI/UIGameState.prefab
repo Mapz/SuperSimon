@@ -381,7 +381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SCORE-025900
+  m_Text: SCORE-000000
 --- !u!1 &4141161333055860699
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9077071ef6ae440f3827b005117bb174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HP: 5
 --- !u!1 &4141161333577086034
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +776,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TIME 0389
+  m_Text: TIME 0300
 --- !u!1 &4141161333797541271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1010,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: STAGE 09
+  m_Text: STAGE 01
 --- !u!1 &4141161334072280548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,7 +1098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9077071ef6ae440f3827b005117bb174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HP: 5
 --- !u!1 &4141161334256696869
 GameObject:
   m_ObjectHideFlags: 0

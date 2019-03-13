@@ -69,8 +69,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5515134260675759402}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 194.5, y: 9.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 206.9, y: 10.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5515134261324050169}
@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 5515134261324050169}
   - component: {fileID: 5515134261324050171}
   - component: {fileID: 5515134261324050170}
+  - component: {fileID: 4393024296162748552}
   m_Layer: 0
   m_Name: OpenningStage
   m_TagString: Untagged
@@ -197,7 +198,8 @@ PlayableDirector:
   - key: {fileID: 114087830014122564, guid: fcd2a3d30a263aa4ba1785f89b6a5a36, type: 2}
     value: {fileID: 5515134260675759381}
   m_ExposedReferences:
-    m_References: []
+    m_References:
+    - 5d8718a3d06a343499807bb5811b3eee: {fileID: 0}
 --- !u!95 &5515134261324050170
 Animator:
   serializedVersion: 3
@@ -217,6 +219,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4393024296162748552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515134261324050168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2eddc7432f9712459967f20621c44bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 5515134261324050171}
 --- !u!1 &5515134261368715829
 GameObject:
   m_ObjectHideFlags: 0

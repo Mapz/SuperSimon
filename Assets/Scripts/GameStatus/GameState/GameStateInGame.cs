@@ -31,14 +31,9 @@ public class GameStateInGame : IGameState, IPause
 
     }
 
-    void InitLevel(bool loadUI = true)
+    void InitLevel()
     {
-        if (loadUI)
-        {
-            GameManager.StatusBar = Utility.CreateUI("UIGameState").GetComponent<StatusBar>();
-            GameManager.StatusBar.transform.SetParent(GameManager.UICanvas.transform, false);
-        }
-
+      
         InGameVars.heart = 300;//DEBUG
 
         InGameVars.time = 300; //TODO 改成从关卡读取
@@ -99,7 +94,7 @@ public class GameStateInGame : IGameState, IPause
         Clear();
         new EnumTimer(() =>
         {
-            InitLevel(false);
+            InitLevel();
         }, 1f).StartTimeout();
     }
 
@@ -131,6 +126,8 @@ public class GameStateInGame : IGameState, IPause
 
     void HeroDied(Damage dmg)
     {
+        GameManager.StatusBar.m_heroHp.DisAttach();
+        GameManager.StatusBar.m_enemyHp.DisAttach();
         GameManager.CountDown.OnTimeOut -= ((Simon)Hero).OnTimeOver;
         GameManager.CountDown.Stop();
         InGameVars.life--;

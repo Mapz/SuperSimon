@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Playables;
 using XAsset;
 public partial class Utility
 {
@@ -54,6 +55,23 @@ public partial class Utility
     public static GameObject LoadRawWeapon(string name)
     {
         return LoadRaw(WeaponPrefabPath + name);
+    }
+
+    public static PlayableDirector LoadTimeline(string name)
+    {
+        Asset asset = Assets.Load<GameObject>(TimelinePrefabPath + name + ".prefab");
+        if (asset != null)
+        {
+            var prefab = asset.asset;
+            if (prefab != null)
+            {
+                var go = GameObject.Instantiate(prefab) as GameObject;
+                ReleaseAssetOnDestroy.Register(go, asset);
+                return go.GetComponent<PlayableDirector>();
+            }
+            else { throw new System.Exception("创建Unit失败:" + name); }
+        }
+        else { throw new System.Exception("创建Unit失败:" + name); }
     }
 
     public static Unit CreateUnit(string unitName, string path = null)
