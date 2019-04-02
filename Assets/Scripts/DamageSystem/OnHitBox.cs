@@ -21,8 +21,9 @@ public class OnHitBox : MonoBehaviour
     {
         // 需要初始化 collider 和 rigid 设置 layer 以及 collider 属性等
         m_UnitAttached = GetComponentInParent<Unit>();
-        if(m_dmgDelegate == null){
-            m_dmgDelegate = GetRealDmg;
+        DamageModifier dm = GetComponent<DamageModifier>();
+        if (dm != null){
+            m_dmgDelegate = dm.GetRealDmg;
         }
         gameObject.layer = LayerMask.NameToLayer("OnHitBox");
     }
@@ -38,12 +39,7 @@ public class OnHitBox : MonoBehaviour
         _OnTriggerEnter2D(other);
     }
 
-    protected virtual int GetRealDmg(int dmg, DmgType dmgType)
-    {
-        if (dmgType == DmgType.RealDmg) return dmg;
-        return dmg - m_defence;
-    }
-
+ 
     protected virtual void _OnTriggerEnter2D(Collider2D other)
     {
         if (!m_active) return;
@@ -59,7 +55,7 @@ public class OnHitBox : MonoBehaviour
             {
 
                 Debug.Log("HitPos:" + hitPos);
-                m_UnitAttached.OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit, hitPos));
+                m_UnitAttached.OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, m_dmgDelegate, unit, hitPos));
 
 
             };

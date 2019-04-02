@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 492863197279696740}
   - component: {fileID: 4157714220606625708}
   - component: {fileID: 2500475225054214365}
+  - component: {fileID: 1350466704025158901}
   m_Layer: 11
   m_Name: OnHitBox
   m_TagString: Untagged
@@ -281,3 +282,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_defence: 0
+--- !u!114 &1350466704025158901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440752270659171043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14f0e95cbc6b994b90f95e091d77f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

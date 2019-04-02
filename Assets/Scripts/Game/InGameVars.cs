@@ -37,7 +37,7 @@ public static class InGameVars
         }
     }
 
-    public static int hp
+    public static float hp
     {
         get
         {

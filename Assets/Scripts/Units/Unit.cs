@@ -14,7 +14,7 @@ public enum Team
 
 public abstract class Unit : MonoBehaviour, IPause
 {
-    public int m_HP
+    public float m_HP
     {
         get { return _HP; }
         set
@@ -37,15 +37,15 @@ public abstract class Unit : MonoBehaviour, IPause
 
     public int m_score; // gain score when died
 
-    public int m_maxHp; 
+    public float m_maxHp; 
 
     public Team m_team;
 
-    public int m_dmg = 0; // save a dmg for other use like create self body weapon or head collision
+    public float m_dmg = 0; // save a dmg for other use like create self body weapon or head collision
     private HPBar hpBarAttached;
 
     [SerializeField]
-    private int _HP = 0;
+    private float _HP = 0;
 
     public bool m_isDead = false;
 
@@ -139,7 +139,7 @@ public abstract class Unit : MonoBehaviour, IPause
 
     }
 
-    protected virtual void OnHeal(int heal)
+    protected virtual void OnHeal(float heal)
     {
 
     }

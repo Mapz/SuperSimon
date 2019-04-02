@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour
 
     public Team m_team;
     public bool m_destroyEnviroment;
-    public int m_dmg = 0;
+    public float m_dmg = 0;
     public Collider2D m_collider;
     public DmgType m_dmgType;
     public Unit m_WeaponCarrier;

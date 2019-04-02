@@ -1,7 +1,5 @@
 # 需要完成
 
-+ TODO: OnHitBox的设计，受击系统和 Unit 分开
-
 + TODO: 支持手柄
 
 + TODO: 移动平台的制作
@@ -35,6 +33,8 @@
 + TODO: 生怪器优化，有怪的时候不能生怪 --> 优化思路，刷怪器改成 GameObject 而不是数据，用Trigger来控制是否刷怪 
 
 # 已经完成
+
++ DONE: OnHitBox的设计，受击系统和 Unit 分开
 
 + DONE: 资源模式调通
   

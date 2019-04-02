@@ -34,7 +34,7 @@ public class Turtle : GuardableEnemy
     private float m_slidingSpeed;
 
     private Team m_originalTeam;
-    private int m_originalDamage;
+    private float m_originalDamage;
     private LayerMask m_originalLayer;
 
     private Weapon m_selfWeapon;

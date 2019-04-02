@@ -15,7 +15,7 @@ public class WanderBrick : BrickBase
 
     protected override void OnDmg(Damage dmg)
     {
-        m_OnDmgEvent[m_HP].Invoke();
+        m_OnDmgEvent[(int)m_HP].Invoke();
     }
 
     protected override void Die(Damage dmg)
@@ -29,17 +29,6 @@ public class WanderBrick : BrickBase
         if (ce)
             Destroy(ce);
         GetComponent<SpriteRenderer>().sprite = m_SpriteWhenEmpty;
-    }
-
-
-    protected override void OnInit()
-    {
-        base.OnInit();
-        this.SetAllHitBoxRealDmgDelegate((int dmg, DmgType dmgType) =>
-        {
-            if (dmg > 1) return 1;
-            return dmg;
-        });
     }
 
     public void ProduceItem(GameObject ItemPrefab)
