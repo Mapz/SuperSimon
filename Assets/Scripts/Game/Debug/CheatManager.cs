@@ -103,6 +103,10 @@ public class CheatManager : MonoBehaviour
 
     }
 
+
+
+#if UNITY_EDITOR
+
     private void OnDrawGizmos()
     {
         if (m_currentString == "") return;
@@ -113,5 +117,6 @@ public class CheatManager : MonoBehaviour
             Handles.Label(Vector3.zero, m_currentString);
     }
 
+#endif
 
 }

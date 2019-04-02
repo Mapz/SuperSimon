@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
-
+using XAsset;
 public class GameConfig : MonoBehaviour {
     public Font m_mainfont;
     public Camera m_mainCamera;
@@ -19,6 +19,8 @@ public class GameConfig : MonoBehaviour {
     }
 
     void Init () {
+        
+        Assets.Initialize();
         GameManager.MainFont = m_mainfont;
         GameManager.ppCamera = m_ppCamera;
         GameManager.mainCamera = m_mainCamera;

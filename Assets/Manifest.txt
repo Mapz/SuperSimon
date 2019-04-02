@@ -1,0 +1,286 @@
+manifest:
+	Assets/Manifest.txt
+
+shared/assets/plugins/bitmapfontimporter/examples/myfont_1:
+	Assets/Plugins/BitmapFontImporter/Examples/MyFont/CV3Font_0.png
+
+shared/assets/assetstobuild/fonts_1:
+	Assets/AssetsToBuild/Fonts/CV3Font.fontsettings
+
+shaders_2:
+	Assets/TextMesh Pro/Resources/Shaders/TMP_Bitmap-Mobile.shader
+	Assets/AssetsToBuild/Shaders/PixelPalette.shader
+
+shared/assets/texture/items_2:
+	Assets/Texture/Items/16x16Sprites.png
+	Assets/Texture/Items/8x8Sprite.png
+
+shared/assets/assetstobuild/weapons_6:
+	Assets/AssetsToBuild/Weapons/AxeSubWeaponFlyingObject.prefab
+	Assets/AssetsToBuild/Weapons/CrossSubWeaponFlyingObject.prefab
+	Assets/AssetsToBuild/Weapons/DaggerSubWeaponFlyingObject.prefab
+	Assets/AssetsToBuild/Weapons/HolyWaterEffect.prefab
+	Assets/AssetsToBuild/Weapons/HolyWaterSubWeaponFlyingObject.prefab
+	Assets/AssetsToBuild/Weapons/CannonBallSubWeaponFlyingObject.prefab
+
+shared/assets/animations/weapons_6:
+	Assets/Animations/Weapons/AxeSubWeaponFlyingObject.controller
+	Assets/Animations/Weapons/Axe.anim
+	Assets/Animations/Weapons/CrossSubWeaponFlyingObject.controller
+	Assets/Animations/Weapons/Cross.anim
+	Assets/Animations/Weapons/HolyWater.anim
+	Assets/Animations/Weapons/HolyWaterEffect.controller
+
+shared/assets/assetstobuild/items_5:
+	Assets/AssetsToBuild/Items/AxeItem.prefab
+	Assets/AssetsToBuild/Items/DaggerItem.prefab
+	Assets/AssetsToBuild/Items/HeartAnim.prefab
+	Assets/AssetsToBuild/Items/ScoreItem.prefab
+	Assets/AssetsToBuild/Items/UpgradeItem.prefab
+
+shared/assets/animations/items_7:
+	Assets/Animations/Items/ItemJumpAnim.anim
+	Assets/Animations/Items/HeartAnim.controller
+	Assets/Animations/Items/BrickDestroyUpLeft.anim
+	Assets/Animations/Items/BrickDestroyDownRight.anim
+	Assets/Animations/Items/BrickDestroy.controller
+	Assets/Animations/Items/BrickDestroyUpRight.anim
+	Assets/Animations/Items/BrickDestroyDownLeft.anim
+
+shared/assets/animations/unit/mushroom_2:
+	Assets/Animations/Unit/Mushroom/Mushroom.anim
+	Assets/Animations/Unit/Mushroom/16x16Enemys_0.controller
+
+shared/assets/animations/unit/level1_boss_7:
+	Assets/Animations/Unit/Level1_boss/Awake.anim
+	Assets/Animations/Unit/Level1_boss/Sleep.anim
+	Assets/Animations/Unit/Level1_boss/AxeAttack.anim
+	Assets/Animations/Unit/Level1_boss/CastlKnight.controller
+	Assets/Animations/Unit/Level1_boss/Walk.anim
+	Assets/Animations/Unit/Level1_boss/Idle.anim
+	Assets/Animations/Unit/Level1_boss/Jump.anim
+
+shared/assets/animations/unit/turtle_4:
+	Assets/Animations/Unit/Turtle/Walk.anim
+	Assets/Animations/Unit/Turtle/WakeUp.anim
+	Assets/Animations/Unit/Turtle/EnemyTurtle.controller
+	Assets/Animations/Unit/Turtle/Guard.anim
+
+shared/assets/texture/levels/supermariotile/supermariotiles_1:
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_0.asset
+
+shared/assets/texture/units_4:
+	Assets/Texture/Units/Level1_Boss.png
+	Assets/Texture/Units/16x24Enemeys.png
+	Assets/Texture/Units/16x16Enemys.png
+	Assets/Texture/Units/UnitSimon.png
+
+shared/assets/scripts/weapons_1:
+	Assets/Scripts/Weapons/FireCanon.anim
+
+shared/assets/assetstobuild/units_4:
+	Assets/AssetsToBuild/Units/EnemyTurtle.prefab
+	Assets/AssetsToBuild/Units/EnemyMushroom.prefab
+	Assets/AssetsToBuild/Units/CastleKnight.prefab
+	Assets/AssetsToBuild/Units/FarSight.anim
+
+shared/assets/assetstobuild/others_1:
+	Assets/AssetsToBuild/Others/BrickDestroy.prefab
+
+shared/assets/texture/levels_1:
+	Assets/Texture/Levels/NES - Super Mario Bros - Tileset.png
+
+shared/assets/assetstobuild/mat_1:
+	Assets/AssetsToBuild/Mat/SpriteCustom.mat
+
+shared/assets/texture/palette_1:
+	Assets/Texture/Palette/SimonPaletteByGChannel.png
+
+shared/assets/animations/unit/simon_13:
+	Assets/Animations/Unit/Simon/MeleeAttackLevel3.anim
+	Assets/Animations/Unit/Simon/Simon.controller
+	Assets/Animations/Unit/Simon/Onhit.anim
+	Assets/Animations/Unit/Simon/Die.anim
+	Assets/Animations/Unit/Simon/MeleeAttackLevel2.anim
+	Assets/Animations/Unit/Simon/Squat.anim
+	Assets/Animations/Unit/Simon/Idle.anim
+	Assets/Animations/Unit/Simon/ShootSubWeapon.anim
+	Assets/Animations/Unit/Simon/Walk.anim
+	Assets/Animations/Unit/Simon/SquatAttackLevel2.anim
+	Assets/Animations/Unit/Simon/SquatAttackLevel3.anim
+	Assets/Animations/Unit/Simon/MeleeAttackLevel1.anim
+	Assets/Animations/Unit/Simon/SquatAttackLevel1.anim
+
+assets/assetstobuild/fonts:
+	Assets/AssetsToBuild/Fonts.meta
+
+assets/assetstobuild/items:
+	Assets/AssetsToBuild/Items.meta
+
+assets/assetstobuild/levels:
+	Assets/AssetsToBuild/Levels.meta
+
+assets/assetstobuild/mat:
+	Assets/AssetsToBuild/Mat.meta
+
+assets/assetstobuild/others:
+	Assets/AssetsToBuild/Others.meta
+
+assets/assetstobuild/shaders:
+	Assets/AssetsToBuild/Shaders.meta
+
+assets/assetstobuild/timelines:
+	Assets/AssetsToBuild/Timelines.meta
+
+assets/assetstobuild/ui:
+	Assets/AssetsToBuild/UI.meta
+
+assets/assetstobuild/units:
+	Assets/AssetsToBuild/Units.meta
+
+assets/assetstobuild/weapons:
+	Assets/AssetsToBuild/Weapons.meta
+
+assets/assetstobuild/fonts/cv3font.fontsettings:
+	Assets/AssetsToBuild/Fonts/CV3Font.fontsettings.meta
+
+assets/assetstobuild/items/axeitem.prefab:
+	Assets/AssetsToBuild/Items/AxeItem.prefab.meta
+
+assets/assetstobuild/items/corssitem:
+	Assets/AssetsToBuild/Items/CorssItem.prefab
+
+assets/assetstobuild/items/corssitem.prefab:
+	Assets/AssetsToBuild/Items/CorssItem.prefab.meta
+
+assets/assetstobuild/items/daggeritem.prefab:
+	Assets/AssetsToBuild/Items/DaggerItem.prefab.meta
+
+assets/assetstobuild/items/heartanim.prefab:
+	Assets/AssetsToBuild/Items/HeartAnim.prefab.meta
+
+assets/assetstobuild/items/holywateritem:
+	Assets/AssetsToBuild/Items/HolyWaterItem.prefab
+
+assets/assetstobuild/items/holywateritem.prefab:
+	Assets/AssetsToBuild/Items/HolyWaterItem.prefab.meta
+
+assets/assetstobuild/items/scoreitem.prefab:
+	Assets/AssetsToBuild/Items/ScoreItem.prefab.meta
+
+assets/assetstobuild/items/upgradeitem.prefab:
+	Assets/AssetsToBuild/Items/UpgradeItem.prefab.meta
+
+assets/assetstobuild/levels/level1:
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_28.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_536.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_277.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_250.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_240.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_249.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_547.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_545.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_248.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_326.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_274.asset
+	Assets/Animations/Items/wanderBrick1.controller
+	Assets/Animations/Items/WanderBrick.anim
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_276.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_279.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_267.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_266.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_241.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_546.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_275.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_327.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_534.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_278.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_535.asset
+	Assets/AssetsToBuild/Levels/Level1.prefab
+
+assets/assetstobuild/levels/level1.prefab:
+	Assets/AssetsToBuild/Levels/Level1.prefab.meta
+
+assets/assetstobuild/mat/spritecustom.mat:
+	Assets/AssetsToBuild/Mat/SpriteCustom.mat.meta
+
+assets/assetstobuild/others/brickdestroy.prefab:
+	Assets/AssetsToBuild/Others/BrickDestroy.prefab.meta
+
+assets/assetstobuild/shaders/pixelpalette.shader:
+	Assets/AssetsToBuild/Shaders/PixelPalette.shader.meta
+
+assets/assetstobuild/timelines/openningstage:
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_550.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_552.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_540.asset
+	Assets/Timeline/Opening.playable
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_13.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_2.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_40.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_14.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_12.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_551.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_11.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_5.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_541.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_539.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_39.asset
+	Assets/Texture/Levels/SuperMarioTile/SuperMarioTiles/NES - Super Mario Bros - Tileset_41.asset
+	Assets/AssetsToBuild/Timelines/OpenningStage.prefab
+
+assets/assetstobuild/timelines/openningstage.prefab:
+	Assets/AssetsToBuild/Timelines/OpenningStage.prefab.meta
+
+assets/assetstobuild/ui/uigamestate:
+	Assets/Texture/UI/HPBlock.png
+	Assets/Texture/UI/HPBlockFill.png
+	Assets/Texture/UI/ItemBlock.png
+	Assets/AssetsToBuild/UI/UIGameState.prefab
+
+assets/assetstobuild/ui/uigamestate.prefab:
+	Assets/AssetsToBuild/UI/UIGameState.prefab.meta
+
+assets/assetstobuild/ui/uititle:
+	Assets/Texture/Title/Title.png
+	Assets/AssetsToBuild/UI/UITitle.prefab
+
+assets/assetstobuild/ui/uititle.prefab:
+	Assets/AssetsToBuild/UI/UITitle.prefab.meta
+
+assets/assetstobuild/units/castleknight.prefab:
+	Assets/AssetsToBuild/Units/CastleKnight.prefab.meta
+
+assets/assetstobuild/units/enemymushroom.prefab:
+	Assets/AssetsToBuild/Units/EnemyMushroom.prefab.meta
+
+assets/assetstobuild/units/enemyturtle.prefab:
+	Assets/AssetsToBuild/Units/EnemyTurtle.prefab.meta
+
+assets/assetstobuild/units/farsight.anim:
+	Assets/AssetsToBuild/Units/FarSight.anim.meta
+
+assets/assetstobuild/units/simon:
+	Assets/AssetsToBuild/Units/Simon.prefab
+
+assets/assetstobuild/units/simon.prefab:
+	Assets/AssetsToBuild/Units/Simon.prefab.meta
+
+assets/assetstobuild/weapons/axesubweaponflyingobject.prefab:
+	Assets/AssetsToBuild/Weapons/AxeSubWeaponFlyingObject.prefab.meta
+
+assets/assetstobuild/weapons/cannonballsubweaponflyingobject.prefab:
+	Assets/AssetsToBuild/Weapons/CannonBallSubWeaponFlyingObject.prefab.meta
+
+assets/assetstobuild/weapons/crosssubweaponflyingobject.prefab:
+	Assets/AssetsToBuild/Weapons/CrossSubWeaponFlyingObject.prefab.meta
+
+assets/assetstobuild/weapons/daggersubweaponflyingobject.prefab:
+	Assets/AssetsToBuild/Weapons/DaggerSubWeaponFlyingObject.prefab.meta
+
+assets/assetstobuild/weapons/holywatereffect.prefab:
+	Assets/AssetsToBuild/Weapons/HolyWaterEffect.prefab.meta
+
+assets/assetstobuild/weapons/holywatersubweaponflyingobject.prefab:
+	Assets/AssetsToBuild/Weapons/HolyWaterSubWeaponFlyingObject.prefab.meta
+
