@@ -22,7 +22,8 @@ public class OnHitBox : MonoBehaviour
         // 需要初始化 collider 和 rigid 设置 layer 以及 collider 属性等
         m_UnitAttached = GetComponentInParent<Unit>();
         DamageModifier dm = GetComponent<DamageModifier>();
-        if (dm != null){
+        if (dm != null)
+        {
             m_dmgDelegate = dm.GetRealDmg;
         }
         gameObject.layer = LayerMask.NameToLayer("OnHitBox");
@@ -39,7 +40,7 @@ public class OnHitBox : MonoBehaviour
         _OnTriggerEnter2D(other);
     }
 
- 
+
     protected virtual void _OnTriggerEnter2D(Collider2D other)
     {
         if (!m_active) return;
@@ -107,9 +108,9 @@ public class OnHitBox : MonoBehaviour
             if (weapon is FlyObjectWeapon)
             {
                 var flyWeapon = (FlyObjectWeapon)weapon;
-                if (flyWeapon.m_Shooter == this && flyWeapon.m_canBeDestroyByShooter)
+                if (flyWeapon.m_Shooter == m_UnitAttached && flyWeapon.m_canBeDestroyByShooter)
                 {
-                    Destroy(flyWeapon.m_WeaponCarrier.gameObject); // TODO:暫時直接毀滅
+                    Unit.Destroy(flyWeapon.m_WeaponCarrier.gameObject); // TODO:暫時直接毀滅
                 }
             }
         }

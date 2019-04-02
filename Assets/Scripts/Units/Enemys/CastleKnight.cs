@@ -14,7 +14,8 @@ public class CastleKnight : SimpleEnemy
     public GameObject m_onHitPrefab;
 
 
-    protected override void OnInit(){
+    protected override void OnInit()
+    {
         base.OnInit();
     }
 
@@ -192,7 +193,7 @@ public class CastleKnight : SimpleEnemy
                 {
                     var random = UnityEngine.Random.Range(0f, 1f);
                     Debug.Log(random);
-                    if (random > 0.5f)
+                    if (random > 0.3f)
                     {
                         var jumpSucceed = m_sm.TransState(stateNameJumpBack);
                         if (jumpSucceed)
@@ -200,13 +201,22 @@ public class CastleKnight : SimpleEnemy
                     }
                     else
                     {
-                        m_sm.SetData("distance", distance);
-                        m_sm.SetData("WalkingBack", true);
-                        var walkSucceed = m_sm.TransState(stateNameWalking);
-                        if (!walkSucceed)
+                        // 在板边，则直接开炮
+                        if (this.isNearScreenHEdge())
                         {
-                            m_sm.SetData("WalkingBack", false);
+                            m_sm.TransState(stateNameCannonAttack);
                         }
+                        else
+                        {
+                            m_sm.SetData("distance", distance);
+                            m_sm.SetData("WalkingBack", true);
+                            var walkSucceed = m_sm.TransState(stateNameWalking);
+                            if (!walkSucceed)
+                            {
+                                m_sm.SetData("WalkingBack", false);
+                            }
+                        }
+
                     }
                 }
                 else
@@ -323,10 +333,12 @@ public class CastleKnight : SimpleEnemy
             if (distance < 80 || walkingBack)
             {
                 Walk(-1);
+                m_sm.SetData<bool>("isWalkingBack", true);
             }
             else
             {
                 Walk(1);
+                m_sm.SetData<bool>("isWalkingBack", false);
             }
 
             m_sm.SetData("WalkCoolDown", false);
@@ -340,6 +352,30 @@ public class CastleKnight : SimpleEnemy
         };
         stateWalking.OnUpdate = state =>
         {
+            // 在板边，则直接开炮
+            if (this.isNearScreenHEdge())
+            {
+                var isWalkingBack = m_sm.GetData<bool>("isWalkingBack");
+                if (isWalkingBack)
+                {
+                    var random = UnityEngine.Random.Range(0f, 1f);
+                    if (random > 0.5)
+                    {
+                        if (!m_sm.TransState(stateNameCannonAttack))
+                        {
+                            Walk(1);
+                            m_sm.SetData<bool>("isWalkingBack", false);
+                        }
+                    }
+                    else
+                    {
+                        Walk(1);
+                        m_sm.SetData<bool>("isWalkingBack", false);
+                    }
+
+                }
+
+            }
 
             if (!m_sm.GetData<bool>("WalkCoolDown"))
             {

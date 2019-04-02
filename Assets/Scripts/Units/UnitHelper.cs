@@ -19,4 +19,9 @@ public static class UnitHelper
         if (other == null) return defaultValue;
         return (unit.transform.position - other.transform.position).x > 0;
     }
+
+    public static bool isNearScreenHEdge(this Unit unit, float acceptableRange = 30)
+    {
+        return InGameVars.ScreenWidth / 2 - Mathf.Abs(GameManager.mainCamera.transform.position.x - unit.transform.position.x) < acceptableRange;
+    }
 }
