@@ -16,7 +16,9 @@ public class GameStateOpening : IGameState
         GameManager.StatusBar = Utility.CreateUI("UIGameState").GetComponent<StatusBar>();
         GameManager.StatusBar.transform.SetParent(GameManager.UICanvas.transform, false);
         //}
-        new EnumTimer(() => { StartCoroutine(StartGame()); }, 5f).StartTimeout();
+        // new EnumTimer(() => { StartCoroutine(StartGame()); }, 5f).StartTimeout();
+
+        new EnumTimer(() => { StartCoroutine(StartGame()); }, 1f).StartTimeout();
     }
 
     IEnumerator StartGame()

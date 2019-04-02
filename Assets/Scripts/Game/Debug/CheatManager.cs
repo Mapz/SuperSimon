@@ -50,6 +50,32 @@ public class CheatManager : MonoBehaviour
                 ((Simon)InGameVars.hero).m_subWeaponShooter.SetShotObject(Utility.LoadRawWeapon("AxeSubWeaponFlyingObject"), null);
             }
         });
+
+        int wrapIndex = 1;
+        m_CheatActions.Add("WRAP", () =>
+        {
+            if (InGameVars.hero != null && InGameVars.hero is Simon)
+            {
+                GameObject go = GameObject.Find("CheckPoint" + wrapIndex);
+                if (go)
+                {
+                    var Hero = InGameVars.hero;
+                    Hero.transform.position = go.transform.position;
+                    RaycastHit2D groundPointHit = Physics2D.Raycast(Hero.transform.position, Vector2.down, 256f, 1 << LayerMask.NameToLayer("Ground"));
+                    if (groundPointHit.collider)
+                    {
+                        var groundPoint = groundPointHit.point;
+                        Hero.transform.position = Vector2.up + new Vector2(groundPoint.x, groundPoint.y - (Hero.GetComponent<SpriteRenderer>().size.y - Hero.GetComponent<SpriteRenderer>().size.y - Hero.GetComponent<SpriteRenderer>().sprite.pivot.y));
+                    }
+                    wrapIndex++;
+                }
+                else
+                {
+                    wrapIndex = 1;
+                }
+
+            }
+        });
     }
 
 

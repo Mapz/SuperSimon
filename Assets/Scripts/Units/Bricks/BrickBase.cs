@@ -9,7 +9,7 @@ public abstract class BrickBase : Unit
         GetDamage(dmg);
     }
 
-    protected override void OnAttack(Damage dmg)
+    public override void OnAttack(Damage dmg)
     {
         if (m_moveAfterHeadCollision)
         {
@@ -69,7 +69,7 @@ public abstract class BrickBase : Unit
                         AddHitCrash(collider);
 
                     }
-                    OnHeadCollision(new Damage(colliderMovingUnit.m_dmg, DmgType.HeadCollision, GetRealDmg));
+                    OnHeadCollision(new Damage(colliderMovingUnit.m_dmg, DmgType.HeadCollision, m_onHitBoxes[0].m_dmgDelegate));
                 }
             }
         }

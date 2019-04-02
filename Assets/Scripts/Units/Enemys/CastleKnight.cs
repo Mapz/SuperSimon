@@ -14,6 +14,10 @@ public class CastleKnight : SimpleEnemy
     public GameObject m_onHitPrefab;
 
 
+    protected override void OnInit(){
+        base.OnInit();
+    }
+
     protected override void OnDmg(Damage dmg)
     {
         base.OnDmg(dmg);

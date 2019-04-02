@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2122139434694904032
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8429534467553302260, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_Name
+      value: wanderBrick1UpgradeItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 216
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471927419169262514, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 393524578726225658, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_OnDmgEvent.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1730875490162060826}
+    - target: {fileID: 393524578726225658, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_OnDmgEvent.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ProduceItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 393524578726225658, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_OnDmgEvent.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 5802404157288649677, guid: cd972c0e8c6b54fe5aced1a00102a9eb,
+        type: 3}
+    - target: {fileID: 7970168579795769344, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_Collider
+      value: 
+      objectReference: {fileID: 2223248271376468083}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7e7cdb2e9e1f215418b361d1523cc021, type: 3}
+--- !u!114 &1730875490162060826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 393524578726225658, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+    type: 3}
+  m_PrefabInstance: {fileID: 2122139434694904032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2739cf1430c594c6799a85cd79cd7477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &2223248271376468083 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 263964242677579923, guid: 7e7cdb2e9e1f215418b361d1523cc021,
+    type: 3}
+  m_PrefabInstance: {fileID: 2122139434694904032}
+  m_PrefabAsset: {fileID: 0}

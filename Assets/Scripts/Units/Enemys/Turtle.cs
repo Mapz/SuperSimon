@@ -16,6 +16,9 @@ public class Turtle : GuardableEnemy
     private Collider2D[] colliders;
 
     [SerializeField]
+    private OnHitBox[] onHitBoxes;
+
+    [SerializeField]
     private float m_wakeUpTime;
 
     [SerializeField]
@@ -50,9 +53,11 @@ public class Turtle : GuardableEnemy
         {
 
             colliders[i].enabled = false;
+            onHitBoxes[i].gameObject.SetActive(false);
 
         }
         Collider2D co = colliders[(int)type];
+        onHitBoxes[(int)type].gameObject.SetActive(true);
         co.enabled = true;
         m_currentCollider = co;
 

@@ -53,6 +53,13 @@ public class Simon : MovingUnit
         1 -> Squat Collider
      */
 
+    [SerializeField]
+    private OnHitBox[] onHitBoxes;
+    /**
+        0 -> Stand Collider
+        1 -> Squat Collider
+     */
+
     public float m_wontBeHurtTime;
 
     public float m_onHit1Time;
@@ -285,6 +292,7 @@ public class Simon : MovingUnit
         for (var i = 0; i < colliders.Length; i++)
         {
             colliders[i].enabled = false;
+            onHitBoxes[i].gameObject.SetActive(false);
         }
 
         Collider2D co = colliders[(int)type];
@@ -302,6 +310,7 @@ public class Simon : MovingUnit
 
 
         co.enabled = true;
+        onHitBoxes[(int)type].gameObject.SetActive(true);
         m_currentCollider = co;
 
 

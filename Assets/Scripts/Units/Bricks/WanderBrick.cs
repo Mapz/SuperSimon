@@ -31,10 +31,15 @@ public class WanderBrick : BrickBase
         GetComponent<SpriteRenderer>().sprite = m_SpriteWhenEmpty;
     }
 
-    protected override int GetRealDmg(int dmg, DmgType dmgType)
+
+    protected override void OnInit()
     {
-        if (dmg > 1) return 1;
-        return dmg;
+        base.OnInit();
+        this.SetAllHitBoxRealDmgDelegate((int dmg, DmgType dmgType) =>
+        {
+            if (dmg > 1) return 1;
+            return dmg;
+        });
     }
 
     public void ProduceItem(GameObject ItemPrefab)

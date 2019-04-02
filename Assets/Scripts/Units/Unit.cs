@@ -1,6 +1,6 @@
 using BTAI;
 using UnityEngine;
-
+using System.Collections.Generic;
 public delegate void OnDied(Damage dmg);
 
 public enum Team
@@ -35,16 +35,13 @@ public abstract class Unit : MonoBehaviour, IPause
 
     protected StateMachine m_sm;
 
-    public int m_score;
+    public int m_score; // gain score when died
 
-    public int m_maxHp;
+    public int m_maxHp; 
 
     public Team m_team;
 
-    public int m_dmg = 0;
-
-    public int m_defence = 0;
-
+    public int m_dmg = 0; // save a dmg for other use like create self body weapon or head collision
     private HPBar hpBarAttached;
 
     [SerializeField]
@@ -60,15 +57,25 @@ public abstract class Unit : MonoBehaviour, IPause
 
     public Damage m_lastDamageGot { get; private set; }
 
-    //打击CD计数器，一个武器只能对一个东西周期性造成伤害而不是总是造成伤害
-    private OnHitCountDown m_onHitCheck = new OnHitCountDown();
+    public OnHitBox[] m_onHitBoxes;
 
 
-    //是否可以受伤
+    // check if can be damaged
     protected virtual bool CanBeDamaged()
     {
         return !m_wontBeHurt && !m_isDead;
     }
+
+    void Awake()
+    {
+        OnInit();
+    }
+
+    protected virtual void OnInit()
+    {
+        m_onHitBoxes = GetComponentsInChildren<OnHitBox>();
+    }
+
 
     public virtual void Upgrade(int change)
     {
@@ -125,11 +132,7 @@ public abstract class Unit : MonoBehaviour, IPause
         }
     }
 
-    protected virtual int GetRealDmg(int dmg, DmgType dmgType)
-    {
-        if (dmgType == DmgType.RealDmg) return dmg;
-        return dmg - m_defence;
-    }
+
 
     protected virtual void OnDmg(Damage dmg)
     {
@@ -178,7 +181,7 @@ public abstract class Unit : MonoBehaviour, IPause
 
     public virtual void Pause(bool pause)
     {
-        Debug.Log("暂停");
+        Debug.Log("Pause");
         m_isPaused = pause;
     }
 
@@ -219,86 +222,12 @@ public abstract class Unit : MonoBehaviour, IPause
 
     }
 
-    protected virtual void OnAttack(Damage dmg)
+    public virtual void OnAttack(Damage dmg)
     {
         m_isAttacked = true;
         GetDamage(dmg);
     }
 
-
-    protected virtual void _OnTriggerEnter2D(Collider2D other)
-    {
-        if (m_isDead) return;
-        var weapon = other.GetComponent<Weapon>();
-        Unit unit;
-        if (weapon)
-        {
-            if (!m_onHitCheck.OnHit(other)) return;
-            unit = weapon.m_WeaponCarrier;
-            Vector3 hitPos = other.bounds.ClosestPoint(transform.position);
-            System.Action OnAttackDelegate = () =>
-            {
-
-                Debug.Log("HitPos:" + hitPos);
-                OnAttack(new Damage(weapon.m_dmg, weapon.m_dmgType, this.transform.position - other.transform.position, GetRealDmg, unit, hitPos));
-
-
-            };
-            switch (m_team)
-            {
-                case Team.Chaos:
-                    switch (weapon.m_team)
-                    {
-                        case Team.Hero:
-                        case Team.Assistance:
-                            OnAttackDelegate.Invoke();
-                            weapon.OnDealDmg();
-                            break;
-                    }
-                    break;
-                case Team.Hero:
-                case Team.Assistance:
-                    switch (weapon.m_team)
-                    {
-                        case Team.Enemy:
-                        case Team.Enviroment:
-                        case Team.Chaos:
-                            OnAttackDelegate.Invoke();
-                            weapon.OnDealDmg();
-
-                            break;
-                    }
-                    break;
-                case Team.Enemy:
-                    switch (weapon.m_team)
-                    {
-                        case Team.Hero:
-                        case Team.Assistance:
-                        case Team.Chaos:
-                            OnAttackDelegate.Invoke();
-                            weapon.OnDealDmg();
-                            break;
-                    }
-                    break;
-                case Team.Enviroment:
-                    if (weapon.m_destroyEnviroment)
-                    {
-                        OnAttackDelegate.Invoke();
-                        weapon.OnDealDmg();
-                    }
-                    break;
-            }
-            //迴旋鏢檢查
-            if (weapon is FlyObjectWeapon)
-            {
-                var flyWeapon = (FlyObjectWeapon)weapon;
-                if (flyWeapon.m_Shooter == this && flyWeapon.m_canBeDestroyByShooter)
-                {
-                    Destroy(flyWeapon.m_WeaponCarrier.gameObject); // TODO:暫時直接毀滅
-                }
-            }
-        }
-    }
 
     public static void Destroy(Unit unit)
     {
@@ -318,22 +247,13 @@ public abstract class Unit : MonoBehaviour, IPause
         }
     }
 
-    //在 PhysicalObject 中触发碰撞
+    //On PhysicalObject Collision
     public virtual void OnCollideWithPhysicalObject(RaycastHit2D hit, Collider2D collider)
     {
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        //Debug.Log (name + " . OnTriggerEnter2D (" + other.name + ")");
-        _OnTriggerEnter2D(other);
-    }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        //Debug.Log (name + " . OnTriggerExit2D (" + other.name + ")");
-    }
 
 
 }

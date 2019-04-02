@@ -42,11 +42,17 @@ public class SimpleEnemy : MovingUnit
         gameObject.layer = LayerMask.NameToLayer("Default");
         physicsObject.ResetContactLayer();
         var colliders = GetComponentsInChildren<Collider2D>();
-        foreach (var collider in colliders) {
+        var onHitBoxes = GetComponentsInChildren<OnHitBox>();
+        foreach (var onhitbox in onHitBoxes)
+        {
+            Destroy(onhitbox);
+        }
+
+        foreach (var collider in colliders)
+        {
             Destroy(collider);
         }
-        //Destroy(m_weaponCollider);
-        //Destroy(m_currentCollider);
+
         OnDied?.Invoke(dmg);
     }
 
